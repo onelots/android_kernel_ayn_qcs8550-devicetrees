@@ -24,14 +24,6 @@
 	};
 };
 
-&wsa_macro {
-	qcom,wsa-bat-cfgs = <2>, <2>;
-};
-
-&wsa2_macro {
-	qcom,wsa-bat-cfgs = <2>, <2>;
-};
-
 &wcd939x_codec {
 	qcom,cdc-vdd-px-lpm-supported = <1>;
 	/* 0 for no crosstalk, 1 for digital crosstalk, and 2 for analog crosstalk */
@@ -78,9 +70,11 @@
 		"AMIC2", "Analog Mic2",
 		"AMIC2", "MIC BIAS2",
 		"AMIC3", "Analog Mic3",
-		"AMIC3", "MIC BIAS1",
+		"AMIC3", "MIC BIAS3",
 		"AMIC4", "Analog Mic4",
-		"AMIC4", "MIC BIAS3",
+		"AMIC4", "MIC BIAS1",
+		"AMIC5", "Analog Mic5",
+		"AMIC5", "MIC BIAS3",
 		"VA AMIC1", "Analog Mic1",
 		"VA AMIC1", "VA MIC BIAS1",
 		"VA AMIC2", "Analog Mic2",
@@ -88,7 +82,9 @@
 		"VA AMIC3", "Analog Mic3",
 		"VA AMIC3", "VA MIC BIAS3",
 		"VA AMIC4", "Analog Mic4",
-		"VA AMIC4", "VA MIC BIAS3",
+		"VA AMIC4", "VA MIC BIAS1",
+		"VA AMIC5", "Analog Mic5",
+		"VA AMIC5", "VA MIC BIAS3",
 		"IN1_HPHL", "HPHL_OUT",
 		"IN2_HPHR", "HPHR_OUT",
 		"IN3_EAR", "AUX_OUT",
@@ -116,6 +112,7 @@
 	qcom,msm-mbhc-gnd-swh = <0>;
 	qcom,wcd-disable-legacy-surge;
 	wcd939x-i2c-handle = <&wcd_usbss>;
+	qcom,ext-disp-audio-rx = <1>;
 	qcom,pri-mi2s-gpios = <&fm_i2s0_gpios>;
 };
 

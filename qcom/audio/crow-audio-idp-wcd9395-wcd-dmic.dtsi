@@ -29,6 +29,8 @@
 		"VA AMIC2", "VA MIC BIAS2",
 		"DMIC0", "Digital Mic0",
 		"DMIC0", "MIC BIAS3",
+		"DMIC1", "Digital Mic1",
+		"DMIC1", "MIC BIAS3",
 		"DMIC2", "Digital Mic2",
 		"DMIC2", "MIC BIAS1",
 		"DMIC3", "Digital Mic3",
@@ -62,6 +64,7 @@
 	asoc-codec-names = "msm-stub-codec.1", "lpass-cdc",
 			"wcd939x_codec", "wsa-codec1", "wsa-codec2";
 	wcd939x-i2c-handle = <&wcd_usbss>;
+	qcom,ext-disp-audio-rx = <1>;
 	qcom,pri-mi2s-gpios = <&fm_i2s0_gpios>;
 };
 

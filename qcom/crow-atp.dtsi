@@ -1,6 +1,7 @@
 #include <dt-bindings/clock/qcom,gcc-crow.h>
 #include <dt-bindings/gpio/gpio.h>
 #include "crow-pmic-overlay.dtsi"
+#include "crow-thermal-overlay.dtsi"
 
 &soc {
 	gpio_key {
@@ -114,6 +115,9 @@
 	qcom,vccq-parent-supply = <&S2B>;
 	qcom,vccq-parent-max-microamp = <210000>;
 
+	qcom,vccq-shutdown-supply = <&L2D>;
+	qcom,vccq-shutdown-max-microamp = <750000>;
+
 	reset-gpios = <&tlmm 167 GPIO_ACTIVE_LOW>;
 	resets = <&gcc GCC_UFS_PHY_BCR>;
 	reset-names = "rst";
@@ -136,4 +140,12 @@
 	pinctrl-1 = <&sdc2_off>;
 
 	cd-gpios = <&tlmm 9 GPIO_ACTIVE_LOW>;
+};
+
+&qupv3_se8_i2c {
+	status = "ok";
+	fsa4480: fsa4480@42 {
+		compatible = "qcom,fsa4480-i2c";
+		reg = <0x42>;
+	};
 };

@@ -1,6 +1,7 @@
 #include <dt-bindings/clock/qcom,gcc-crow.h>
 #include <dt-bindings/gpio/gpio.h>
 #include "crow-pmic-overlay.dtsi"
+#include "crow-thermal-overlay.dtsi"
 
 &soc {
 	gpio_key {
@@ -39,6 +40,11 @@
 	status = "ok";
 };
 
+&battery_charger {
+	qcom,thermal-mitigation-step = <500000>;
+	#cooling-cells = <2>;
+};
+
 &qupv3_se0_spi {
 	#address-cells = <1>;
 	#size-cells = <0>;
@@ -75,6 +81,14 @@
 
 		goodix,touch-type = "primary";
 		goodix,qts_en;
+		qts,trusted-touch-mode = "vm_mode";
+		qts,touch-environment = "pvm";
+		qts,trusted-touch-type = "primary";
+		qts,trusted-touch-spi-irq = <666>;
+		qts,trusted-touch-io-bases = <0x880000 0x810000>;
+		qts,trusted-touch-io-sizes = <0x1000 0x4000>;
+		qts,trusted-touch-vm-gpio-list = <&tlmm 0 0 &tlmm 1 0 &tlmm 2 0
+						&tlmm 3 0 &tlmm 28 0 &tlmm 21 0x2008>;
 	};
 };
 
@@ -118,6 +132,9 @@
 	qcom,vccq-parent-supply = <&S2B>;
 	qcom,vccq-parent-max-microamp = <210000>;
 
+	qcom,vccq-shutdown-supply = <&L2D>;
+	qcom,vccq-shutdown-max-microamp = <750000>;
+
 	reset-gpios = <&tlmm 167 GPIO_ACTIVE_LOW>;
 	resets = <&gcc GCC_UFS_PHY_BCR>;
 	reset-names = "rst";
@@ -140,4 +157,12 @@
 	pinctrl-1 = <&sdc2_off>;
 
 	cd-gpios = <&tlmm 9 GPIO_ACTIVE_LOW>;
+};
+
+&qupv3_se8_i2c {
+	status = "ok";
+	fsa4480: fsa4480@42 {
+		compatible = "qcom,fsa4480-i2c";
+		reg = <0x42>;
+	};
 };

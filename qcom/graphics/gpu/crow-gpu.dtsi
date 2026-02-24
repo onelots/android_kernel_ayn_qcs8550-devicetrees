@@ -21,16 +21,20 @@
 	clocks = <&gcc GCC_GPU_MEMNOC_GFX_CLK>,
 		<&gcc GCC_GPU_SNOC_DVM_GFX_CLK>,
 		<&gpucc GPU_CC_AHB_CLK>,
-		<&gpucc GPU_CC_HLOS1_VOTE_GPU_SMMU_CLK>;
+		<&gpucc GPU_CC_HLOS1_VOTE_GPU_SMMU_CLK>,
+		<&aoss_qmp>;
 	clock-names = "gcc_gpu_memnoc_gfx",
 			"gcc_gpu_snoc_dvm_gfx",
-			"gpu_cc_ahb", "gpu_cc_hlos1_vote_gpu_smmu";
+			"gpu_cc_ahb", "gpu_cc_hlos1_vote_gpu_smmu",
+			"apb_pclk";
 
 	qcom,no-nap;
 
 	qcom,min-access-length = <32>;
 
 	qcom,ubwc-mode = <4>;
+
+	qcom,tzone-names = "gpuss-0", "gpuss-1";
 
 	interconnects = <&gem_noc MASTER_GFX3D &mc_virt SLAVE_EBI1>;
 	interconnect-names = "gpu_icc_path";
@@ -60,6 +64,9 @@
 		<MHZ_TO_KBPS(2092, 4)>, /* index=6 NOM		*/
 		<MHZ_TO_KBPS(2736, 4)>, /* index=7 TURBO	*/
 		<MHZ_TO_KBPS(3196, 4)>; /* index=8 TURBO L1	*/
+
+	nvmem-cells = <&gpu_speed_bin>, <&gpu_gaming_bin>;
+	nvmem-cell-names = "speed_bin", "gaming_bin";
 
 	zap-shader {
 		memory-region = <&gpu_microcode_mem>;
@@ -163,5 +170,8 @@
 
 		iommus = <&kgsl_smmu 0x5 0x000>;
 		qcom,iommu-dma = "disabled";
+
+		mboxes = <&qmp_aop 0>;
+		mbox-names = "aop";
 	};
 };

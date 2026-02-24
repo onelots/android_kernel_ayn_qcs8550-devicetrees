@@ -39,7 +39,7 @@
 		alloc-ranges = <0x0 0x00000000 0x0 0xffffffff>;
 		reusable;
 		alignment = <0x0 0x400000>;
-		size = <0x0 0x2000000>;
+		size = <0x0 0x1C00000>;
 	};
 };
 
@@ -60,9 +60,10 @@
 			pinctrl-1 = <&cnss_wlan_en_sleep>;
 			qcom,wlan;
 			qcom,wlan-rc-num = <0>;
-			qcom,wlan-ramdump-dynamic = <0x780000>;
+			qcom,wlan-ramdump-dynamic = <0x500000>;
 			use-pm-domain;
 			mboxes = <&qmp_aop 0>;
+			platform-name-required;
 
 			vdd-wlan-io-supply = <&L6B>;
 			qcom,vdd-wlan-io-config = <1800000 1800000 0 0 1>;
@@ -83,7 +84,7 @@
 				"s2b", "rf",
 				"l15b", "rf",
 				"s1k", "bb",
-				"s7b", "bb";
+				"s7b", "rf";
 
 			qcom,pmu_vreg_map =
 				"VDD095_MX_PMU", "s7b",
@@ -97,17 +98,13 @@
 				"VDD19_PMU_RFA_I", "s4b";
 
 			qcom,pdc_init_table =
-			"{class: wlan_pdc, ss: rf, res: s7b.v, upval: 916}",
-			"{class: wlan_pdc, ss: rf, res: s7b.v, dwnval: 612}",
+			"{class: wlan_pdc, ss: rf, res: s7b.v, upval: 976}",
+			"{class: wlan_pdc, ss: rf, res: s7b.v, dwnval: 800}",
 			"{class: wlan_pdc, ss: rf, res: s2b.v, upval: 1316}",
 			"{class: wlan_pdc, ss: rf, res: s2b.v, dwnval: 944}",
 			"{class: wlan_pdc, ss: rf, res: s4b.v, upval: 1864}",
 			"{class: wlan_pdc, ss: rf, res: s4b.v, dwnval: 1820}",
-			"{class: wlan_pdc, ss: rf, res: s7b.m, enable: 0}",
-			"{class: wlan_pdc, ss: rf, res: s7b.v, enable: 0}",
 			"{class: wlan_pdc, ss: bb, res: pdc, enable: 1}",
-			"{class: wlan_pdc, ss: bb, res: s7b.v, upval: 976}",
-			"{class: wlan_pdc, ss: bb, res: s7b.v, dwnval: 512}",
 			"{class: wlan_pdc, ss: bb, res: s1k.v, upval: 940}",
 			"{class: wlan_pdc, ss: bb, res: s1k.v, dwnval: 420}";
 		};
@@ -133,10 +130,15 @@
 		cnss_pci_iommu_group0: cnss_pci_iommu_group0 {
 			qcom,iommu-msi-size = <0x1000>;
 			qcom,iommu-dma-addr-pool = <0xa0000000 0x10000000>;
+			qcom,iommu-geometry = <0xa0000000 0x10010000>;
 			qcom,iommu-dma = "fastmap";
 			qcom,iommu-pagetable = "coherent";
 			qcom,iommu-faults = "stall-disable", "HUPCF", "no-CFRE",
 					    "non-fatal";
 		};
 	};
+};
+
+&pcie0 {
+	qcom,boot-option = <0x1>;
 };
