@@ -538,9 +538,10 @@
 
 &qupv3_se4_4uart {
 	status = "ok";
+	qcom,auto-suspend-disable;
 	qrc:qrc@100 {
 		compatible = "qcom,qrc-uart";
-		status = "ok";
+		status = "disabled";
 		qcom,qrc-reset-gpio = <&tlmm 168 0>;
 	};
 };

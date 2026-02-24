@@ -10,6 +10,7 @@ endif
 ifeq ($(CONFIG_ARCH_KALAMA),y)
 dtbo-y += kalama-cnss.dtbo
 dtbo-y += kalama-aim300-cnss.dtbo
+dtbo-y += kalama-rb5-gen2-cnss.dtbo
 endif
 
 ifeq ($(CONFIG_ARCH_QCS405),y)
@@ -89,6 +90,12 @@ dtbo-y += lemans-cnss.dtbo
 endif
 endif
 
+
+ifeq ($(CONFIG_ARCH_ANORAK),y)
+dtbo-y += anorak-hsp-cnss.dtbo
+dtbo-y += anorak-kiwi-cnss.dtbo
+endif
+
 ifeq ($(CONFIG_QTI_QUIN_GVM),y)
 dtbo-y += sa8155p-vm-cnss.dtbo
 dtbo-y += sa8195p-vm-cnss.dtbo
@@ -98,6 +105,7 @@ dtbo-y += direwolf-vm-dual-cnss.dtbo
 dtbo-y += lemans-vm-cnss.dtbo
 dtbo-y += monaco-vm-cnss.dtbo
 dtbo-y += sa6155p-vm-cnss.dtbo
+dtbo-y += monaco_auto-vm-cnss.dtbo
 endif
 
 
@@ -111,6 +119,10 @@ endif
 
 ifeq ($(CONFIG_ARCH_TRINKET),y)
 dtbo-y += trinket-cnss.dtbo
+endif
+
+ifeq ($(CONFIG_ARCH_SCUBA),y)
+dtbo-y += scuba-cnss.dtbo
 endif
 
 always-y	:= $(dtb-y) $(dtbo-y)

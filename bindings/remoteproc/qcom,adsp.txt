@@ -69,6 +69,8 @@ on the Qualcomm Technologies inc ADSP Hexagon core.
 		    "qcom,bengal-adsp-pas"
 		    "qcom,bengal-cdsp-pas"
 		    "qcom,bengal-modem-pas"
+		    "qcom,scuba-adsp-pas"
+		    "qcom,scuba-modem-pas"
 
 - interrupts-extended:
 	Usage: required

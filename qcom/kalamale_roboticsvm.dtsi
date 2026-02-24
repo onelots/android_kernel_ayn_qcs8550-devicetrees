@@ -228,11 +228,6 @@
 		clock-frequency = <19200000>;
 	};
 
-	qrtr-gunyah {
-		compatible = "qcom,qrtr-gunyah";
-		gunyah-label = <8>;
-	};
-
 	vsock-gunyah {
 		compatible = "qcom,gunyah-vsock";
 		msgq-label = <3>;
@@ -244,4 +239,10 @@
 		qcom,support-hypervisor;
 	};
 
+	gcc: clock-controller@100000 {
+		compatible = "qcom,dummycc";
+		clock-output-names = "gcc_clocks";
+		#clock-cells = <1>;
+		#reset-cells = <1>;
+	};
 };

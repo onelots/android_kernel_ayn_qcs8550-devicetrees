@@ -1,5 +1,6 @@
 ifeq ($(CONFIG_ARCH_KALAMA),y)
 dtbo-y += kalama-bt.dtbo
+dtbo-y += kalama-iot-bt.dtbo
 endif
 
 ifeq ($(CONFIG_ARCH_WAIPIO),y)
@@ -29,6 +30,10 @@ endif
 
 ifeq ($(CONFIG_ARCH_SDM670), y)
 dtbo-y += sdm670-bt.dtbo
+endif
+
+ifeq ($(CONFIG_ARCH_SCUBA),y)
+dtbo-y += scuba-bt.dtbo
 endif
 
 always-y        := $(dtb-y) $(dtbo-y)

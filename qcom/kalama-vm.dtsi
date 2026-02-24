@@ -119,12 +119,15 @@
 				0x0 0xc42d000 0x0 0xc42d000 0x0 0x4000 0x1
 				0x0 0xc440000 0x0 0xc440000 0x0 0x80000 0x1
 				0x0 0xc4c0000 0x0 0xc4c0000 0x0 0x10000 0x1
-				0x0 0xae8f000 0x0 0xae8f000 0x0 0x1000 0x0>;
+				0x0 0xae8f000 0x0 0xae8f000 0x0 0x1000 0x0
+				0x0 0x0f1fb000 0x0 0x0f1fb000 0x0 0x1000 0x0>;
 
 		/* For LEVM pored usecases is SE4 and SE8, for SE4 we used gpii5
 		 * and irq no is 316, for SE8 we used gpii6 and irq no is 626.
 		 */
-		gic-irq-ranges = <316 316
+		gic-irq-ranges = <247 247
+				  248 248
+				  316 316
 				  626 626>; /* PVM->SVM IRQ transfer */
 
 		vm-attrs = "crash-fatal";
@@ -372,8 +375,11 @@
 		#gpio-cells = <2>;
 		interrupt-controller;
 		#interrupt-cells = <2>;
+		interrupts = <GIC_SPI 214 IRQ_TYPE_EDGE_BOTH>,
+			     <GIC_SPI 215 IRQ_TYPE_LEVEL_HIGH>,
+			     <GIC_SPI 216 IRQ_TYPE_LEVEL_HIGH>;
 		/* Valid pins */
-		gpios = /bits/ 16 <86 87 133 137 44 45 46 47 24 25 91 56 57 58 59 13 48>;
+		gpios = /bits/ 16 <14 15 86 87 133 137 44 45 46 47 24 25 91 56 57 58 59 13 48>;
 
 	};
 
@@ -429,6 +435,7 @@
 		tlmm-vm-gpio-list = <&tlmm 86 0 &tlmm 87 0 &tlmm 133 0 &tlmm 137 0 &tlmm 44 0 &tlmm 45 0
 					&tlmm 46 0 &tlmm 47 0 &tlmm 24 0 &tlmm 25 0 &tlmm 91 0
 					 &tlmm 56 0 &tlmm 57 0 &tlmm 58 0 &tlmm 59 0 &tlmm 13 0 &tlmm 48 0>;
+		tlmm-vm-gpio-lend-list = <&tlmm 14 0 &tlmm 15 0>;
 	};
 
 	vgic: interrupt-controller@17100000 {

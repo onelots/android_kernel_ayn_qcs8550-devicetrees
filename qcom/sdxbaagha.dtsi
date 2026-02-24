@@ -504,6 +504,7 @@
 		parent-supply = <&VDD_CX_LEVEL>;
 		qcom,retain-regs;
 		qcom,support-hw-trigger;
+		qcom,clear-retain-regs;
 	};
 
 	gcc_usb20_gdsc: qcom,gdsc@a7004 {

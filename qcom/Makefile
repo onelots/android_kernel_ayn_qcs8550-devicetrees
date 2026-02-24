@@ -170,6 +170,21 @@ bengal-dtb-$(CONFIG_ARCH_BENGAL) += \
 bengal-overlays-dtb-$(CONFIG_ARCH_BENGAL) += $(BENGAL_BOARDS) $(BENGAL_BASE_DTB)
 dtb-y += $(bengal-dtb-y)
 
+SCUBA_BASE_DTB +=  scuba-iot.dtb scuba-iot-2gb.dtb scubap-iot.dtb scubap-iot-idp.dtb scubap-iot-idp-2gb.dtb
+
+SCUBA_BOARDS += \
+		 scuba-iot-idp-overlay.dtbo \
+		 scuba-iot-idp-usbc-overlay.dtbo \
+		 scuba-iot-qrd-eldo-overlay.dtbo \
+		 scuba-iot-qrd-non-eldo-overlay.dtbo \
+		 scuba-iot-rb1-overlay.dtbo
+
+bengal-dtb-$(CONFIG_ARCH_SCUBA) += \
+	$(call add-overlays, $(SCUBA_BOARDS), $(SCUBA_BASE_DTB))
+
+bengal-overlays-dtb-$(CONFIG_ARCH_SCUBA) += $(SCUBA_BOARDS) $(SCUBA_BASE_DTB)
+dtb-y += $(bengal-dtb-y)
+
 KONA_BASE_DTB += kona-iot.dtb kona-iot-v2.dtb kona-iot-v2.1.dtb kona-7230-iot-v2.1.dtb
 KONA_LE_BASE_DTB += kona-7230-iot-v2.1.dtb qrb5165-iot.dtb qrb5165n-iot.dtb qrb3165-iot.dtb qrb3165n-iot.dtb
 

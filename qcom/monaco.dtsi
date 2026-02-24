@@ -1831,8 +1831,8 @@
 
 		opp-100000000 {
 			opp-hz = /bits/ 64 <100000000>;
-			opp-peak-kBps = <500000 200000>;
-			opp-avg-kBps = <104000 0>;
+			opp-peak-kBps = <500000 133332>;
+			opp-avg-kBps = <37000 0>;
 		};
 
 		opp-384000000 {

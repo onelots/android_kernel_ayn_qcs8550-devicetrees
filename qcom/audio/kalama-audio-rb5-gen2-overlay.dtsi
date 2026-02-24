@@ -474,6 +474,17 @@
 		qcom,upd_ear_pa_reg_addr = <0x300A>;
 	};
 
+	cdc_pri_mi2s_gpios: pri_mi2s_pinctrl {
+		status = "disabled";
+		compatible = "qcom,msm-cdc-pinctrl";
+		pinctrl-names = "aud_active", "aud_sleep";
+		pinctrl-0 = <&i2s0_sck_active &i2s0_ws_active
+				&i2s0_sd0_active &i2s0_sd1_active>;
+		pinctrl-1 = <&i2s0_sck_sleep &i2s0_ws_sleep
+				&i2s0_sd0_sleep &i2s0_sd1_sleep>;
+		#gpio-cells = <0>;
+	};
+
 	cdc_sec_mi2s_gpios: sec_i2s1_pinctrl {
 		compatible = "qcom,msm-cdc-pinctrl";
 		pinctrl-names = "aud_active", "aud_sleep";
@@ -481,6 +492,18 @@
 				&i2s1_sd0_active>;
 		pinctrl-1 = <&i2s1_sck_sleep &i2s1_ws_sleep
 				&i2s1_sd0_sleep>;
+		#gpio-cells = <0>;
+	};
+
+	cdc_quat_mi2s_gpios: quat_mi2s_pinctrl {
+		compatible = "qcom,msm-cdc-pinctrl";
+		pinctrl-names = "aud_active", "aud_sleep";
+		pinctrl-0 = <&quat_mi2s_sck_active &quat_mi2s_ws_active
+						&quat_mi2s_sd0_active>;
+		pinctrl-1 = <&quat_mi2s_sck_sleep &quat_mi2s_ws_sleep
+						&quat_mi2s_sd0_sleep>;
+		qcom,lpi-gpios;
+		qcom,tlmm-pins = <166>;
 		#gpio-cells = <0>;
 	};
 

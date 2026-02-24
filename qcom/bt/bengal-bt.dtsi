@@ -5,7 +5,7 @@
 
 &soc {
 
-	bluetooth: wcn3990 {
+	bluetooth: bt_wcn3990 {
 		compatible = "qcom,wcn3990";
 		qcom,bt-sw-ctrl-gpio = <&tlmm 87 0>;
 		qcom,bt-vdd-io-supply = <&L9A>;    /* IO */

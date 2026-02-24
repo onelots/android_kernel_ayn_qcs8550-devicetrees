@@ -1,6 +1,11 @@
 &soc {
-	/delete-node/ qrtr-gunyah-tvm;
-	/delete-node/ qrtr-gunyah-oemvm;
+	qrtr-gunyah-tvm {
+		status = "disabled";
+	};
+
+	qrtr-gunyah-oemvm {
+		status = "disabled";
+	};
 
 	trust_ui_vm {
 		vm_name = "roboticsvm1";
@@ -37,4 +42,12 @@
 	dmesg-dump {
 		peer-name = <6>;
 	};
+};
+
+&gpi_dma1 {
+	qcom,gpii-mask = <0x6>;
+};
+
+&gpi_dma2 {
+	qcom,gpii-mask = <0x1e>;
 };

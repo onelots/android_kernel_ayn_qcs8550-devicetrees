@@ -6,7 +6,7 @@
 / {
 	model = "Qualcomm Technologies, Inc. Kalama LE DVT ROBOTICS GVM2";
 	compatible = "qcom,kalamap-iot", "qcom,kalamap", "qcom,iot";
-	qcom,board-id = <0x1021f 0x2>;
+	qcom,board-id = <0x1021f 0x2>, <0x1041f 0x2>;
 
 	qcom,mem-buf {
 		qcom,vmid = <53>;
@@ -62,10 +62,6 @@
 };
 
 &soc {
-	qrtr-gunyah {
-		gunyah-label = <8>;
-	};
-
 	qtee_shmbridge {
 		qcom,custom-bridge-size = <512>;
 	};

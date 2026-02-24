@@ -77,6 +77,15 @@ SoCs:
 - KHAJEG
   compatible = "qcom,khajeg"
 
+- SCUBA
+  compatible = "qcom,scuba"
+
+- SCUBAIOT
+  compatible = "qcom,scuba-iot"
+
+- SCUBAPIOT
+  compatible = "qcom,scubap-iot"
+
 - SDMSHRIKE
   compatible = "qcom,sdmshrike"
 
@@ -371,6 +380,9 @@ compatible = "qcom,khajeq-atp"
 compatible = "qcom,khajeg-idp"
 compatible = "qcom,khajeg-qrd"
 compatible = "qcom,khajeg-atp"
+compatible = "qcom,scuba-rumi"
+compatible = "qcom,scuba-idp"
+compatible = "qcom,scuba-qrd"
 compatible = "qcom,sdxpinn-rumi"
 compatible = "qcom,sdxpinn-idp"
 compatible = "qcom,sa410m-rumi"

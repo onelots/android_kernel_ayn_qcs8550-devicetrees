@@ -15,6 +15,7 @@ dtbo-y += kalama-audio.dtbo \
                  kalama-sg-audio-hhg.dtbo \
                  kalama-audio-rb5-gen2.dtbo \
                  kalama-audio-rb5-gen2-dvt.dtbo \
+                 kalama-audio-rb5-gen2-vc.dtbo \
                  kalama-audio-aim300.dtbo
 endif
 

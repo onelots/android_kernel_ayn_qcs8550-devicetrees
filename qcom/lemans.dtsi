@@ -575,7 +575,7 @@
 	};
 
 	/* global autoconfigured region for contiguous allocations */
-	linux,cma {
+	system_cma: linux,cma {
 		compatible = "shared-dma-pool";
 		alloc-ranges = <0x0 0x00000000 0x0 0xdfffffff>;
 		reusable;
@@ -2348,9 +2348,10 @@
 		reg = <0x1FFE02C 0x10>,
 		      <0x1FFD018 0x10>,
 		      <0x17C0000C 0x04>;
-		mboxes = <&ipcc_computeL1 IPCC_CLIENT_SAIL0 0x4>,
+		mboxes = <&ipcc_computeL1 IPCC_CLIENT_SAIL0 0x2>,
 			 <&ipcc_computeL1 IPCC_CLIENT_SAIL0 0x3>,
-			 <&ipcc_computeL1 IPCC_CLIENT_SAIL0 0x2>,
+			 <&ipcc_computeL1 IPCC_CLIENT_SAIL0 0x4>,
+			 <&ipcc_computeL1 IPCC_CLIENT_SAIL0 0x5>,
 			 <&ipcc_computeL1 IPCC_CLIENT_SAIL0 0x6>,
 			 <&ipcc_computeL1 IPCC_CLIENT_SAIL0 0X7>;
 		memory-region = <&sail_mailbox_mem>,
@@ -2362,6 +2363,7 @@
 			     <IPCC_CLIENT_SAIL0 0x5 IRQ_TYPE_EDGE_RISING>,
 			     <IPCC_CLIENT_SAIL0 0x6 IRQ_TYPE_EDGE_RISING>,
 			     <IPCC_CLIENT_SAIL0 0X7 IRQ_TYPE_EDGE_RISING>;
+		sail-handshake-delay = <50000>;
 	};
 
 	qmp_aop: qcom,qmp-aop@c300000 {
@@ -3155,6 +3157,9 @@
 	vccq2-supply = <&S4A>;
 	vccq2-max-microamp = <800000>;
 
+	qcom,vccq-shutdown-supply = <&L4C>;
+	qcom,vccq-shutdown-max-microamp = <1200000>;
+
 	qcom,vddp-ref-clk-supply = <&L4C>;
 	qcom,vddp-ref-clk-max-microamp = <100>;
 
@@ -3184,6 +3189,9 @@
 
 	vccq2-supply = <&S4A>;
 	vccq2-max-microamp = <800000>;
+
+	qcom,vccq-shutdown-supply = <&L5C>;
+	qcom,vccq-shutdown-max-microamp = <1200000>;
 
 	qcom,vddp-ref-clk-supply = <&L5C>;
 	qcom,vddp-ref-clk-max-microamp = <100>;
