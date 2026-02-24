@@ -61,7 +61,9 @@ KALAMA_BOARDS += \
 		 kalamap-sg-hhg-overlay.dtbo \
 		 kalamap-rb5-gen2-overlay.dtbo \
 		 kalamap-rb5-gen2-dvt-overlay.dtbo \
+		 kalamap-rb5-gen2-dvt-06-overlay.dtbo \
 		 kalamap-rb5-gen2-dvt-roboticspvm-overlay.dtbo \
+		 kalamap-rb5-gen2-dvt-05-overlay.dtbo \
 		 kalamap-aim300-overlay.dtbo \
 		 kalamap-aim300-v2-overlay.dtbo \
 		 kalamap-aim300-rdk-overlay.dtbo \

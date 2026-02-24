@@ -99,4 +99,8 @@
 		reg = <0xc210000 0x1000>;
 		clock-frequency = <19200000>;
 	};
+
+	logbuf: qcom,logbuf-vendor-hooks {
+		compatible = "qcom,logbuf-vendor-hooks";
+	};
 };

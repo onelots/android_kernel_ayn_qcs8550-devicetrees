@@ -61,9 +61,14 @@
 
 		vdd-wlan-ctrl1-supply = <&vreg_conn_pa>;
 		vdd-wlan-io-supply = <&L6A>;
-		wlan_vregs = "vdd-wlan-io", "vdd-wlan-ctrl1";
+		vdd-wlan-rfa2-supply = <&S2A>;
+		vdd-wlan-rfa3-supply = <&S4A>;
+		wlan_vregs = "vdd-wlan-io", "vdd-wlan-ctrl1",
+				"vdd-wlan-rfa2", "vdd-wlan-rfa3";
 		qcom,vdd-wlan-io-config = <1800000 1800000 0 0 1>;
 		qcom,vdd-wlan-ctrl1-config = <0 0 0 0 0>;
+		qcom,vdd-wlan-rfa2-config = <1350000 1350000 0 0 0>;
+		qcom,vdd-wlan-rfa3-config = <1950000 1950000 450000 0 0>;
 		wlan-en-gpio = <&tlmm 95 0>;
 		pinctrl-names = "wlan_en_active", "wlan_en_sleep";
 		pinctrl-0 = <&wlan_en_active>;
@@ -73,10 +78,21 @@
 			supported-ids = <0x003e>;
 			qcom,wlan-ramdump-dynamic = <0x200000>;
 		};
+
+		chip_cfg@1 {
+			supported-ids = <0x1103>;
+			qcom,wlan-ramdump-dynamic = <0x420000>;
+			qcom,smmu-s1-enable;
+			qcom,sleep-clk-support;
+			pcie-disable-l1ss;
+		};
 	};
 };
 
 &pcie0 {
+	qcom,no-l0s-supported;
+	qcom,no-l1-supported;
+	qcom,no-l1ss-supported;
 	qcom,boot-option = <0x1>;
 	status = "ok";
 };
