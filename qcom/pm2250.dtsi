@@ -404,6 +404,11 @@
 				qcom,default-led-trigger = "switch0_trigger";
 			};
 		};
+
+		bcl_soc: bcl-soc {
+			compatible = "qcom,msm-bcl-soc";
+			#thermal-sensor-cells = <0>;
+		};
 	};
 };
 
@@ -431,6 +436,33 @@
 				temperature = <145000>;
 				hysteresis = <0>;
 				type = "critical";
+			};
+		};
+	};
+
+	socd {
+		polling-delay-passive = <100>;
+		polling-delay = <0>;
+		thermal-sensors = <&bcl_soc>;
+
+
+		trips {
+			thermal-engine-trip {
+				temperature = <100>;
+				hysteresis = <0>;
+				type = "passive";
+			};
+
+			thermal-hal-trip {
+				temperature = <100>;
+				hysteresis = <0>;
+				type = "passive";
+			};
+
+			soc_trip:soc-trip {
+				temperature = <90>;
+				hysteresis = <0>;
+				type = "passive";
 			};
 		};
 	};

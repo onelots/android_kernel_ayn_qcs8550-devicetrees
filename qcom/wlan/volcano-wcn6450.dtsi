@@ -90,6 +90,8 @@
 
 		qcom,qmp = <&aoss_qmp>;
 
+		qcom,vreg_ol_cpr ="l3f";
+
 		qcom,pdc_init_table =
 			" {class: wlan_pdc, ss: rf, res: s3b.v, dwnval: 920}",
 			" {class: wlan_pdc, ss: rf, res: s1b.v, dwnval: 1856}",

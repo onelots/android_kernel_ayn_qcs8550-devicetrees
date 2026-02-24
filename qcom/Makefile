@@ -277,7 +277,9 @@ cinder-dtb-$(CONFIG_ARCH_CINDER) += cinder-ru-rumi.dtb \
 	cinder-v2-du-idp-4gb.dtb \
 	cinder-v2-du-x100.dtb \
 	cinder-v2-ru-rumi.dtb \
-	cinder-v2-du-rumi.dtb
+	cinder-v2-du-rumi.dtb \
+	cinder-ru-idp-32tr.dtb \
+	cinder-ru-idp-64tr.dtb
 dtb-y += $(cinder-dtb-y)
 
 QCS405_BASE_DTB += qcs405.dtb qcs407.dtb

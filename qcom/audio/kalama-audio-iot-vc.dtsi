@@ -171,6 +171,8 @@
 &kalama_snd {
 	qcom,model = "kalama-iot-vc-snd-card";
 
+	qcom,mi2s-audio-intf = <0>;
+	qcom,iot-vc-mi2s-audio-intf = <1>;
 	qcom,audio-routing =
 		"RX_TX DEC0_INP", "TX DEC0 MUX",
 		"RX_TX DEC1_INP", "TX DEC1 MUX",

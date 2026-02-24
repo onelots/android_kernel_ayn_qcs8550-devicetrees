@@ -1,4 +1,8 @@
 #include "pm8150.dtsi"
+/ {
+	qcom,pmic-id-size = <8>;
+	qcom,pmic-id = <0x1E 0x0 0x0 0x0 0x0 0x0 0x0 0x0>;
+};
 
 &pm8150_vadc {
 	xo_therm {
