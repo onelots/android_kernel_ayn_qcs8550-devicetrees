@@ -34,6 +34,46 @@
 	/* 36 - 39 qupv3_se2_spi for tdk temp sensor */
 	qcom,gpios-reserved = <34 35>;
 
+	i2chub0_se4_pins: i2chub0_se4_pins {
+		i2chub0_se4_sda_active: i2chub0_se4_sda_active {
+			mux {
+				pins = "gpio4";
+				function = "i2chub0_se4_l0";
+			};
+
+			config {
+				pins = "gpio4";
+				drive-strength = <8>;
+				bias-disable;
+			};
+		};
+
+		i2chub0_se4_scl_active: i2chub0_se4_scl_active {
+			mux {
+				pins = "gpio5";
+				function = "i2chub0_se4_l1";
+			};
+
+			config {
+				pins = "gpio5";
+				drive-strength = <8>;
+				bias-disable;
+			};
+		};
+
+		i2chub0_se4_sleep: i2chub0_se4_sleep {
+			mux {
+				pins = "gpio4", "gpio5";
+				function = "gpio";
+			};
+
+			config {
+				pins = "gpio4", "gpio5";
+				drive-strength = <2>;
+			};
+		};
+	};
+
 	pice0_usb_power_1p05_default: pice0_usb_power_1p05_default {
 		mux {
 			pins = "gpio179";
@@ -615,6 +655,7 @@
 
 &usb0 {
 	usb-role-switch;
+	snps,dwc3_guctl_resbwhseps_quirk;
 	port {
 		usb_port0: endpoint {
 			remote-endpoint = <&usb_port0_connector>;
@@ -712,6 +753,8 @@
 };
 
 &qupv3_hub_i2c4 {
+	pinctrl-0 = <&i2chub0_se4_sda_active>, <&i2chub0_se4_scl_active>;
+	pinctrl-1 = <&i2chub0_se4_sleep>;
 	status = "ok";
 
 	pcie0_i2c_ctrl: pcie0_i2c_ctrl {
@@ -1189,6 +1232,13 @@
 	rear-tof-therm {
 		status = "disabled";
 	};
+};
+
+&pmk8550_vadc {
+	/delete-node/ pm8550_msm_therm;
+	/delete-node/ pm8550_cam_flash_therm;
+	/delete-node/ pm8550_wlan_therm;
+	/delete-node/ pm8550_rear_tof_therm;
 };
 
 &qcom_qbt {

@@ -8,6 +8,10 @@ Required properties :
 			"qcom,lcc-apq8064"
 			"qcom,lcc-ipq8064"
 			"qcom,lcc-mdm9615"
+			"qcom,lpassaoncc-scuba"
+			"qcom,lpassaudiocc-scuba"
+			"qcom,lpassaoncc-khaje"
+			"qcom,lpassaudiocc-khaje"
 
 - reg : shall contain base register location and length
 - #clock-cells : shall contain 1

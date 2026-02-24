@@ -139,6 +139,7 @@
 
 &usb0 {
 	extcon = <&extcon_lt8711uxe2>, <&eud>;
+	snps,dwc3_guctl_resbwhseps_quirk;
 };
 
 &L6M {
@@ -154,6 +155,8 @@
 
 &aliases {
 	i2c0 = "/soc/qcom,qupv3_i2c_geni_se@9c0000/i2c@988000";
+	i2c1 = "/soc/qcom,qupv3_1_geni_se@ac0000/i2c@a80000";
+	i2c2 = "/soc/qcom,qupv3_i2c_geni_se@9c0000/i2c@98c000";
 };
 
 &soc {

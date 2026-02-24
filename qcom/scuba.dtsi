@@ -1129,6 +1129,8 @@
 			 <&rpmcc RPM_SMD_CE1_CLK>,
 			 <&rpmcc RPM_SMD_CE1_CLK>;
 		qcom,ce-opp-freq = <192000000>;
+		interconnect-names = "data_path";
+		interconnects = <&system_noc MASTER_CRYPTO_CORE0 &bimc SLAVE_EBI_CH0>;
 		qcom,smmu-s1-enable;
 		iommus = <&apps_smmu 0x0086 0x0011>,
 			 <&apps_smmu 0x0096 0x0011>;
@@ -1182,6 +1184,8 @@
 		qcom,use-sw-ahash-algo;
 		qcom,use-sw-aead-algo;
 		qcom,use-sw-hmac-algo;
+		interconnect-names = "data_path";
+		interconnects = <&system_noc MASTER_CRYPTO_CORE0 &bimc SLAVE_EBI_CH0>;
 		qcom,smmu-s1-enable;
 		iommus = <&apps_smmu 0x0084 0x0011>,
 			<&apps_smmu 0x0094 0x0011>;

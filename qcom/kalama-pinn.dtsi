@@ -238,3 +238,87 @@
 		};
 	};
 };
+
+&L1K {
+	status = "disabled";
+};
+
+&L2K {
+	status = "disabled";
+};
+
+&L3K {
+	status = "disabled";
+};
+
+&L4K {
+	status = "disabled";
+};
+
+&L5K {
+	status = "disabled";
+};
+
+&L6K {
+	status = "disabled";
+};
+
+&L7K {
+	status = "disabled";
+};
+
+&L1M {
+	status = "disabled";
+};
+
+&L2M {
+	status = "disabled";
+};
+
+&L3M {
+	status = "disabled";
+};
+
+&L4M {
+	status = "disabled";
+};
+
+&L5M {
+	status = "disabled";
+};
+
+&L6M {
+	status = "disabled";
+};
+
+&L7M {
+	status = "disabled";
+};
+
+&L1N {
+	status = "disabled";
+};
+
+&L2N {
+	status = "disabled";
+};
+
+&L3N {
+	status = "disabled";
+};
+
+&L4N {
+	status = "disabled";
+};
+
+&L5N {
+	status = "disabled";
+};
+
+&L6N {
+	status = "disabled";
+};
+
+&L7N {
+	status = "disabled";
+};

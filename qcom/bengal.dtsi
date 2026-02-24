@@ -616,7 +616,8 @@
 		<&rpmcc RPM_SMD_QUP_A_CLK>;
 	};
 
-	mmnrt_virt: interconnect@0 {
+	mmnrt_virt: interconnect1@1880000 {
+		reg = <0x01880000 0x5f080>;
 		compatible = "qcom,bengal-mmnrt_virt";
 		#interconnect-cells = <1>;
 		qcom,util-factor = <142>;
@@ -626,7 +627,8 @@
 			 <&rpmcc RPM_SMD_MMNRT_A_CLK>;
 	 };
 
-	mmrt_virt: interconnect@1 {
+	mmrt_virt: interconnect2@1880000 {
+		reg = <0x01880000 0x5f080>;
 		compatible = "qcom,bengal-mmrt_virt";
 		#interconnect-cells = <1>;
 		qcom,util-factor = <139>;

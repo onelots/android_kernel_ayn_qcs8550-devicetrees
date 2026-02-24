@@ -419,7 +419,7 @@
 		qcom,supported-modes =
 			<RPMH_REGULATOR_MODE_LPM
 			RPMH_REGULATOR_MODE_HPM>;
-		qcom,mode-threshold-currents = <0 30000>;
+		qcom,mode-threshold-currents = <0 10000>;
 
 		L9A:
 		pm8775_a_l9: regulator-pm8775_a-l9 {

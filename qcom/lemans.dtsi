@@ -2040,6 +2040,8 @@
 		lanes-per-direction = <2>;
 		dev-ref-clk-freq = <0>; /* 19.2 MHz */
 
+		set-ds-spm-level;
+
 		clock-names =
 			"core_clk",
 			"bus_aggr_clk",
@@ -2183,7 +2185,8 @@
 		lanes-per-direction = <2>;
 		dev-ref-clk-freq = <0>; /* 19.2 MHz */
 
-		spm-level = <5>;
+		set-ds-spm-level;
+
 		clock-names =
 			"core_clk",
 			"bus_aggr_clk",

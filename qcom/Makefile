@@ -206,8 +206,11 @@ SCUBA_BOARDS += \
 
 bengal-dtb-$(CONFIG_ARCH_SCUBA) += \
 	$(call add-overlays, $(SCUBA_BOARDS), $(SCUBA_BASE_DTB))
+bengal_le-dtb-$(CONFIG_ARCH_SCUBA) += \
+	$(call add-overlays, $(SCUBA_BOARDS), $(SCUBA_BASE_DTB))
 
 bengal-overlays-dtb-$(CONFIG_ARCH_SCUBA) += $(SCUBA_BOARDS) $(SCUBA_BASE_DTB)
+bengal_le-overlays-dtb-$(CONFIG_ARCH_SCUBA) += $(SCUBA_BOARDS) $(SCUBA_BASE_DTB)
 dtb-y += $(bengal-dtb-y)
 
 KONA_BASE_DTB += kona-iot.dtb kona-iot-v2.dtb kona-iot-v2.1.dtb kona-7230-iot-v2.1.dtb
@@ -557,12 +560,19 @@ kalama_tuivm-dtb-$(CONFIG_ARCH_QTI_VM) += kalama-vm-rumi.dtb \
                  kalama-vm-qrd.dtb \
                  kalama-vm-hdk.dtb \
                  kalama-vm-hhg.dtb \
+                 kalamap-vm-hdk-rb5-gen2-vc.dtb \
+                 kalamap-vm-iot-vc.dtb \
+                 kalamap-vm-cdp.dtb \
                  kalama-oemvm-cdp.dtb \
                  kalama-oemvm-mtp.dtb \
                  kalama-oemvm-qrd.dtb \
                  kalama-oemvm-rumi.dtb \
                  kalamap-oemvm-hdk.dtb \
-                 kalamap-oemvm-hhg.dtb
+                 kalamap-oemvm-hhg.dtb \
+                 kalamap-oemvm-hdk-rb5-gen2-vc.dtb \
+                 kalamap-oemvm-iot-vc.dtb \
+                 kalamap-oemvm-cdp.dtb
+
 dtb-y += $(kalama_tuivm-dtb-y)
 
 kalamale_roboticsvm-dtb-$(CONFIG_ARCH_QTI_VM) += kalamale_roboticsvm1-dvt.dtb \
