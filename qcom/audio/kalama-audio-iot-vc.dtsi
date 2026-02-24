@@ -1,0 +1,194 @@
+#include "kalama-audio-iot.dtsi"
+
+&lpass_cdc {
+	qcom,num-macros = <3>;
+};
+
+&wcd938x_codec {
+	status = "disabled";
+};
+
+&wsa_macro {
+	status = "disabled";
+};
+
+&wsa2_macro {
+	status = "disabled";
+};
+
+&wsa_spkr_en02 {
+	status = "disabled";
+};
+
+&wsa_spkr_en13 {
+	status = "disabled";
+};
+
+&fsa4480 {
+	status = "disabled";
+};
+
+&va_macro {
+	qcom,is-used-swr-gpio = <0>;
+};
+
+&rx_macro {
+	qcom,is-used-swr-gpio = <0>;
+};
+
+&va_swr_gpios {
+	status = "disabled";
+};
+
+&rx_swr_gpios {
+	status = "disabled";
+};
+
+&swr_haptics {
+	status = "disabled";
+};
+
+&fm_i2s1_gpios {
+	status = "disabled";
+};
+
+&tlmm {
+	tas5805m_pdn: tas5805m_pdn {
+		mux {
+			pins = "gpio63";
+			function = "gpio";
+		};
+
+		config {
+			pins = "gpio63";
+			drive-strength = <8>;
+			bias-pull-down;
+			output-low;
+		};
+	};
+};
+
+&qupv3_hub_i2c2 {
+	status = "ok";
+	tas5805m: tas5805m@2d {
+		compatible = "ti,tas5805m";
+		reg = <0x2d>;
+
+		gpio,hpd = <&tlmm 24 0>;
+		interrupt-parent = <&tlmm>;
+		interrupts = <24 0>;
+
+		gpio,pdn = <&tlmm 63 0>;
+		pinctrl-names = "default";
+		pinctrl-0 = <&tas5805m_pdn>;
+		status = "ok";
+	};
+};
+
+&cdc_dmic01_gpios {
+	status = "disabled";
+};
+
+&cdc_dmic23_gpios {
+	status = "disabled";
+};
+
+&cdc_dmic45_gpios {
+	status = "disabled";
+};
+
+&cdc_dmic67_gpios {
+	status = "disabled";
+};
+
+&spf_core_platform {
+
+	pri_i2s0_gpios: pri_i2s0_pinctrl {
+		compatible = "qcom,msm-cdc-pinctrl";
+		pinctrl-names = "aud_active", "aud_sleep";
+		pinctrl-0 = <&i2s0_sck_active &i2s0_ws_active
+					 &i2s0_sd0_active &i2s0_sd1_active>;
+		pinctrl-1 = <&i2s0_sck_sleep &i2s0_ws_sleep
+					 &i2s0_sd0_sleep &i2s0_sd1_sleep>;
+		#gpio-cells = <0>;
+		status = "ok";
+	};
+
+	cdc_sec_mi2s_gpios: sec_i2s1_pinctrl {
+		compatible = "qcom,msm-cdc-pinctrl";
+		pinctrl-names = "aud_active", "aud_sleep";
+		pinctrl-0 = <&i2s1_sck_active &i2s1_ws_active
+				&i2s1_sd0_active>;
+		pinctrl-1 = <&i2s1_sck_sleep &i2s1_ws_sleep
+				&i2s1_sd0_sleep>;
+		#gpio-cells = <0>;
+		status = "ok";
+	};
+
+	sep_lpi_i2s3_gpios: sep_lpi_i2s3_pinctrl {
+		compatible = "qcom,msm-cdc-pinctrl";
+		pinctrl-names = "aud_active", "aud_sleep";
+		pinctrl-0 = <&lpi_i2s3_sck_active &lpi_i2s3_ws_active &lpi_i2s3_sd0_active>;
+		pinctrl-1 = <&lpi_i2s3_sck_sleep &lpi_i2s3_ws_sleep &lpi_i2s3_sd0_sleep>;
+		#gpio-cells = <0>;
+		status = "ok";
+	};
+
+	quat_lpi_i2s0_gpios: quat_lpi_i2s0_pinctrl {
+		compatible = "qcom,msm-cdc-pinctrl";
+		pinctrl-names = "aud_active", "aud_sleep";
+		pinctrl-0 = <&quat_mi2s_sck_active &quat_mi2s_ws_active
+					 &quat_mi2s_sd0_active &quat_mi2s_sd1_active
+					 &quat_mi2s_sd2_active &quat_mi2s_sd3_active>;
+		pinctrl-1 = <&quat_mi2s_sck_sleep &quat_mi2s_ws_sleep
+					 &quat_mi2s_sd0_sleep &quat_mi2s_sd1_sleep
+					 &quat_mi2s_sd2_sleep &quat_mi2s_sd3_sleep>;
+		#gpio-cells = <0>;
+		status = "ok";
+	};
+
+	quin_lpi_i2s1_gpios: quin_lpi_i2s1_pinctrl {
+		compatible = "qcom,msm-cdc-pinctrl";
+		pinctrl-names = "aud_active", "aud_sleep";
+		pinctrl-0 = <&lpi_i2s1_sck_active &lpi_i2s1_ws_active
+					 &lpi_i2s1_sd0_active &lpi_i2s1_sd1_active>;
+		pinctrl-1 = <&lpi_i2s1_sck_sleep &lpi_i2s1_ws_sleep
+					 &lpi_i2s1_sd0_sleep &lpi_i2s1_sd1_sleep>;
+		#gpio-cells = <0>;
+		qcom,lpi-gpios;
+		status = "ok";
+	};
+
+};
+
+&kalama_snd {
+	qcom,model = "kalama-iot-vc-snd-card";
+
+	qcom,audio-routing =
+		"RX_TX DEC0_INP", "TX DEC0 MUX",
+		"RX_TX DEC1_INP", "TX DEC1 MUX",
+		"RX_TX DEC2_INP", "TX DEC2 MUX",
+		"RX_TX DEC3_INP", "TX DEC3 MUX",
+		"VA SWR_INPUT", "VA_SWR_CLK",
+		"VA_AIF1 CAP", "VA_SWR_CLK",
+		"VA_AIF2 CAP", "VA_SWR_CLK",
+		"VA_AIF3 CAP", "VA_SWR_CLK";
+
+	qcom,wsa-max-devs = <0>;
+	qcom,wcd-disabled = <1>;
+	swr-haptics-unsupported;
+
+	asoc-codec  = <&stub_codec>, <&lpass_cdc>;
+	asoc-codec-names = "msm-stub-codec.1", "lpass-cdc";
+
+	/delete-property/ qcom,cdc-dmic01-gpios;
+	/delete-property/ qcom,cdc-dmic23-gpios;
+	/delete-property/ qcom,cdc-dmic45-gpios;
+	/delete-property/ fm_i2s1_gpios;
+
+	qcom,pri-mi2s-gpios = <&pri_i2s0_gpios>;
+	qcom,sec-mi2s-gpios = <&cdc_sec_mi2s_gpios>;
+	qcom,quat-mi2s-gpios = <&quat_lpi_i2s0_gpios>;
+	qcom,quin-mi2s-gpios = <&quin_lpi_i2s1_gpios>;
+	qcom,sep-mi2s-gpios = <&sep_lpi_i2s3_gpios>;
+};

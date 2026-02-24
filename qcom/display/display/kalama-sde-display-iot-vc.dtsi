@@ -1,0 +1,28 @@
+#include "kalama-sde-display-rb5-gen2.dtsi"
+
+&lt9611_pins {
+	mux {
+		pins = "gpio15", "gpio88", "gpio14", "gpio49";
+		function = "gpio";
+	};
+
+	config {
+		pins = "gpio15", "gpio88", "gpio14", "gpio49";
+		drive-strength = <8>;
+		bias-disable = <0>;
+	};
+};
+
+&lt9611 {
+	lt,irq-gpio = <&tlmm 15 0x0>;
+	lt,writable-gpio = <&tlmm 88 0x0>;
+	lt,reset-gpio = <&tlmm 14 0x0>;
+	lt,dsi-sel-gpio = <&tlmm 49 0x0>;
+
+	pinctrl-names = "default";
+	pinctrl-0 = <&lt9611_pins>;
+};
+
+&sde_dp {
+	qcom,dp-aux-switch = <>;
+};

@@ -1,0 +1,16 @@
+/dts-v1/;
+/plugin/;
+
+#include <dt-bindings/clock/qcom,gcc-kalama.h>
+#include <dt-bindings/clock/qcom,camcc-kalama.h>
+#include <dt-bindings/interconnect/qcom,kalama.h>
+#include <dt-bindings/interrupt-controller/arm-gic.h>
+#include <dt-bindings/regulator/qcom,rpmh-regulator-levels.h>
+
+#include "kalama-camera-sensor-rb5gen2-vc.dtsi"
+/ {
+    model = "Qualcomm Technologies, Inc. Kalama RB5 gen2 vc";
+    compatible = "qcom,kalamap-iot", "qcom,kalamap", "qcom,iot";
+    qcom,msm-id = <603 0x20000>;
+    qcom,board-id = <0x1001f 0x6>;
+};

@@ -1,0 +1,11 @@
+/dts-v1/;
+/plugin/;
+
+#include "kona-sde.dtsi"
+#include "kona-sde-display-rb5-HDMI.dtsi"
+
+/ {
+	model = "Qualcomm Technologies, Inc. Robotics RB5 Platform with HDMI adapter card";
+	compatible = "qcom,kona-mtp", "qcom,kona", "qcom,mtp";
+	qcom,board-id = <0x5010008 0x0>, <0x401000b 0x0>;
+};
