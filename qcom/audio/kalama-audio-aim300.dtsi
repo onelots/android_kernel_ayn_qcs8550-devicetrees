@@ -24,7 +24,7 @@
 };
 
 &kalama_snd {
-	qcom,model = "kalama-qrd-snd-card";
+	qcom,model = "kalama-aim-snd-card";
 
 	qcom,audio-routing =
 		"AMIC1", "Analog Mic1",
@@ -61,6 +61,8 @@
 		"VA AMIC4", "VA MIC BIAS3",
 		"VA AMIC5", "Analog Mic5",
 		"VA AMIC5", "VA MIC BIAS4",
+		"VA AMIC6", "Analog Mic6",
+		"VA AMIC6", "VA MIC BIAS4",
 		"IN1_HPHL", "HPHL_OUT",
 		"IN2_HPHR", "HPHR_OUT",
 		"IN3_AUX", "AUX_OUT",

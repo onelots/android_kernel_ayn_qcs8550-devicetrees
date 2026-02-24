@@ -4145,3 +4145,4 @@
 #include "msm-rdbg.dtsi"
 #include "kona-thermal.dtsi"
 #include "kona-coresight.dtsi"
+#include "kona-npu.dtsi"

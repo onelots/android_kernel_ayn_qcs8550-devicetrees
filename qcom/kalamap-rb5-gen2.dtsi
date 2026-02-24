@@ -132,7 +132,6 @@
 		regulator-max-microvolt = <1000000>;
 		enable-active-high;
 		regulator-always-on;
-		regulator-boot-on;
 		regulator-enable-ramp-delay = <5000>;
 	};
 
@@ -147,7 +146,6 @@
 		regulator-max-microvolt = <3300000>;
 		enable-active-high;
 		regulator-always-on;
-		regulator-boot-on;
 		regulator-enable-ramp-delay = <10000>;
 	};
 
@@ -162,7 +160,6 @@
 		regulator-max-microvolt = <3300000>;
 		enable-active-high;
 		regulator-always-on;
-		regulator-boot-on;
 		regulator-enable-ramp-delay = <10000>;
 	};
 
@@ -741,7 +738,6 @@
 
 &pcie0 {
 	qcom,boot-option = <0x2>;
-
 	pcie-i2c-phandle = <&qupv3_hub_i2c4>;
 	vreg-3p3-supply = <&qps615_resx0_0p9_vreg>;
 	msi-parent = <&pcie0_msi>;
@@ -957,6 +953,7 @@
 
 &pcie1 {
 	pcie-i2c-phandle = <&qupv3_hub_i2c3>;
+	qcom,filtered-bdfs = <0x05010000>;
 	qcom,boot-option = <0x1>;
 	vreg-3p3-supply = <&qps615_resx1_0p9_vreg>;
 	qcom,apss-based-l1ss-sleep;

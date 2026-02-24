@@ -404,11 +404,11 @@
 	qcom,param-override-seq =
 		/* <value reg_offset> */
 		/* Adjust HS trasmit amplitude */
-		<0xb 0x51
+		<0xe 0x51
 		/* Squelch detection threshold */
 		 0x3 0x54
 		/* Tx pre-emphasis tuning */
-		 0x3 0x57
+		 0x6 0x57
 		/* HS disconnect threshold */
 		 0x6 0x53>;
 };
@@ -805,6 +805,11 @@
 		<0x400 &apps_smmu 0x1488 0x1>,
 		<0x500 &apps_smmu 0x148c 0x1>,
 		<0x501 &apps_smmu 0x148e 0x1>;
+
+};
+
+&mhi_0 {
+	reg = <0x100 0x00 0x00 0x00 0x00>;
 };
 
 &pcie1_rp {
@@ -848,7 +853,7 @@
 		/* BDF 2.3.0 */
 		pcie1_bus2_dev3_fn0: pcie1_bus2_dev3_fn0 {
 			reg = <0x1800 0x0 0x0 0x0 0x0>;
-			qps615_eth1,qps615_eth1@pcie1_rp {
+			qps615_eth1: qps615_eth1 {
 				reg = <0x100 0x0 0x0 0x0 0x0>;
 				pinctrl-names = "default";
 				pinctrl-0 = <&qca_intn_wol_sig>;

@@ -62,6 +62,9 @@ SoCs:
 - BENGAL
   compatible = "qcom,bengal"
 
+- BENGALP
+  compatible = "qcom,bengalp"
+
 - KHAJE
   compatible = "qcom,khaje"
 
@@ -289,6 +292,9 @@ compatible = "qcom,lito-cdp"
 compatible = "qcom,lito-atp"
 compatible = "qcom,lito-qrd"
 compatible = "qcom,bengal-rumi"
+compatible = "qcom,bengal-idp"
+compatible = "qcom,bengal-qrd"
+compatible = "qcom,bengalp-idp"
 compatible = "qcom,sdmshrike-rumi"
 compatible = "qcom,sdmshrike-mtp"
 compatible = "qcom,sdmshrike-cdp"

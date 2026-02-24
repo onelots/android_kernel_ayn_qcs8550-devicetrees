@@ -1,0 +1,10 @@
+/dts-v1/;
+
+#include "kalamale_roboticsvm.dtsi"
+#include "kalamale_roboticsvm1-dvt.dtsi"
+
+/ {
+	model = "Qualcomm Technologies, Inc. Kalama LE DVT ROBOTICS GVM 1";
+	compatible = "qcom,kalama-qrd", "qcom,kalama", "qcom,qrd";
+	qcom,board-id = <0x1021f 0x2>;
+};

@@ -2263,6 +2263,8 @@
 		phy-names = "ufsphy";
 		#reset-cells = <1>;
 
+		qcom,dynamic-irq-affinity;
+
 		lanes-per-direction = <1>;
 		dev-ref-clk-freq = <0>; /* 19.2 MHz */
 
@@ -2342,12 +2344,11 @@
 		status = "disabled";
 
 		qos0 {
-			mask = <0x0f>;
 			vote = <44>;
+			perf;
 		};
 
 		qos1 {
-			mask = <0xf0>;
 			vote = <44>;
 		};
 	};

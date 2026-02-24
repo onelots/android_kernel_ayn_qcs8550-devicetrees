@@ -61,7 +61,11 @@ KALAMA_BOARDS += \
 		 kalamap-sg-hhg-overlay.dtbo \
 		 kalamap-rb5-gen2-overlay.dtbo \
 		 kalamap-rb5-gen2-dvt-overlay.dtbo \
-		 kalamap-aim300-overlay.dtbo
+		 kalamap-rb5-gen2-dvt-roboticspvm-overlay.dtbo \
+		 kalamap-aim300-overlay.dtbo \
+		 kalamap-aim300-v2-overlay.dtbo \
+		 kalamap-hdk-rb5-gen2-single-wingmate-overlay.dtbo \
+		 kalamap-hdk-rb5-gen2-dual-wingmate-overlay.dtbo
 
 NOAPQ_KALAMA_BOARDS += \
 		 kalama-rumi-overlay.dtbo \
@@ -142,6 +146,26 @@ KHAJE_BOARDS += \
 bengal-dtb-$(CONFIG_ARCH_KHAJE) += \
         $(call add-overlays, $(KHAJE_BOARDS) ,$(KHAJE_BASE_DTB))
 bengal-overlays-dtb-$(CONFIG_ARCH_KHAJE) += $(KHAJE_BOARDS) $(KHAJE_BASE_DTB)
+dtb-y += $(bengal-dtb-y)
+
+BENGAL_BASE_DTB += bengal.dtb bengalp.dtb bengal-1gb.dtb bengal-2gb.dtb
+
+BENGAL_BOARDS += \
+		bengal-rumi-overlay.dtbo \
+		bengal-qrd-overlay.dtbo \
+		bengal-idp-overlay.dtbo \
+                bengal-idp-nopmi-overlay.dtbo \
+                bengal-idp-usbc-overlay.dtbo \
+	        bengalp-idp-overlay.dtbo \
+	        bengal-idp-1gb-overlay.dtbo \
+	        bengal-idp-2gb-overlay.dtbo \
+	        bengal-idp-usbc-1gb-overlay.dtbo \
+	        bengal-idp-usbc-2gb-overlay.dtbo
+
+bengal-dtb-$(CONFIG_ARCH_BENGAL) += \
+	$(call add-overlays, $(BENGAL_BOARDS), $(BENGAL_BASE_DTB))
+
+bengal-overlays-dtb-$(CONFIG_ARCH_BENGAL) += $(BENGAL_BOARDS) $(BENGAL_BASE_DTB)
 dtb-y += $(bengal-dtb-y)
 
 KONA_BASE_DTB += kona-iot.dtb kona-iot-v2.dtb kona-iot-v2.1.dtb kona-7230-iot-v2.1.dtb
@@ -495,6 +519,10 @@ kalama_tuivm-dtb-$(CONFIG_ARCH_QTI_VM) += kalama-vm-rumi.dtb \
                  kalamap-oemvm-hdk.dtb \
                  kalamap-oemvm-hhg.dtb
 dtb-y += $(kalama_tuivm-dtb-y)
+
+kalamale_roboticsvm-dtb-$(CONFIG_ARCH_QTI_VM) += kalamale_roboticsvm1-dvt.dtb \
+	kalamale_roboticsvm2-dvt.dtb
+dtb-y += $(kalamale_roboticsvm-dtb-y)
 endif
 endif
 
