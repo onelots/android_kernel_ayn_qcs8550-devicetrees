@@ -1,5 +1,4 @@
 #include "kalama-sde-display.dtsi"
-#include <dt-bindings/interrupt-controller/irq.h>
 
 &dsi_vtdr6130_amoled_cmd {
 	qcom,panel-supply-entries = <&dsi_panel_pwr_supply>;
@@ -78,7 +77,7 @@
 &dsi_dual_sim_cmd {
 	qcom,panel-supply-entries = <&dsi_panel_pwr_supply_sim>;
 	qcom,mdss-dsi-bl-pmic-control-type = "bl_ctrl_dcs";
-	qcom,bl-dsc-cmd-state = "dsi_lp_mode";
+	qcom,bl-dcs-cmd-state = "dsi_lp_mode";
 };
 
 &dsi_dual_sim_dsc_375_cmd {
@@ -119,7 +118,7 @@
 		interrupt-parent = <&tlmm>;
 		interrupts = <8 0>;
 		interrupt-names = "lt_irq";
-		lt,irq-gpio = <&tlmm 8 IRQ_TYPE_EDGE_FALLING>;
+		lt,irq-gpio = <&tlmm 8 0x0>;
 		lt,reset-gpio = <&tlmm 7 0x0>;
 		lt,hdmi-3p3-en = <&tlmm 6 0x0>;
 		lt,hdmi-1p2-en = <&tlmm 152 0x0>;
@@ -166,27 +165,15 @@
 
 			port@0 {
 				reg = <0>;
-				lt9611_in_1: endpoint {
-					remote-endpoint = <&ext_dsi_1_out>;
+				lt9611_in_0: endpoint {
+					remote-endpoint = <&ext_dsi_0_out>;
 				};
 			};
 		};
 	};
 };
 
-&dsi_ext_bridge_1080p {
-	qcom,dsi-select-clocks = "pll_byte_clk0", "pll_dsi_clk0";
-	qcom,dsi-select-sec-clocks = "pll_byte_clk1", "pll_dsi_clk1";
-
-	qcom,dsi-sec-ctrl-num = <1>;
-	qcom,dsi-sec-phy-num = <1>;
-};
-
 &sde_dsi {
-	qcom,dsi-default-panel = <&dsi_vtdr6130_amoled_cmd>;
-};
-
-&sde_dsi1 {
 	qcom,dsi-default-panel = <&dsi_ext_bridge_1080p>;
 	ports {
 		#address-cells = <1>;
@@ -194,8 +181,8 @@
 
 		port@0 {
 			reg = <0>;
-			ext_dsi_1_out: endpoint {
-				remote-endpoint = <&lt9611_in_1>;
+			ext_dsi_0_out: endpoint {
+				remote-endpoint = <&lt9611_in_0>;
 			};
 		};
 	};
@@ -211,16 +198,4 @@
 &battery_charger {
 	qcom,display-panels = <&dsi_vtdr6130_amoled_cmd
 			      &dsi_vtdr6130_amoled_video>;
-};
-
-&mdss_mdp {
-	connectors = <&sde_dsi &sde_dsi1 &smmu_sde_unsec &sde_rscc &sde_dp>;
-};
-
-&sde_wb1 {
-	status = "disabled";
-};
-
-&sde_wb2 {
-	status = "disabled";
 };
