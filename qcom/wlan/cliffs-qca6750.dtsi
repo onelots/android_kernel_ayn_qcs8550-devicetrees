@@ -33,7 +33,7 @@
 	icnss2: qcom,wcn6750 {
 		compatible = "qcom,wcn6750";
 		reg = <0x17110040 0x0>,
-		      <0xb0000000 0x10000>;
+		      <0xc0000000 0x10000>;
 		reg-names = "msi_addr", "smmu_iova_ipa";
 		qcom,rproc-handle = <&wpss_pas>;
 		iommus = <&apps_smmu 0x1400 0x1>;
@@ -72,19 +72,19 @@
 
 		qcom,iommu-dma = "fastmap";
 		qcom,iommu-faults = "stall-disable", "HUPCF", "non-fatal";
-		qcom,iommu-dma-addr-pool = <0xa0000000 0x10000000>;
-		qcom,iommu-geometry = <0xa0000000 0x10010000>;
+		qcom,iommu-dma-addr-pool = <0xb0000000 0x10000000>;
+		qcom,iommu-geometry = <0xb0000000 0x10010000>;
 		dma-coherent;
 		qcom,fw-prefix;
 		qcom,wlan;
 		tsens = "sys-therm-4";
 		qcom,wlan-msa-fixed-region = <&wlan_msa_mem>;
 		vdd-cx-mx-supply = <&S3B>;
-		qcom,vdd-cx-mx-config = <880000 1040000 0 0 1>;
+		qcom,vdd-cx-mx-config = <968000 1040000 0 0 1>;
 		vdd-1.8-xo-supply = <&S1B>;
-		qcom,vdd-1.8-xo-config = <1872000 2040000 0 0 0>;
+		qcom,vdd-1.8-xo-config = <1856000 2040000 0 0 0>;
 		vdd-1.3-rfa-supply = <&S2B>;
-		qcom,vdd-1.3-rfa-config = <1256000 1408000 0 0 0>;
+		qcom,vdd-1.3-rfa-config = <1256000 2050000 0 0 0>;
 
 		qcom,smem-states = <&smp2p_wlan_1_out 0>,
 				   <&smp2p_wlan_2_out 0>,

@@ -60,6 +60,7 @@ KALAMA_BOARDS += \
 		 kalamap-hdk-overlay.dtbo \
 		 kalamap-sg-hhg-overlay.dtbo \
 		 kalamap-rb5-gen2-overlay.dtbo \
+		 kalamap-rb5-gen2-dvt-overlay.dtbo \
 		 kalamap-aim300-overlay.dtbo
 
 NOAPQ_KALAMA_BOARDS += \
@@ -74,6 +75,7 @@ kalama-dtb-$(CONFIG_ARCH_KALAMA) += \
 	$(call add-overlays, $(KALAMA_BOARDS) $(APQ_KALAMA_BOARDS),$(KALAMA_APQ_BASE_DTB))
 kalama-overlays-dtb-$(CONFIG_ARCH_KALAMA) += $(KALAMA_BOARDS) $(NOAPQ_KALAMA_BOARDS) $(KALAMA_BASE_DTB) $(KALAMA_APQ_BASE_DTB)
 kalama_le-overlays-dtb-$(CONFIG_ARCH_KALAMA) += $(KALAMA_BOARDS) $(NOAPQ_KALAMA_BOARDS) $(KALAMA_BASE_DTB) $(KALAMA_APQ_BASE_DTB)
+kalama_lu-overlays-dtb-$(CONFIG_ARCH_KALAMA) += $(KALAMA_BOARDS) $(NOAPQ_KALAMA_BOARDS) $(KALAMA_BASE_DTB) $(KALAMA_APQ_BASE_DTB)
 dtb-y += $(kalama-dtb-y)
 
 CROW_BASE_DTB += crow.dtb
@@ -152,7 +154,9 @@ KONA_BOARDS += \
                  kona-rb5-overlay-new.dtbo \
                  kona-iot-v2.1-vc-overlay.dtbo \
 		 kona-7230-iot-rb5-overlay.dtbo \
-		 kona-rb5-overlay.dtbo
+		 kona-rb5-overlay.dtbo \
+		 kona-qrd-wingmate-overlay.dtbo \
+		 kona-mtp-wingmate-overlay.dtbo
 
 
 KONA_LE_BOARDS += \
@@ -225,7 +229,7 @@ qcs405-dtb-$(CONFIG_ARCH_QCS405) += \
 qcs405-overlays-dtb-$(CONFIG_ARCH_QCS405) += $(QCS405_BOARDS) $(QCS405_BASE_DTB)
 dtb-y += $(qcs405-dtb-y)
 
-TRINKET_BASE_DTB += trinket-iot.dtb trinketp-iot.dtb
+TRINKET_BASE_DTB += trinket-iot.dtb trinketp-iot.dtb trinket.dtb
 
 TRINKET_BOARDS += \
 	trinket-iot-idp-overlay.dtbo \
@@ -237,7 +241,12 @@ TRINKET_BOARDS += \
 	trinketp-iot-dp-idp-overlay.dtbo \
 	trinketp-iot-external-codec-idp-overlay.dtbo \
 	trinketp-iot-usbc-external-codec-idp-overlay.dtbo \
-	trinketp-iot-usbc-idp-overlay.dtbo
+	trinketp-iot-usbc-idp-overlay.dtbo \
+	trinket-dp-idp-overlay.dtbo \
+	trinket-idp-overlay.dtbo \
+	trinket-external-codec-idp-overlay.dtbo \
+	trinket-usbc-external-codec-idp-overlay.dtbo \
+	trinket-usbc-idp-overlay.dtbo
 
 trinket-dtb-$(CONFIG_ARCH_TRINKET) += \
         $(call add-overlays, $(TRINKET_BOARDS) ,$(TRINKET_BASE_DTB))
@@ -288,6 +297,27 @@ sdmsteppeauto-dtb-$(CONFIG_ARCH_SA6155) += \
 sdmsteppeauto-overlays-dtb-$(CONFIG_ARCH_SA6155) += $(SA6155_BOARDS) $(SA6155P_BOARDS) $(SA6155_BASE_DTB) $(SA6155P_BASE_DTB)
 
 dtb-y += $(sdmsteppeauto-dtb-y)
+
+SDM670_BASE_DTB += qcs605.dtb
+SDM670_LC_BASE_DTB += qcs605-lc.dtb
+
+SDM670_BOARDS += \
+		 qcs605-mtp-overlay.dtbo \
+		 qcs605-cdp-overlay.dtbo \
+		 qcs605-360camera-overlay.dtbo \
+		 qcs605-external-codec-mtp-overlay.dtbo
+
+SDM670_LC_BOARDS += \
+		qcs605-lc-mtp-overlay.dtbo \
+		qcs605-lc-ipcamera-overlay.dtbo \
+		qcs605-lc-cdp-overlay.dtbo
+
+
+qcs605-dtb-$(CONFIG_ARCH_SDM670) += \
+	$(call add-overlays, $(SDM670_BOARDS) ,$(SDM670_BASE_DTB)) \
+	$(call add-overlays, $(SDM670_LC_BOARDS) ,$(SDM670_LC_BASE_DTB))
+qcs605-overlays-dtb-$(CONFIG_ARCH_SDM670) += $(SDM670_BOARDS) $(SDM670_BASE_DTB) $(SDM670_LC_BOARDS) $(SDM670_LC_BASE_DTB)
+dtb-y += $(qcs605-dtb-y)
 
 LEMANS_BASE_DTB		+= lemans.dtb
 LEMANS_IVI_BASE_DTB	+= lemans-ivi.dtb
