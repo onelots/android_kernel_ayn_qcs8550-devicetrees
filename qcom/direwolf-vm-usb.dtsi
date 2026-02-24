@@ -77,8 +77,10 @@
 	/* Primary USB port related High Speed PHY */
 	usb2_phy0: hsphy@88e5000 {
 		compatible = "qcom,usb-hsphy-snps-femto";
-		reg = <0x088e5000 0x120>;
-		reg-names = "hsusb_phy_base";
+		reg = <0x088e5000 0x120>,
+			<0x088e4000 0x4>;
+		reg-names = "hsusb_phy_base",
+			"eud_enable_reg";
 
 		vdd-supply = <&L5A0>;
 		vdda18-supply = <&L7A0>;
@@ -638,7 +640,7 @@
 			compatible = "snps,dwc3";
 			reg = <0xa400000 0xd93c>;
 			iommus = <&apps_smmu 0x0800 0x0>;
-			qcom,iommu-dma = "atomic";
+			qcom,iommu-dma = "bypass";
 			qcom,iommu-dma-addr-pool = <0x90000000 0x60000000>;
 			interrupts = <GIC_SPI 133 IRQ_TYPE_LEVEL_HIGH>;
 			usb-phy = <&usb2_phy2>, <&usb_qmp_phy0>,

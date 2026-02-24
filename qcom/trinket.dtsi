@@ -1221,7 +1221,7 @@
 		compatible = "qcom,msm-rng";
 		reg = <0x1b53000 0x1000>;
 		qcom,no-qrng-config;
-		clock-names = "iface_clk";
+		clock-names = "km_clk_src";
 		clocks = <&rpmcc GCC_PRNG_AHB_CLK>;
 	};
 

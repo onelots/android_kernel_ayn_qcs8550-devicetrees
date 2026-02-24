@@ -158,6 +158,7 @@
 		interrupt-names = "lt_irq";
 		lt,irq-gpio = <&tlmm 40 0x0>;
 		lt,reset-gpio = <&tlmm 7 0x0>;
+		lt,cont-splash-en;
 
 		pinctrl-names = "default";
 		pinctrl-0 = <&lt9611_pins>;

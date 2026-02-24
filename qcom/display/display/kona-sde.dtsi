@@ -383,6 +383,7 @@
 		qcom,dsc-feature-enable;
 		qcom,dsc-version = <0x11>;
 		qcom,fec-feature-enable;
+		qcom,pll-clk-factor = <1>;
 
 		qcom,ctrl-supply-entries {
 			#address-cells = <1>;

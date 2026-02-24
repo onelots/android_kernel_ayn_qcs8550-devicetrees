@@ -2948,6 +2948,7 @@
 	};
 
 	lpassaoncc: clock-controller@a780000 {
+		status = "disabled";
 		compatible = "qcom,lpassaoncc-khaje", "syscon";
 		reg = <0xa780000 0x30000>;
 		reg-name = "cc_base";
@@ -2959,6 +2960,7 @@
 	};
 
 	lpassaudiocc: clock-controller@a540000 {
+		status = "disabled";
 		compatible = "qcom,lpassaudiocc-khaje", "syscon";
 		reg = <0xa540000 0x30000>;
 		reg-name = "cc_base";

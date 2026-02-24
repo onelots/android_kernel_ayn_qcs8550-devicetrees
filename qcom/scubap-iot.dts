@@ -6,6 +6,6 @@
 / {
 	model = "Qualcomm Technologies, Inc. Scubap IOT SoC";
 	compatible = "qcom,scubap-iot";
-	qcom,msm-id = <474 0x10000>;
+	qcom,msm-id = <474 0x10000>, <622 0x10000>;
 	qcom,board-id = <0 0>;
 };

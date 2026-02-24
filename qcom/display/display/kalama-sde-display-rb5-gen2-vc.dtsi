@@ -17,6 +17,7 @@
 
 &lt9611 {
 	/delete-property/ lt,audio-support;
+	/delete-property/ lt,cont-splash-en;
 	lt,customize-modes {
 		lt,customize-mode-id@0 {
 			lt,mode-h-active = <1920>;

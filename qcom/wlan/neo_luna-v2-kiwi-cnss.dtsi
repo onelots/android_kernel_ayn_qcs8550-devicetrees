@@ -59,7 +59,6 @@
 		qcom,wlan;
 		qcom,wlan-rc-num = <0>;
 		qcom,wlan-ramdump-dynamic = <0x780000>;
-		qcom,wlan-cbc-enabled;
 		use-pm-domain;
 		qcom,same-dt-multi-dev;
 		/* For AOP communication, use direct QMP instead of mailbox */
