@@ -219,6 +219,7 @@
 
 	novatek@62 {
 		reg = <0x62>;
+		compatible = "novatek,NVT-ts";
 
 		interrupt-parent = <&tlmm>;
 		interrupts = <80 0x2008>;
@@ -336,4 +337,18 @@
 		pinctrl-1 = <&fpc_reset_high>;
 		pinctrl-2 = <&fpc_int_low>;
 	};
+};
+
+&pm2250_flash {
+	#io-channel-cells = <1>;
+	io-channels = <&pm2250_qg PSY_IIO_RESISTANCE>,
+		<&pm2250_qg PSY_IIO_VOLTAGE_OCV>,
+		<&pm2250_qg PSY_IIO_CURRENT_NOW>,
+		<&pm2250_charger PSY_IIO_FLASH_TRIGGER>,
+		<&pm2250_charger PSY_IIO_FLASH_ACTIVE>;
+	io-channel-names = "rbatt",
+			"voltage_ocv",
+			"current_now",
+			"flash_trigger",
+			"flash_active";
 };

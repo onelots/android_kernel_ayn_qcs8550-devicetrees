@@ -43,6 +43,9 @@
 			device_type = "cpu";
 			compatible = "arm,armv8";
 			reg = <0x0 0x0>;
+			cpu-idle-states = <&SILVER_OFF>;
+			power-domains = <&CPU_PD0>;
+			power-domain-names = "psci";
 			enable-method = "psci";
 			capacity-dmips-mhz = <1024>;
 			dynamic-power-coefficient = <100>;
@@ -68,6 +71,9 @@
 			device_type = "cpu";
 			compatible = "arm,armv8";
 			reg = <0x0 0x1>;
+			cpu-idle-states = <&SILVER_OFF>;
+			power-domains = <&CPU_PD1>;
+			power-domain-names = "psci";
 			enable-method = "psci";
 			capacity-dmips-mhz = <1024>;
 			dynamic-power-coefficient = <100>;
@@ -88,6 +94,9 @@
 			device_type = "cpu";
 			compatible = "arm,armv8";
 			reg = <0x0 0x2>;
+			cpu-idle-states = <&SILVER_OFF>;
+			power-domains = <&CPU_PD2>;
+			power-domain-names = "psci";
 			enable-method = "psci";
 			capacity-dmips-mhz = <1024>;
 			dynamic-power-coefficient = <100>;
@@ -108,6 +117,9 @@
 			device_type = "cpu";
 			compatible = "arm,armv8";
 			reg = <0x0 0x3>;
+			cpu-idle-states = <&SILVER_OFF>;
+			power-domains = <&CPU_PD3>;
+			power-domain-names = "psci";
 			enable-method = "psci";
 			capacity-dmips-mhz = <1024>;
 			dynamic-power-coefficient = <100>;
@@ -145,9 +157,55 @@
 		};
 	};
 
+	idle-states {
+		SILVER_OFF: silver-c3 {  /* C3 */
+			compatible = "arm,idle-state";
+			idle-state-name = "pc";
+			entry-latency-us = <297>;
+			exit-latency-us = <324>;
+			min-residency-us = <1110>;
+			arm,psci-suspend-param = <0x40000003>;
+			local-timer-stop;
+		};
+
+		SILVER_CLUSTER_D3: silver-cluster-d3 { /* D3 */
+			compatible = "domain-idle-state";
+			idle-state-name = "pwr-l2-pc";
+			entry-latency-us = <800>;
+			exit-latency-us = <2118>;
+			min-residency-us = <7376>;
+			arm,psci-suspend-param = <0x41000043>;
+		};
+	};
+
 	psci {
 		compatible = "arm,psci-1.0";
 		method = "smc";
+
+		CPU_PD0: cpu-pd0 {
+			#power-domain-cells = <0>;
+			power-domains = <&CLUSTER_PD>;
+		};
+
+		CPU_PD1: cpu-pd1 {
+			#power-domain-cells = <0>;
+			power-domains = <&CLUSTER_PD>;
+		};
+
+		CPU_PD2: cpu-pd2 {
+			#power-domain-cells = <0>;
+			power-domains = <&CLUSTER_PD>;
+		};
+
+		CPU_PD3: cpu-pd3 {
+			#power-domain-cells = <0>;
+			power-domains = <&CLUSTER_PD>;
+		};
+
+		CLUSTER_PD: cluster-pd0 {
+			#power-domain-cells = <0>;
+			domain-idle-states = <&SILVER_CLUSTER_D3>;
+		};
 	};
 
 	firmware: firmware {
@@ -207,11 +265,6 @@
 			reg = <0x0 0x4ab00000 0x0 0x6900000>;
 		};
 
-		pil_video_mem: pil_video_region@51400000 {
-			no-map;
-			reg = <0x0 0x51400000 0x0 0x500000>;
-		};
-
 		wlan_msa_mem: wlan_msa_region@51900000 {
 			no-map;
 			reg = <0x0 0x51900000 0x0 0x100000>;
@@ -235,6 +288,11 @@
 		pil_gpu_mem: gpu_region@53615000 {
 			no-map;
 			reg = <0x0 0x53615000 0x0 0x2000>;
+		};
+
+		video_mem: video_region@53617000 {
+			no-map;
+			reg = <0x0 0x53617000 0x0 0x700000>;
 		};
 
 		removed_region: removed_region@60000000 {
@@ -263,21 +321,6 @@
 			reusable;
 			alignment = <0 0x400000>;
 			size = <0 0x5c00000>;
-		};
-
-		cont_splash_memory: cont_splash_region@5c000000 {
-			reg = <0x0 0x5c000000 0x0 0x00f00000>;
-			label = "cont_splash_region";
-		};
-
-		dfps_data_memory: dfps_data_region@5cf00000 {
-			reg = <0x0 0x5cf00000 0x0 0x0100000>;
-			label = "dfps_data_region";
-		};
-
-		disp_rdump_memory: disp_rdump_region@5c000000 {
-			reg = <0x0 0x5c000000 0x0 0x00f00000>;
-			label = "disp_rdump_region";
 		};
 
 		non_secure_display_memory: non_secure_display_region {
@@ -339,7 +382,7 @@
 	};
 
 	chosen {
-		bootargs = "rcupdate.rcu_expedited=1 rcu_nocbs=0-7 kpti=off";
+		bootargs = "lpm_levels.sleep_disabled=1 console=ttyMSM0,115200n8 msm_rtb.filter=0x237 service_locator.enable=1 swiotlb=2048 loop.max_part=7 cpufreq.default_governor=performance rcupdate.rcu_expedited=1 rcu_nocbs=0-7 kpti=off export_pmu_events movable_node ftrace_dump_on_oops disable_dma32=on cgroup.memory=nokmem,nosocket panic=5";
 	};
 
 	soc: soc { };
@@ -390,7 +433,7 @@
 	};
 
 	mpm: interrupt-controller@0x45f01b8 {
-		compatible = "qcom,mpm";
+		compatible = "qcom,mpm", "qcom,mpm-scuba";
 		interrupts = <GIC_SPI 197 IRQ_TYPE_EDGE_RISING>;
 		reg = <0x45f01b8 0x1000>,
 		      <0xf111008 0x4>,  /* MSM_APCS_GCC_BASE 4K */
@@ -1469,6 +1512,25 @@
 		rpm-channel-name = "rpm_requests";
 		interrupts = <GIC_SPI 194 IRQ_TYPE_EDGE_RISING>;
 		rpm-channel-type = <15>; /* SMD_APPS_RPM */
+		power-domains = <&CLUSTER_PD>;
+	};
+
+	cluster-device {
+		compatible = "qcom,lpm-cluster-dev";
+		power-domains = <&CLUSTER_PD>;
+	};
+
+	rpm-stats@4690000 {
+		compatible = "qcom,rpm-sleep-stats";
+		reg = <0x04690000 0x400>;
+	};
+
+	qcom,rpm-master-stats@45f0150 {
+		compatible = "qcom,rpm-master-stats";
+		reg = <0x45f0150 0x5000>;
+		qcom,masters = "APSS", "MPSS", "ADSP", "CDSP", "TZ";
+		qcom,master-stats-version = <2>;
+		qcom,master-offset = <4096>;
 	};
 
 	mem_dump {
@@ -1834,8 +1896,14 @@
 		qcom,gpucc = <&gpucc>;
 		qcom,mccc = <&mccc_debug>;
 		qcom,cpucc = <&cpucc_debug>;
-		clock-names = "xo_clk_src";
-		clocks = <&rpmcc RPM_SMD_XO_CLK_SRC>;
+		clocks = <&rpmcc RPM_SMD_XO_CLK_SRC>,
+			 <&gcc 0>,
+			 <&dispcc 0>,
+			 <&gpucc 0>;
+		clock-names = "xo_clk_src",
+			      "gcc",
+			      "dispcc",
+			      "gpucc";
 		#clock-cells = <1>;
 	};
 
@@ -1929,7 +1997,7 @@
 			qcom,sampling-path = <&ddr_dcvs_sp>;
 			qcom,miss-ev = <0x17>;
 
-			silver {
+			gold {
 				compatible = "qcom,memlat-mon";
 				qcom,cpulist = <&CPU0 &CPU1 &CPU2 &CPU3>;
 				qcom,sampling-enabled;
@@ -1954,7 +2022,7 @@
 				};
 			};
 
-			silver-compute {
+			gold-compute {
 				compatible = "qcom,memlat-mon";
 				qcom,cpulist = <&CPU0 &CPU1 &CPU2 &CPU3>;
 				qcom,sampling-enabled;

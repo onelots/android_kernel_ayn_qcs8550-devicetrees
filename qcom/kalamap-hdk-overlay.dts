@@ -3,6 +3,7 @@
 
 #include <dt-bindings/interconnect/qcom,kalama.h>
 #include "kalamap-hdk.dtsi"
+#include <dt-bindings/regulator/qcom,rpmh-regulator-levels.h>
 
 / {
 	model = "Qualcomm Technologies, Inc. KalamaP HDK";
@@ -69,3 +70,19 @@
 		};
 	};
 };
+
+&apps_rsc_drv2 {
+	rpmh-regulator-ldon7 {
+		compatible = "qcom,rpmh-vrm-regulator";
+		qcom,resource-name = "ldon7";
+
+		L7N: pm8010n_l7: regulator-pm8010n-l7 {
+			regulator-name = "pm8010n_l7";
+			qcom,set = <RPMH_REGULATOR_SET_ALL>;
+			regulator-min-microvolt = <2960000>;
+			regulator-max-microvolt = <3300000>;
+			qcom,init-voltage = <2960000>;
+		};
+	};
+};
+

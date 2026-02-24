@@ -1174,12 +1174,15 @@
 		coresight-name = "coresight-tmc-etr";
 
 		arm,buffer-size = <0x400000>;
-		arm,sg-enable;
+		arm,scatter-gather;
 
 		qcom,iommu-dma = "bypass";
+		iommus = <&apps_smmu 0x0180 0>,
+			<&apps_smmu 0x0160 0>;
 
 		qcom,mem_support;
 		qcom,sw-usb;
+		ranges;
 
 		coresight-csr = <&csr>;
 

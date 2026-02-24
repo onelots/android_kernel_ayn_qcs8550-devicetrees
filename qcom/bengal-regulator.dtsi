@@ -387,7 +387,7 @@
 		L24A: pm6125_l24: regulator-l24 {
 			regulator-min-microvolt = <2704000>;
 			regulator-max-microvolt = <3600000>;
-			qcom,init-voltage = <2704000>;
+			qcom,init-voltage = <2960000>;
 			status = "okay";
 		};
 	};

@@ -2574,7 +2574,7 @@
 		pcie-desc-buf-size = <0x2000>;
 		pcie-data-buf-size = <0x4000>;
 
-		sw_pcie_buf_size = <0x2000000>;
+		sw_pcie_buf_size = <0x800000>;
 
 		clocks = <&aoss_qmp>;
 		clock-names = "apb_pclk";

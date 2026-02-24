@@ -1221,6 +1221,10 @@
 
 		clocks = <&rpmhcc RPMH_CXO_CLK>, <&gcc GCC_GPLL0>;
 		clock-names = "xo", "alternate";
+		interrupts = <GIC_SPI 31 IRQ_TYPE_LEVEL_HIGH>,
+			     <GIC_SPI 32 IRQ_TYPE_LEVEL_HIGH>;
+		interrupt-names = "dcvsh0_int",
+				  "dcvsh1_int";
 
 		qcom,skip-enable-check;
 		qcom,lut-row-size = <4>;

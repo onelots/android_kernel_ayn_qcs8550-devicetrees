@@ -233,13 +233,15 @@
 			interconnects = <&clk_virt MASTER_QUP_CORE_0 &clk_virt SLAVE_QUP_CORE_0>,
 			<&bimc MASTER_AMPSS_M0 &config_noc SLAVE_QUP_0>,
 			<&system_noc MASTER_QUP_0 &bimc SLAVE_EBI_CH0>;
-			pinctrl-names = "default", "active", "sleep";
-			pinctrl-0 = <&qupv3_se3_default_ctsrtsrx>,
-						<&qupv3_se3_default_tx>;
-			pinctrl-1 = <&qupv3_se3_ctsrx>, <&qupv3_se3_rts>,
-						<&qupv3_se3_tx>;
-			pinctrl-2 = <&qupv3_se3_ctsrx>, <&qupv3_se3_rts>,
-						<&qupv3_se3_tx>;
+			pinctrl-names = "default", "active", "sleep", "shutdown";
+			pinctrl-0 = <&qupv3_se3_default_cts>, <&qupv3_se3_default_rts>,
+				<&qupv3_se3_default_tx>, <&qupv3_se3_default_rx>;
+			pinctrl-1 = <&qupv3_se3_cts>, <&qupv3_se3_rts>,
+				<&qupv3_se3_tx>, <&qupv3_se3_rx>;
+			pinctrl-2 = <&qupv3_se3_cts>, <&qupv3_se3_rts>,
+				<&qupv3_se3_tx>, <&qupv3_se3_default_rx>;
+			pinctrl-3 = <&qupv3_se3_default_cts>, <&qupv3_se3_default_rts>,
+				<&qupv3_se3_default_tx>, <&qupv3_se3_default_rx>;
 			qcom,wakeup-byte = <0xFD>;
 			status = "disabled";
 		};
