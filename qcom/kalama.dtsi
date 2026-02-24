@@ -1124,6 +1124,102 @@
 				  <&cam_bcm_voter2>;
 	};
 
+	camsx_noc: camsx_noc {
+		compatible = "qcom,camsx-icc";
+		reg = <0xac13000 0x00064>;
+		reg-names = "cpas_qchan";
+
+		#interconnect-cells = <1>;
+		status = "disabled";
+
+		clock-names =
+			"cphy_rx_clk_src",
+			"csid_csiphy_rx_clk",
+			"csiphy0_clk",
+			"csiphy1_clk",
+			"csiphy2_clk",
+			"csiphy3_clk",
+			"csiphy4_clk",
+			"csiphy5_clk",
+			"csiphy6_clk",
+			"csiphy7_clk",
+			"ife_lite_cphy_rx_clk",
+			"slow_ahb_clk_src",
+			"bps_ahb_clk",
+			"core_ahb_clk",
+			"cpas_ahb_clk",
+			"cre_ahb_clk",
+			"drv_ahb_clk",
+			"icp_ahb_clk",
+			"icp_clk",
+			"ife_lite_ahb_clk",
+			"ipe_nps_ahb_clk",
+			"fast_ahb_clk_src",
+			"bps_fast_ahb_clk",
+			"cpas_fast_ahb_clk",
+			"ife0_fast_ahb_clk",
+			"ife1_fast_ahb_clk",
+			"ife2_fast_ahb_clk",
+			"ipe_nps_fast_ahb_clk",
+			"ipe_pps_fast_ahb_clk",
+			"sbi_fast_ahb_clk",
+			"sfe0_fast_ahb_clk",
+			"sfe1_fast_ahb_clk",
+			"camnoc_axi_clk_src",
+			"camnoc_axi_clk",
+			"ife_lite_clk_src",
+			"cpas_ife_lite_clk",
+			"ife_lite_clk",
+			"ife_lite_csid_clk_src",
+			"ife_lite_csid_clk";
+
+		clocks =
+			<&camcc CAM_CC_CPHY_RX_CLK_SRC>,
+			<&camcc CAM_CC_CSID_CSIPHY_RX_CLK>,
+			<&camcc CAM_CC_CSIPHY0_CLK>,
+			<&camcc CAM_CC_CSIPHY1_CLK>,
+			<&camcc CAM_CC_CSIPHY2_CLK>,
+			<&camcc CAM_CC_CSIPHY3_CLK>,
+			<&camcc CAM_CC_CSIPHY4_CLK>,
+			<&camcc CAM_CC_CSIPHY5_CLK>,
+			<&camcc CAM_CC_CSIPHY6_CLK>,
+			<&camcc CAM_CC_CSIPHY7_CLK>,
+			<&camcc CAM_CC_IFE_LITE_CPHY_RX_CLK>,
+			<&camcc CAM_CC_SLOW_AHB_CLK_SRC>,
+			<&camcc CAM_CC_BPS_AHB_CLK>,
+			<&camcc CAM_CC_CORE_AHB_CLK>,
+			<&camcc CAM_CC_CPAS_AHB_CLK>,
+			<&camcc CAM_CC_CRE_AHB_CLK>,
+			<&camcc CAM_CC_DRV_AHB_CLK>,
+			<&camcc CAM_CC_ICP_AHB_CLK>,
+			<&camcc CAM_CC_ICP_CLK>,
+			<&camcc CAM_CC_IFE_LITE_AHB_CLK>,
+			<&camcc CAM_CC_IPE_NPS_AHB_CLK>,
+			<&camcc CAM_CC_FAST_AHB_CLK_SRC>,
+			<&camcc CAM_CC_BPS_FAST_AHB_CLK>,
+			<&camcc CAM_CC_CPAS_FAST_AHB_CLK>,
+			<&camcc CAM_CC_IFE_0_FAST_AHB_CLK>,
+			<&camcc CAM_CC_IFE_1_FAST_AHB_CLK>,
+			<&camcc CAM_CC_IFE_2_FAST_AHB_CLK>,
+			<&camcc CAM_CC_IPE_NPS_FAST_AHB_CLK>,
+			<&camcc CAM_CC_IPE_PPS_FAST_AHB_CLK>,
+			<&camcc CAM_CC_SBI_FAST_AHB_CLK>,
+			<&camcc CAM_CC_SFE_0_FAST_AHB_CLK>,
+			<&camcc CAM_CC_SFE_1_FAST_AHB_CLK>,
+			<&camcc CAM_CC_CAMNOC_AXI_CLK_SRC>,
+			<&camcc CAM_CC_CAMNOC_AXI_CLK>,
+			<&camcc CAM_CC_IFE_LITE_CLK_SRC>,
+			<&camcc CAM_CC_CPAS_IFE_LITE_CLK>,
+			<&camcc CAM_CC_IFE_LITE_CLK>,
+			<&camcc CAM_CC_IFE_LITE_CSID_CLK_SRC>,
+			<&camcc CAM_CC_IFE_LITE_CSID_CLK>;
+
+		icp-clock-frequency = <400000000>;
+		qchannel-masters =
+				"camnoc_axi_clk",
+				"cpas_ahb_clk";
+	};
+
 	config_noc: interconnect@1600000 {
 		compatible = "qcom,kalama-cnoc_cfg";
 		reg = <0x1600000 0x6200>;
