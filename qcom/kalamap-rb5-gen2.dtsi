@@ -655,6 +655,7 @@
 
 &usb0 {
 	usb-role-switch;
+	snps,dwc3_guctl_resbwhseps_quirk;
 	port {
 		usb_port0: endpoint {
 			remote-endpoint = <&usb_port0_connector>;

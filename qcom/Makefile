@@ -160,7 +160,10 @@ KHAJE_BOARDS += \
 
 bengal-dtb-$(CONFIG_ARCH_KHAJE) += \
         $(call add-overlays, $(KHAJE_BOARDS) ,$(KHAJE_BASE_DTB))
+bengal_le-dtb-$(CONFIG_ARCH_KHAJE) += \
+        $(call add-overlays, $(KHAJE_BOARDS) ,$(KHAJE_BASE_DTB))
 bengal-overlays-dtb-$(CONFIG_ARCH_KHAJE) += $(KHAJE_BOARDS) $(KHAJE_BASE_DTB)
+bengal_le-overlays-dtb-$(CONFIG_ARCH_KHAJE) += $(KHAJE_BOARDS) $(KHAJE_BASE_DTB)
 dtb-y += $(bengal-dtb-y)
 
 BENGAL_BASE_DTB += bengal.dtb bengalp.dtb bengal-1gb.dtb bengal-2gb.dtb
@@ -562,6 +565,7 @@ kalama_tuivm-dtb-$(CONFIG_ARCH_QTI_VM) += kalama-vm-rumi.dtb \
                  kalama-vm-hhg.dtb \
                  kalamap-vm-hdk-rb5-gen2-vc.dtb \
                  kalamap-vm-iot-vc.dtb \
+                 kalamap-vm-cdp.dtb \
                  kalama-oemvm-cdp.dtb \
                  kalama-oemvm-mtp.dtb \
                  kalama-oemvm-qrd.dtb \
@@ -569,7 +573,8 @@ kalama_tuivm-dtb-$(CONFIG_ARCH_QTI_VM) += kalama-vm-rumi.dtb \
                  kalamap-oemvm-hdk.dtb \
                  kalamap-oemvm-hhg.dtb \
                  kalamap-oemvm-hdk-rb5-gen2-vc.dtb \
-                 kalamap-oemvm-iot-vc.dtb
+                 kalamap-oemvm-iot-vc.dtb \
+                 kalamap-oemvm-cdp.dtb
 
 dtb-y += $(kalama_tuivm-dtb-y)
 

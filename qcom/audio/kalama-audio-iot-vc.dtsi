@@ -73,6 +73,7 @@
 	tas5805m: tas5805m@2d {
 		compatible = "ti,tas5805m";
 		reg = <0x2d>;
+		prepare-in-dai;
 
 		gpio,hpd = <&tlmm 24 0>;
 		interrupt-parent = <&tlmm>;
@@ -81,6 +82,12 @@
 		gpio,pdn = <&tlmm 63 0>;
 		pinctrl-names = "default";
 		pinctrl-0 = <&tas5805m_pdn>;
+		status = "ok";
+	};
+
+	add2010@34 {
+		compatible = "esmt,add2010";
+		reg = <0x34>;
 		status = "ok";
 	};
 };
