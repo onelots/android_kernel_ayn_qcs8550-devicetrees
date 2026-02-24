@@ -160,7 +160,10 @@ KHAJE_BOARDS += \
 
 bengal-dtb-$(CONFIG_ARCH_KHAJE) += \
         $(call add-overlays, $(KHAJE_BOARDS) ,$(KHAJE_BASE_DTB))
+bengal_le-dtb-$(CONFIG_ARCH_KHAJE) += \
+        $(call add-overlays, $(KHAJE_BOARDS) ,$(KHAJE_BASE_DTB))
 bengal-overlays-dtb-$(CONFIG_ARCH_KHAJE) += $(KHAJE_BOARDS) $(KHAJE_BASE_DTB)
+bengal_le-overlays-dtb-$(CONFIG_ARCH_KHAJE) += $(KHAJE_BOARDS) $(KHAJE_BASE_DTB)
 dtb-y += $(bengal-dtb-y)
 
 BENGAL_BASE_DTB += bengal.dtb bengalp.dtb bengal-1gb.dtb bengal-2gb.dtb
@@ -274,7 +277,9 @@ cinder-dtb-$(CONFIG_ARCH_CINDER) += cinder-ru-rumi.dtb \
 	cinder-v2-du-idp-4gb.dtb \
 	cinder-v2-du-x100.dtb \
 	cinder-v2-ru-rumi.dtb \
-	cinder-v2-du-rumi.dtb
+	cinder-v2-du-rumi.dtb \
+	cinder-ru-idp-32tr.dtb \
+	cinder-ru-idp-64tr.dtb
 dtb-y += $(cinder-dtb-y)
 
 QCS405_BASE_DTB += qcs405.dtb qcs407.dtb

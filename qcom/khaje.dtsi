@@ -2948,6 +2948,7 @@
 	};
 
 	lpassaoncc: clock-controller@a780000 {
+		status = "disabled";
 		compatible = "qcom,lpassaoncc-khaje", "syscon";
 		reg = <0xa780000 0x30000>;
 		reg-name = "cc_base";
@@ -2959,6 +2960,7 @@
 	};
 
 	lpassaudiocc: clock-controller@a540000 {
+		status = "disabled";
 		compatible = "qcom,lpassaudiocc-khaje", "syscon";
 		reg = <0xa540000 0x30000>;
 		reg-name = "cc_base";
@@ -2991,14 +2993,20 @@
 		qcom,gpucc = <&gpucc>;
 		qcom,mccc = <&mccc_debug>;
 		qcom,apsscc = <&apsscc_debug>;
+		qcom,lpassaoncc = <&lpassaoncc>;
+		qcom,lpassaudiocc = <&lpassaudiocc>;
 		clocks = <&rpmcc RPM_SMD_XO_CLK_SRC>,
 			<&gcc 0>,
 			<&dispcc 0>,
-			<&gpucc 0>;
+			<&gpucc 0>,
+			<&lpassaoncc 0>,
+			<&lpassaudiocc 0>;
 		clock-names = "xo_clk_src",
 				"gcc",
 				"dispcc",
-				"gpucc";
+				"gpucc",
+				"lpassaoncc",
+				"lpassaudiocc";
 		#clock-cells = <1>;
 	};
 
@@ -4050,18 +4058,6 @@ tpdm_turing_llm: tpdm@8861000 {
 };
 
 &lpass_audio_hm_gdsc {
-	status = "ok";
-	clocks = <&gcc GCC_LPASS_SWAY_CLK>;
-	parent-supply = <&L3A_LEVEL>;
-};
-
-&lpass_pdc_hm_gdsc {
-	status = "ok";
-	clocks = <&gcc GCC_LPASS_SWAY_CLK>;
-	parent-supply = <&L3A_LEVEL>;
-};
-
-&lpass_ssc_gdsc {
 	status = "ok";
 	clocks = <&gcc GCC_LPASS_SWAY_CLK>;
 	parent-supply = <&L3A_LEVEL>;

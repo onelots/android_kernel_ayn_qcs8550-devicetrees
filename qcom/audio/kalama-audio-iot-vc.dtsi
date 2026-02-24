@@ -84,6 +84,12 @@
 		pinctrl-0 = <&tas5805m_pdn>;
 		status = "ok";
 	};
+
+	add2010@34 {
+		compatible = "esmt,add2010";
+		reg = <0x34>;
+		status = "ok";
+	};
 };
 
 &cdc_dmic01_gpios {
@@ -165,6 +171,8 @@
 &kalama_snd {
 	qcom,model = "kalama-iot-vc-snd-card";
 
+	qcom,mi2s-audio-intf = <0>;
+	qcom,iot-vc-mi2s-audio-intf = <1>;
 	qcom,audio-routing =
 		"RX_TX DEC0_INP", "TX DEC0 MUX",
 		"RX_TX DEC1_INP", "TX DEC1 MUX",

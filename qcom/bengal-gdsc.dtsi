@@ -128,28 +128,4 @@
 		qcom,support-cfg-gdscr;
 		status = "disabled";
 	};
-
-	lpass_pdc_hm_gdsc: qcom,gdsc@a783090 {
-		compatible = "qcom,gdsc";
-		reg = <0xa783090 0x4>;
-		regulator-name = "lpass_pdc_hm_gdsc";
-		qcom,retain-regs;
-		qcom,support-cfg-gdscr;
-		status = "disabled";
-	};
-
-	lpass_ssc_gdsc_hw_ctrl: syscon@a7960ac {
-		compatible = "syscon";
-		reg = <0xa7960ac 0x4>;
-	};
-
-	lpass_ssc_gdsc: qcom,gdsc@a796090 {
-		compatible = "qcom,gdsc";
-		reg = <0xa796090 0x4>;
-		regulator-name = "lpass_ssc_gdsc";
-		hw-ctrl-addr = <&lpass_ssc_gdsc_hw_ctrl>;
-		qcom,retain-regs;
-		qcom,support-cfg-gdscr;
-		status = "disabled";
-	};
 };

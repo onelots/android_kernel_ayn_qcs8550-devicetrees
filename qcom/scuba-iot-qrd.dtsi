@@ -123,16 +123,11 @@
 };
 
 &thermal_zones {
-	quiet-therm-usr {
-		polling-delay = <5000>;
-	};
 
-	quiet-therm-step {
+	quiet-therm {
 		polling-delay-passive = <2000>;
 		polling-delay = <5000>;
-		thermal-governor = "step_wise";
-		thermal-sensors = <&pm2250_adc_tm_iio ADC5_AMUX_THM2_100K_PU>;
-		wake-capable-sensor;
+		thermal-sensors = <&pm2250_adc_tm_iio 2>;
 		trips {
 			quiet_cpu0_trip: quiet-cpu0-trip {
 				temperature = <40000>;
@@ -174,14 +169,12 @@
 		cooling-maps {
 			gpu-cdev {
 				trip = <&quiet_gpu_trip>;
-				cooling-device = <&msm_gpu THERMAL_NO_LIMIT
-							(THERMAL_MAX_LIMIT - 3)>;
+				cooling-device = <&msm_gpu THERMAL_NO_LIMIT 1>;
 			};
 
 			cpu0-cdev {
 				trip = <&quiet_cpu0_trip>;
-				cooling-device = <&CPU0 THERMAL_NO_LIMIT
-							(THERMAL_MAX_LIMIT - 3)>;
+				cooling-device = <&CPU0 THERMAL_NO_LIMIT 5>;
 			};
 
 			modem-proc-cdev0 {

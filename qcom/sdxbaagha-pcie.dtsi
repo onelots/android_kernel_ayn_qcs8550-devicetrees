@@ -3,6 +3,7 @@
 
 &soc {
 	pcie0: qcom,pcie@1bf0000 {
+		device_type = "pci";
 		compatible = "qcom,pci-msm";
 
 		reg = <0x01bf0000 0x4000>,
