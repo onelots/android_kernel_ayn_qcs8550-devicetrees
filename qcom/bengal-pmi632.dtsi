@@ -47,15 +47,12 @@
 };
 
 &pmi632_adc_tm {
-	#address-cells = <1>;
-	#size-cells = <0>;
-	io-channels = <&pmi632_vadc ADC5_GPIO2_100K_PU>;
-
 	/* Channel nodes */
 	skin_therm {
-		reg = <ADC5_GPIO2_100K_PU>;
+		reg = <0>;
+		io-channels = <&pmi632_vadc ADC5_GPIO2_100K_PU>;
 		qcom,ratiometric;
-		qcom,hw-settle-time = <200>;
+		qcom,hw-settle-time-us = <200>;
 	};
 };
 
@@ -101,12 +98,10 @@
 };
 
 &thermal_zones {
-	chg-skin-therm-usr {
+	chg-skin-therm {
 		polling-delay-passive = <0>;
 		polling-delay = <0>;
-		thermal-governor = "user_space";
-		thermal-sensors = <&pmi632_adc_tm ADC5_GPIO2_100K_PU>;
-		wake-capable-sensor;
+		thermal-sensors = <&pmi632_adc_tm 0>;
 		trips {
 			active-config0 {
 				temperature = <125000>;
@@ -117,6 +112,7 @@
 	};
 
 	quiet-therm-step {
+		polling-delay-passive = <0>;
 		cooling-maps {
 			batt_cdev1 {
 				cooling-device = <&pmi632_charger 2 2>;

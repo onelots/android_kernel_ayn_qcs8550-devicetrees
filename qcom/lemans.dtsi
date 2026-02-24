@@ -1158,8 +1158,9 @@
 		vdd_mm-supply = <&VDD_MM_LEVEL>;
 		vdd_mxa-supply = <&VDD_MXA_LEVEL>;
 		vdd_mxc-supply = <&VDD_MXC_LEVEL>;
-		clocks = <&rpmhcc RPMH_CXO_CLK>, <&gcc GCC_CAMERA_AHB_CLK>, <&sleep_clk>;
-		clock-names = "bi_tcxo", "iface", "sleep_clk";
+		clocks = <&rpmhcc RPMH_CXO_CLK>, <&rpmhcc RPMH_CXO_CLK_A>,
+			 <&gcc GCC_CAMERA_AHB_CLK>, <&sleep_clk>;
+		clock-names = "bi_tcxo", "bi_tcxo_ao", "iface", "sleep_clk";
 		#clock-cells = <1>;
 		#reset-cells = <1>;
 	};
@@ -2035,7 +2036,6 @@
 		lanes-per-direction = <2>;
 		dev-ref-clk-freq = <0>; /* 19.2 MHz */
 
-		spm-level = <5>;
 		clock-names =
 			"core_clk",
 			"bus_aggr_clk",
@@ -2346,6 +2346,7 @@
 	sail_mailbox: sail-mailbox@90d80000 {
 		compatible = "qcom,sail-mailbox";
 		reg = <0x1FFE02C 0x10>,
+		      <0x1FFD018 0x10>,
 		      <0x17C0000C 0x04>;
 		mboxes = <&ipcc_computeL1 IPCC_CLIENT_SAIL0 0x4>,
 			 <&ipcc_computeL1 IPCC_CLIENT_SAIL0 0x3>,
@@ -2750,6 +2751,7 @@
 		clock-names = "stmmaceth", "pclk", "ptp_ref", "phyaux","sgmi_ref","rgmii";
 		snps,ptp-ref-clk-rate = <230400000>;
 		snps,ptp-req-clk-rate = <125000000>;
+		emac-phy-off-suspend = <4>;
 		disable-frame-preem;
 		interrupts-extended = <&intc 0 946 4>;
 		qcom,arm-smmu;
@@ -3175,7 +3177,6 @@
 	vdd-hba-fixed-regulator;
 
 	vcc-supply = <&L8C>;
-	vcc-voltage-level = <2504000 2506000>;
 	vcc-max-microamp = <1100000>;
 
 	vccq-supply = <&L5C>;

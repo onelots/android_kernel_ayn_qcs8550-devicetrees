@@ -64,8 +64,10 @@ KALAMA_BOARDS += \
 		 kalamap-rb5-gen2-dvt-roboticspvm-overlay.dtbo \
 		 kalamap-aim300-overlay.dtbo \
 		 kalamap-aim300-v2-overlay.dtbo \
+		 kalamap-aim300-rdk-overlay.dtbo \
 		 kalamap-hdk-rb5-gen2-single-wingmate-overlay.dtbo \
-		 kalamap-hdk-rb5-gen2-dual-wingmate-overlay.dtbo
+		 kalamap-hdk-rb5-gen2-dual-wingmate-overlay.dtbo \
+		 kalamap-hdk-rb5-gen2-vc-overlay.dtbo
 
 NOAPQ_KALAMA_BOARDS += \
 		 kalama-rumi-overlay.dtbo \
@@ -270,7 +272,10 @@ TRINKET_BOARDS += \
 	trinket-idp-overlay.dtbo \
 	trinket-external-codec-idp-overlay.dtbo \
 	trinket-usbc-external-codec-idp-overlay.dtbo \
-	trinket-usbc-idp-overlay.dtbo
+	trinket-usbc-idp-overlay.dtbo \
+	trinket-dp-usbc-idp-overlay.dtbo \
+	trinket-iot-dp-usbc-idp-overlay.dtbo \
+	trinketp-iot-dp-usbc-idp-overlay.dtbo
 
 trinket-dtb-$(CONFIG_ARCH_TRINKET) += \
         $(call add-overlays, $(TRINKET_BOARDS) ,$(TRINKET_BASE_DTB))

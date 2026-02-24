@@ -23,6 +23,14 @@ ifeq ($(CONFIG_ARCH_TRINKET), y)
 dtbo-y += trinket-bt-v1.dtbo
 endif
 
+ifeq ($(CONFIG_ARCH_BENGAL), y)
+dtbo-y += bengal-bt.dtbo
+endif
+
+ifeq ($(CONFIG_ARCH_SDM670), y)
+dtbo-y += sdm670-bt.dtbo
+endif
+
 always-y        := $(dtb-y) $(dtbo-y)
 subdir-y        := $(dts-dirs)
 clean-files     := *.dtb *.dtbo

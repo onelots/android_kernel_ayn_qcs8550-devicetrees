@@ -194,3 +194,8 @@
 		};
 	};
 };
+
+&pcie2 {
+	qcom,boot-option = <0x1>;
+	status = "ok";
+};

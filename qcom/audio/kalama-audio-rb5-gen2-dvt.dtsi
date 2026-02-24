@@ -23,9 +23,14 @@
 	};
 };
 
+&cdc_sec_mi2s_gpios {
+	status = "ok";
+};
+
 &kalama_snd {
 	qcom,model = "kalama-rb5-gen2-dvt-snd-card";
 	swr-haptics-unsupported;
+	qcom,mi2s-audio-intf = <1>;
 	qcom,audio-routing =
 		"TX DMIC0", "Digital Mic0",
 		"TX DMIC1", "Digital Mic1",
@@ -59,6 +64,7 @@
 			"wsa-codec1", "wsa-codec2";
 		qcom,wsa-max-devs = <2>;
 		qcom,wcd-disabled = <1>;
+		qcom,sec-mi2s-gpios = <&cdc_sec_mi2s_gpios>;
 };
 
 &swr_haptics {

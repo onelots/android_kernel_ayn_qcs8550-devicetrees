@@ -190,9 +190,11 @@
 		qcom,pmic-revid = <&pm660_revid>;
 		io-channels = <&pm660_rradc 0>,
 			      <&pm660_rradc 7>,
+			      <&pm660_charger PSY_IIO_CHARGE_QNOVO_ENABLE>,
 			      <&pm660_charger PSY_IIO_CHARGE_DONE>;
 		io-channel-names = "rradc_batt_id",
 				   "rradc_die_temp",
+				   "charge_qnovo_enable",
 				   "charge_done";
 		qcom,rradc-base = <0x4500>;
 		qcom,fg-esr-timer-awake = <64 96>;

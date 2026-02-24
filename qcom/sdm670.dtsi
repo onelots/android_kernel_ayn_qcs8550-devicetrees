@@ -588,10 +588,12 @@
 			reg = <0x0 0x95c15000 0x0 0x2000>;
 		};
 
-		qseecom_mem: qseecom_region@0x9e400000 {
+		qseecom_mem: qseecom_region {
 			compatible = "shared-dma-pool";
-			no-map;
-			reg = <0x0 0x9e400000 0x0 0x1400000>;
+			alloc-ranges = <0x0 0x00000000 0x0 0xffffffff>;
+			reusable;
+			alignment = <0x0 0x400000>;
+			size = <0x0 0x1400000>;
 		};
 
 		adsp_mem: adsp_region {
@@ -991,6 +993,16 @@
 			 <&apps_smmu 0x714 0x1>;
 	};
 
+	qcom,mem-buf {
+		compatible = "qcom,mem-buf";
+		qcom,vmid = <3>;
+		qcom,mem-buf-capabilities = "supplier";
+	};
+
+	qcom,mem-buf-msgq {
+		compatible = "qcom,mem-buf-msgq";
+	};
+
 	qcom,qbt1000 {
 		clock-names = "core", "iface";
 		clock-frequency = <25000000>;
@@ -1268,44 +1280,74 @@
 		#freq-domain-cells = <1>;
 	};
 
+	slimbam_aud: bamdma@62d84000 {
+		compatible = "qcom,bam-v1.7.0";
+		qcom,controlled-remotely;
+		reg = <0x62d84000 0x2a000>;
+		reg-names = "bam";
+		num-channels  = <31>;
+		interrupts = <0 164 IRQ_TYPE_LEVEL_HIGH>;
+		#dma-cells = <1>;
+		qcom,ee = <1>;
+		qcom,num-ees = <2>;
+		iommus = <&apps_smmu 0x1826 0x0>,
+			 <&apps_smmu 0x182d 0x0>,
+			 <&apps_smmu 0x182e 0x1>,
+			 <&apps_smmu 0x1830 0x1>;
+		qcom,iommu-dma-addr-pool = <0x50000000 0x10000000>;
+		qcom,iommu-dma = "atomic";
+	};
+
 	slim_aud: slim@62dc0000 {
-		cell-index = <1>;
-		compatible = "qcom,slim-ngd";
-		reg = <0x62dc0000 0x2c000>,
-			<0x62d84000 0x2a000>;
-		reg-names = "slimbus_physical", "slimbus_bam_physical";
-		interrupts = <0 163 IRQ_TYPE_LEVEL_HIGH>,
-				<0 164 IRQ_TYPE_LEVEL_HIGH>;
-		interrupt-names = "slimbus_irq", "slimbus_bam_irq";
+		compatible = "qcom,slim-ngd-v1.5.0";
+		reg = <0x62dc0000 0x2c000>;
+		reg-names = "ctrl";
+		interrupts = <0 163 IRQ_TYPE_LEVEL_HIGH>;
+		interrupt-names = "slimbus_irq";
 		qcom,apps-ch-pipes = <0x780000>;
 		qcom,ea-pc = <0x290>;
+		iommus = <&apps_smmu 0x1826 0x0>,
+			 <&apps_smmu 0x182d 0x0>,
+			 <&apps_smmu 0x182e 0x1>,
+			 <&apps_smmu 0x1830 0x1>;
+		qcom,iommu-dma-addr-pool = <0x50000000 0x10000000>;
+		qcom,iommu-dma = "atomic";
+		dmas = <&slimbam_aud 3>, <&slimbam_aud 4>;
+		dma-names = "rx", "tx";
+		#address-cells = <1>;
+		#size-cells = <0>;
 		status = "disabled";
-		qcom,iommu-s1-bypass;
+	};
 
-		iommu_slim_aud_ctrl_cb: qcom,iommu_slim_ctrl_cb {
-			iommus = <&apps_smmu 0x1826 0x0>,
-				 <&apps_smmu 0x182d 0x0>,
-				 <&apps_smmu 0x182e 0x1>,
-				 <&apps_smmu 0x1830 0x1>;
-		};
-
+	slimbam_qca: bamdma@62e04000 {
+		compatible = "qcom,bam-v1.7.0";
+		qcom,controlled-remotely;
+		reg = <0x62e04000 0x20000>;
+		reg-names = "bam";
+		num-channels  = <31>;
+		interrupts = <0 292 IRQ_TYPE_LEVEL_HIGH>;
+		#dma-cells = <1>;
+		qcom,ee = <1>;
+		qcom,num-ees = <2>;
+		iommus = <&apps_smmu 0x1833 0x0>;
+		qcom,iommu-dma-addr-pool = <0x50000000 0x10000000>;
+		qcom,iommu-dma = "atomic";
 	};
 
 	slim_qca: slim@62e40000 {
-		cell-index = <3>;
-		compatible = "qcom,slim-ngd";
-		reg = <0x62e40000 0x2c000>,
-			<0x62e04000 0x20000>;
-		reg-names = "slimbus_physical", "slimbus_bam_physical";
-		interrupts = <0 291 IRQ_TYPE_LEVEL_HIGH>,
-				<0 292 IRQ_TYPE_LEVEL_HIGH>;
-		interrupt-names = "slimbus_irq", "slimbus_bam_irq";
-		status = "ok";
-		qcom,iommu-s1-bypass;
-
-		iommu_slim_qca_ctrl_cb: qcom,iommu_slim_ctrl_cb {
-			iommus = <&apps_smmu 0x1833 0x0>;
-		};
+		compatible = "qcom,slim-ngd-v1.5.0";
+		reg = <0x62e40000 0x2c000>;
+		reg-names = "ctrl";
+		interrupts = <0 291 IRQ_TYPE_LEVEL_HIGH>;
+		interrupt-names = "slimbus_irq";
+		iommus = <&apps_smmu 0x1833 0x0>;
+		qcom,iommu-dma-addr-pool = <0x50000000 0x10000000>;
+		qcom,iommu-dma = "atomic";
+		dmas = <&slimbam_qca 3>, <&slimbam_qca 4>;
+		dma-names = "rx", "tx";
+		#address-cells = <1>;
+		#size-cells = <0>;
+		status = "disabled";
 	};
 
 	wdog: qcom,wdt@17980000 {
@@ -1701,7 +1743,7 @@
 	qcom,smp2p-adsp {
 		compatible = "qcom,smp2p";
 		qcom,smem = <443>, <429>;
-		mboxes = <&apss_shared 10>;
+		mboxes = <&apss_shared 26>;
 		qcom,local-pid = <0>;
 		qcom,remote-pid = <2>;
 		interrupts = <GIC_SPI 172 IRQ_TYPE_EDGE_RISING>;
@@ -1733,7 +1775,7 @@
 	qcom,smp2p-cdsp@1799000c {
 		compatible = "qcom,smp2p";
 		qcom,smem = <94>, <432>;
-		mboxes = <&apss_shared 30>;
+		mboxes = <&apss_shared 6>;
 		qcom,local-pid = <0>;
 		qcom,remote-pid = <5>;
 		interrupts = <GIC_SPI 576 IRQ_TYPE_EDGE_RISING>;
@@ -2168,7 +2210,7 @@
 		glink_edge: glink-edge {
 			qcom,remote-pid = <2>;
 			transport = "smem";
-			mboxes = <&apss_shared 8>;
+			mboxes = <&apss_shared 24>;
 			mbox-names = "adsp_smem";
 			interrupts = <GIC_SPI 170 IRQ_TYPE_EDGE_RISING>;
 
@@ -2675,6 +2717,7 @@
 	qcom,msm-cdsp-loader {
 		compatible = "qcom,cdsp-loader";
 		qcom,proc-img-to-load = "cdsp";
+		qcom,rproc-handle = <&cdsp_pas>;
 	};
 
 	qcom,msm-adsprpc-mem {

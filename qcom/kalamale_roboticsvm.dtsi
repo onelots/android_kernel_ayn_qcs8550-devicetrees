@@ -8,10 +8,6 @@
 	qcom,msm-id = <519 0x10000>, <536 0x10000>, <519 0x20000>, <536 0x20000>, <603 0x20000>;
 	interrupt-parent = <&vgic>;
 
-	chosen {
-		bootargs = "nokaslr log_buf_len=256K root=/dev/ram rw init=/init console=hvc0 loglevel=8";
-	};
-
 	logbuf: qcom,logbuf-vendor-hooks {
 		compatible = "qcom,logbuf-vendor-hooks";
 	};
@@ -20,6 +16,20 @@
 		#address-cells = <2>;
 		#size-cells = <2>;
 		ranges;
+	};
+
+	qcom,mem-buf {
+		compatible = "qcom,mem-buf";
+		qcom,mem-buf-capabilities = "consumer";
+		qcom,vmid = <53>;
+	};
+
+	qcom,mem-buf-msgq {
+		compatible = "qcom,mem-buf-msgq";
+	};
+
+	chosen {
+		bootargs = "nokaslr log_buf_len=256K root=/dev/ram rw init=/init console=hvc0 loglevel=8";
 	};
 
 	cpus {
@@ -42,7 +52,6 @@
 			enable-method = "psci";
 			cpu-idle-states = <&CPU_PWR_DWN
 					   &CLUSTER_PWR_DWN>;
-
 		};
 	};
 
@@ -78,12 +87,12 @@
 		kernel-entry-segment = "kernel";
 		kernel-entry-offset = <0x0 0x0>;
 		vendor = "QTI";
-		image-name = "qcom,oemvm";
+		image-name = "qcom,roboticsvmX";
 		qcom,pasid = <0x0 0x22>;
 		qcom,qtee-config-info = "p=7C,8F,97,159,7F1;";
-		qcom,secdomain-ids = <49>;
+		qcom,secdomain-ids = <53>;
 		qcom,primary-vm-index = <0>;
-		vm-uri = "vmuid/oemvm";
+		vm-uri = "vmuid/roboticsvmX";
 		vm-guid = "847bfe26-0b12-5728-812a-06103f6bdec0";
 		vm-attrs = "crash-fatal";
 
@@ -105,7 +114,7 @@
 		vcpus {
 			config = "/cpus";
 			affinity = "proxy";
-			affinity-map = <0x0 0x0>;
+			affinity-map = <0x5 0x6>;
 			sched-priority = <0>;       /* relative to PVM */
 			sched-timeslice = <2000>;   /* in ms */
 		};
@@ -159,23 +168,12 @@
 				};
 			};
 
-			qrtr-shm {
-				vdevice-type = "shm-doorbell";
-				generate = "/hypervisor/qrtr-shm";
-				push-compatible = "qcom,qrtr-gunyah-gen";
-				peer-default;
-				memory {
-					qcom,label = <0x8>;
-					allocate-base;
-				};
-			};
-
-			vsock-msgq-pair {
+			vsock-msgq {
 				vdevice-type = "message-queue-pair";
 				generate = "/hypervisor/gvsock-msgq-pair";
 				message-size = <0xf0>;
 				queue-depth = <0x8>;
-				peer = "vm-name:qcom,trustedvm";
+				peer = "vm-name:qcom,roboticsvmX";
 				qcom,label = <0x3>;
 			};
 
@@ -187,7 +185,6 @@
 				qcom,label = <0x9>;
 				peer-default;
 			};
-
 		};
 	};
 
@@ -229,20 +226,6 @@
 			     <GIC_PPI 11 (GIC_CPU_MASK_SIMPLE(8) | IRQ_TYPE_LEVEL_LOW)>,
 			     <GIC_PPI 12 (GIC_CPU_MASK_SIMPLE(8) | IRQ_TYPE_LEVEL_LOW)>;
 		clock-frequency = <19200000>;
-	};
-
-	qcom,mem-buf {
-		compatible = "qcom,mem-buf";
-		qcom,vmid = <49>;
-	};
-
-	qcom,mem-buf-msgq {
-		compatible = "qcom,mem-buf-msgq";
-	};
-
-	qcom,qrtr {
-		compatible = "qcom,qrtr";
-		qcom,node-id = <21>;
 	};
 
 	qrtr-gunyah {

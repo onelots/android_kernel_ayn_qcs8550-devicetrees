@@ -27,4 +27,14 @@
 		memory-region = <&oem_vm_mem>;
 		virtio-backends = <&oem_vm_virt_be0>;
 	};
+
+	vsock-gunyah {
+		compatible = "qcom,gunyah-vsock";
+		qcom,master;
+		msgq-label = <3>;
+	};
+
+	dmesg-dump {
+		peer-name = <6>;
+	};
 };

@@ -113,7 +113,7 @@
 		qcom,ep-latency = <10>;
 		qcom,core-preset = <0x77777777>;
 		qcom,no-l1ss-supported;
-
+		qcom,no-l0s-supported;
 		qcom,pcie-phy-ver = <1106>;
 		qcom,phy-status-offset = <0x214>;
 		qcom,phy-status-bit = <6>;
@@ -927,7 +927,7 @@
 		qcom,target-link-speed = <0x3>;
 		qcom,core-preset = <0x77777777>;
 		qcom,no-l1ss-supported;
-
+		qcom,no-l0s-supported;
 		perst-gpio = <&tlmm 141 0>;
 		wake-gpio = <&tlmm 139 0>;
 		pinctrl-names = "default", "sleep";

@@ -1285,7 +1285,7 @@
 
 	tpdm_turing: tpdm@6860000 {
 		compatible = "arm,primecell";
-		arm,primecell-periphid = <0x000bb908>;
+		arm,primecell-periphid = <0x0003b968>;
 		reg = <0x6860000 0x1000>;
 		reg-names = "tpdm-base";
 

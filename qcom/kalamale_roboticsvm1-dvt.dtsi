@@ -1,15 +1,2 @@
 &soc {
-	qcom,mem-buf {
-		qcom,vmid = <52>;
-	};
 };
-
-&{/qcom,vm-config} {
-	image-name = "qcom,roboticsvm1";
-	qcom,secdomain-ids = <52>;
-	vm-uri = "vmuid/roboticsvm1";
-	vsock-msgq-pair {
-		peer = "vm-name:qcom,roboticsvm2";
-	};
-};
-

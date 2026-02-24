@@ -36,9 +36,8 @@
 
 		qcom,iommu-dma = "fastmap";
 		qcom,iommu-faults = "stall-disable", "HUPCF", "non-fatal";
-		qcom,iommu-dma-addr-pool = <0xa0000000 0x10000000>;
-		qcom,iommu-geometry = <0xa0000000 0x10010000>;
-		dma-coherent;
+		qcom,iommu-dma-addr-pool = <0xb0000000 0x10000000>;
+		qcom,iommu-geometry = <0xb0000000 0x10010000>;
 		qcom,fw-prefix;
 		qcom,wlan;
 		wpss-support-enable;

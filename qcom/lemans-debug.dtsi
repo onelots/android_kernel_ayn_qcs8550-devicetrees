@@ -1443,13 +1443,54 @@
 				<DCC_READ 0x18220408 1 0>,
 				<DCC_READ 0x18230408 1 0>,
 				<DCC_READ 0x18440008 14 0>,
-				<DCC_READ 0x18441000 7 0>;
+				<DCC_READ 0x18441000 7 0>,
+				<DCC_READ 0x1FFD008 8 0>;
 		};
 	};
 
 	mem_dump {
 		compatible = "qcom,mem-dump";
 		memory-region = <&dump_mem>;
+
+		c0_context {
+			qcom,dump-size = <0x800>;
+			qcom,dump-id = <0x0>;
+		};
+
+		c100_context {
+			qcom,dump-size = <0x800>;
+			qcom,dump-id = <0x1>;
+		};
+
+		c200_context {
+			qcom,dump-size = <0x800>;
+			qcom,dump-id = <0x2>;
+		};
+
+		c300_context {
+			qcom,dump-size = <0x800>;
+			qcom,dump-id = <0x3>;
+		};
+
+		c400_context {
+			qcom,dump-size = <0x800>;
+			qcom,dump-id = <0x4>;
+		};
+
+		c500_context {
+			qcom,dump-size = <0x800>;
+			qcom,dump-id = <0x5>;
+		};
+
+		c600_context {
+			qcom,dump-size = <0x800>;
+			qcom,dump-id = <0x6>;
+		};
+
+		c700_context {
+			qcom,dump-size = <0x800>;
+			qcom,dump-id = <0x7>;
+		};
 
 		rpmh {
 			qcom,dump-size = <0x2000000>;
