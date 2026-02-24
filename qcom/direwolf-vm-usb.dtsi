@@ -33,7 +33,7 @@
 			<&gcc GCC_SYS_NOC_USB_AXI_CLK>;
 		clock-names = "core_clk", "iface_clk", "bus_aggr_clk",
 				"utmi_clk", "sleep_clk", "noc_aggr_clk",
-				"noc_aggr_north_axi_clk", "noc_aggr_south_axi_clk",
+				"noc_aggr_north_clk", "noc_aggr_south_clk",
 				"noc_sys_clk";
 
 		resets = <&gcc GCC_USB30_PRIM_BCR>;
@@ -326,7 +326,7 @@
 			<&gcc GCC_SYS_NOC_USB_AXI_CLK>;
 		clock-names = "core_clk", "iface_clk", "bus_aggr_clk",
 				"utmi_clk", "sleep_clk", "noc_aggr_clk",
-				"noc_aggr_north_axi_clk", "noc_aggr_south_axi_clk",
+				"noc_aggr_north_clk", "noc_aggr_south_clk",
 				"noc_sys_clk";
 
 		resets = <&gcc GCC_USB30_SEC_BCR>;
@@ -623,7 +623,7 @@
 			<&gcc GCC_SYS_NOC_USB_AXI_CLK>;
 		clock-names = "core_clk", "iface_clk", "bus_aggr_clk",
 				"utmi_clk", "sleep_clk", "noc_aggr_clk",
-				"noc_aggr_north_axi_clk", "noc_aggr_south_axi_clk",
+				"noc_aggr_north_clk", "noc_aggr_south_clk",
 				"noc_sys_clk";
 
 		resets = <&gcc GCC_USB30_MP_BCR>;

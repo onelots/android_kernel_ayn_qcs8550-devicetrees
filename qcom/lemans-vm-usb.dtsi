@@ -41,14 +41,11 @@
 		qcom,disable-host-ssphy-powerdown;
 		status = "disabled";
 
-		dummy-supply = <&apps_smmu>;
-
 		dwc3@a600000 {
 			compatible = "snps,dwc3";
 			reg = <0xa600000 0xd93c>;
 			iommus = <&apps_smmu 0x080 0x0>;
 			qcom,iommu-dma = "bypass";
-			dma-coherent;
 			interrupts = <GIC_SPI 292 IRQ_TYPE_LEVEL_HIGH>;
 			usb-phy = <&usb2_phy0>, <&usb_qmp_phy0>;
 			snps,disable-clk-gating;
@@ -262,15 +259,12 @@
 		qcom,disable-host-ssphy-powerdown;
 		status = "disabled";
 
-		dummy-supply = <&apps_smmu>;
-
 		dwc3@a800000 {
 			compatible = "snps,dwc3";
 			reg = <0xa800000 0xd93c>;
 			interrupts = <GIC_SPI 349 IRQ_TYPE_LEVEL_HIGH>;
 			iommus = <&apps_smmu 0x0A0 0x0>;
 			qcom,iommu-dma = "bypass";
-			dma-coherent;
 			usb-phy = <&usb2_phy1>, <&usb_qmp_phy1>;
 			snps,disable-clk-gating;
 			snps,has-lpm-erratum;
@@ -481,14 +475,11 @@
 
 		status = "disabled";
 
-		dummy-supply = <&apps_smmu>;
-
 		dwc3@a400000 {
 			compatible = "snps,dwc3";
 			reg = <0xa400000 0xd800>;
 			iommus = <&apps_smmu 0x020 0x0>;
 			qcom,iommu-dma = "bypass";
-			dma-coherent;
 			interrupts = <GIC_SPI 442 IRQ_TYPE_LEVEL_HIGH>;
 			usb-phy = <&usb2_phy2>, <&usb_nop_phy>;
 			snps,disable-clk-gating;

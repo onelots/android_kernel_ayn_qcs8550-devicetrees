@@ -18,6 +18,6 @@
 / {
 	model = "Qualcomm Technologies, Inc. Scuba SoC";
 	compatible = "qcom,scuba", "qcom,scuba-iot", "qcom,idp";
-	qcom,msm-id = <473 0x10000>, <474 0x10000>, <621 0x10000>, <622 0x10000>;
+	qcom,msm-id = <473 0x10000>, <474 0x10000>;
 	qcom,board-id = <0 0>, <34 0>, <0 0x400>, <34 0x400>;
 };

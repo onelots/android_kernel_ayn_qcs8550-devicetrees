@@ -6,6 +6,6 @@
 / {
 	model = "Qualcomm Technologies, Inc. Kalamap RB5 gen2 DVT ROBOTICS PVM";
 	compatible = "qcom,kalamap-iot", "qcom,kalamap", "qcom,iot";
-	qcom,msm-id = <603 0x20000>, <668 0x20000>;
+	qcom,msm-id = <603 0x20000>;
 	qcom,board-id = <0x1021f 0x2>, <0x1041f 0x2>;
 };

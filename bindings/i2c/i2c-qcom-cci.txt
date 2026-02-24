@@ -10,7 +10,6 @@ PROPERTIES:
 		"qcom,msm8996-cci"
 		"qcom,sdm845-cci"
 		"qcom,sm8250-cci"
-		"qcom,sm8550-cci"
 
 - reg
 	Usage: required
