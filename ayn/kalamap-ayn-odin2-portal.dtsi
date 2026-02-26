@@ -1,0 +1,31 @@
+#include "kalamap-ayn-odin2-common.dtsi"
+
+&sdhc_2 {
+	cd-debounce-delay-ms = <2000>;
+};
+
+&qupv3_se0_i2c {
+	#address-cells = <1>;
+	#size-cells = <0>;
+	status = "ok";
+
+	htr3212l@3c {
+		compatible = "yongfukang,htr3212";
+		reg = <0x3c>;
+		htr3212,label = "sn3112l";
+		htr3212,dv-en = <&tlmm 55 0x00>;
+	};
+};
+
+&qupv3_se12_i2c {
+	#address-cells = <1>;
+	#size-cells = <0>;
+	status = "ok";
+
+	htr3212r@3c {
+		compatible = "yongfukang,htr3212";
+		reg = <0x3c>;
+		htr3212,label = "sn3112r";
+		htr3212,dv-en = <&tlmm 56 0x00>;
+	};
+};

@@ -1,0 +1,8 @@
+DTC_INCLUDE += $(srctree)/../qcs8550-modules/qcom/opensource/audio-kernel/include
+
+dtbo-$(CONFIG_ARCH_KALAMA) += ../../qcom/audio/kalama-audio.dtbo \
+                 kalama-audio-ayn-odin2.dtbo
+
+ always-y    := $(dtb-y) $(dtbo-y)
+ subdir-y    := $(dts-dirs)
+ clean-files    := *.dtb *.dtbo

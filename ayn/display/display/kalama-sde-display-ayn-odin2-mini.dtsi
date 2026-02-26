@@ -1,0 +1,276 @@
+#include <dt-bindings/gpio/gpio.h>
+
+#include "kalama-sde-display-ayn-odin2-common.dtsi"
+
+&dsi_ext_bridge_1080p {
+	qcom,panel-supply-entries = <&dsi_bridge_pwr_supply>;
+};
+
+&soc {
+	dsi_bridge_pwr_supply: dsi_bridge_pwr_supply {
+		#address-cells = <1>;
+		#size-cells = <0>;
+
+		qcom,panel-supply-entry@0 {
+			reg = <0>;
+			qcom,supply-name = "vddio";
+			qcom,supply-min-voltage = <1800000>;
+			qcom,supply-max-voltage = <1800000>;
+			qcom,supply-enable-load = <200000>;
+			qcom,supply-disable-load = <80>;
+			qcom,supply-post-on-sleep = <20>;
+		};
+
+		qcom,panel-supply-entry@1 {
+			reg = <1>;
+			qcom,supply-name = "vdd";
+			qcom,supply-min-voltage = <1800000>;
+			qcom,supply-max-voltage = <1800000>;
+			qcom,supply-enable-load = <100000>;
+			qcom,supply-disable-load = <100>;
+		};
+	};
+};
+
+&dsi_xm91080_1080p_video {
+	qcom,panel-supply-entries = <&dsi_panel_pwr_supply>;
+	qcom,platform-reset-gpio = <&tlmm 133 0>;
+	qcom,platform-bklight-en-gpio = <&tlmm 55 0>;
+};
+
+&dsi_panel_pwr_supply {
+	qcom,panel-supply-entry@3 {
+		reg = <3>;
+		qcom,supply-name = "vdisp-en-p";
+		qcom,supply-min-voltage = <2800000>;
+		qcom,supply-max-voltage = <2800000>;
+		qcom,supply-enable-load = <10000>;
+		qcom,supply-disable-load = <0>;
+		qcom,supply-post-on-sleep = <0>;
+	};
+
+	qcom,panel-supply-entry@4 {
+		reg = <4>;
+		qcom,supply-name = "vdisp-en-n";
+		qcom,supply-min-voltage = <2800000>;
+		qcom,supply-max-voltage = <2800000>;
+		qcom,supply-enable-load = <10000>;
+		qcom,supply-disable-load = <0>;
+		qcom,supply-post-on-sleep = <0>;
+	};
+};
+
+&tlmm {
+	display_panel_vdisp_en_p_default: display_panel_vdisp_en_p_default {
+		mux {
+			pins = "gpio101";
+			function = "gpio";
+		};
+		config {
+			pins = "gpio101";
+			drive-strength = <8>;
+			bias-disable = <0>;
+			output-high;
+		};
+	};
+
+	display_panel_vdisp_en_n_default: display_panel_vdisp_en_n_default {
+		mux {
+			pins = "gpio102";
+			function = "gpio";
+		};
+		config {
+			pins = "gpio102";
+			drive-strength = <8>;
+			bias-disable = <0>;
+			output-high;
+		};
+	};
+};
+
+&soc {
+	display_panel_vdisp_en_p: display_gpio_regulator@2 {
+		compatible = "qti-regulator-fixed";
+		regulator-name = "display_panel_vdisp_en_p";
+		regulator-min-microvolt = <2800000>;
+		regulator-max-microvolt = <2800000>;
+		regulator-enable-ramp-delay = <233>;
+		gpio = <&tlmm 101 0>;
+		enable-active-high;
+		regulator-boot-on;
+		proxy-supply = <&display_panel_vdisp_en_p>;
+		qcom,proxy-consumer-enable;
+		pinctrl-names = "default";
+		pinctrl-0 = <&display_panel_vdisp_en_p_default>;
+	};
+
+	display_panel_vdisp_en_n: display_gpio_regulator@3 {
+		compatible = "qti-regulator-fixed";
+		regulator-name = "display_panel_vdisp_en_n";
+		regulator-min-microvolt = <2800000>;
+		regulator-max-microvolt = <2800000>;
+		regulator-enable-ramp-delay = <233>;
+		gpio = <&tlmm 102 0>;
+		enable-active-high;
+		regulator-boot-on;
+		proxy-supply = <&display_panel_vdisp_en_n>;
+		qcom,proxy-consumer-enable;
+		pinctrl-names = "default";
+		pinctrl-0 = <&display_panel_vdisp_en_n_default>;
+	};
+
+	vdd_hdmi_1v8: vdd-hdmi-1v8-regulator {
+		compatible = "regulator-fixed";
+		regulator-name = "vdd_hdmi_1v8";
+		regulator-min-microvolt = <1800000>;
+		regulator-max-microvolt = <1800000>;
+		gpio = <&tlmm 6 GPIO_ACTIVE_HIGH>;
+		enable-active-high;
+	};
+
+	vcc_hdmi_1v8: vcc-hdmi-1v8-regulator {
+		compatible = "regulator-fixed";
+		regulator-name = "vcc_hdmi_1v8";
+		regulator-min-microvolt = <1800000>;
+		regulator-max-microvolt = <1800000>;
+		gpio = <&tlmm 10 GPIO_ACTIVE_HIGH>;
+		enable-active-high;
+	};
+
+	hdmi-connector {
+		compatible = "hdmi-connector";
+		label = "hdmi";
+		type = "d";
+
+		hpd-gpios = <&tlmm 9 GPIO_ACTIVE_HIGH>;
+
+		port {
+			hdmi_connector_in: endpoint {
+				remote-endpoint = <&lt8912_out>;
+			};
+		};
+	};
+};
+
+&qupv3_hub_i2c0_sda_active {
+	config {
+		bias-disable;
+	};
+};
+
+&qupv3_hub_i2c0_scl_active {
+	config {
+		bias-disable;
+	};
+};
+
+&qupv3_hub_i2c0 {
+	status = "okay";
+
+	qcom,clk-freq-out = <100000>;
+
+	pinctrl-names = "default";
+	pinctrl-0 = <&qupv3_hub_i2c0_sda_active>, <&qupv3_hub_i2c0_scl_active>;
+	/delete-property/ pinctrl-1;
+
+	lt8912b: lontium,lt8912b@48 {
+		compatible = "lontium,lt8912b";
+		reg = <0x48>;
+		reset-gpios = <&tlmm 7 0x0>;
+
+/*
+		interrupt-parent = <&tlmm>;
+		interrupts = <44 0>;
+		interrupt-names = "lt_irq";
+		lt,irq-gpio = <&tlmm 8 0x2008>;
+*/
+
+		ports {
+			#address-cells = <1>;
+			#size-cells = <0>;
+
+			port@0 {
+				reg = <0>;
+
+				lt8912b_in_0: endpoint {
+					data-lanes = <0 1 2 3>;
+					remote-endpoint = <&ext_dsi_0_out>;
+				};
+			};
+
+			port@1 {
+				reg = <1>;
+
+				lt8912_out: endpoint {
+					remote-endpoint = <&hdmi_connector_in>;
+				};
+			};
+		};
+	};
+};
+
+&qupv3_se4_i2c {
+	#address-cells = <1>;
+	#size-cells = <0>;
+
+	qcom,clk-freq-out = <400000>;
+	status = "okay";
+
+	hynitron@1a {
+		compatible = "hynitron,hyn_ts";
+		reg = <0x1a>;
+		interrupt-parent = <&tlmm>;
+		interrupts = <25 0x2008>;
+		hynitron,max-touch-number = <5>;
+		hynitron,display-coords =  <1080 1920>;
+		hynitron,key-number = <3>;
+		hynitron,key-code = <139 172 158>;
+		hynitron,key-y-coord = <2000 2000 2000>;
+		hynitron,key-x-coord = <200 600 800>;
+		pinctrl-names = "pmx_ts_active", "pmx_ts_suspend";
+		pinctrl-0 = <&ts_int_active &ts_reset_active>;
+		pinctrl-1 = <&ts_int_suspend &ts_reset_suspend>;
+		vdd_ana-supply = <&L2B>;
+		hynitron,irq-gpio = <&tlmm 25 0x02>;
+		hynitron,reset-gpio = <&tlmm 24 0x01>;
+	};
+};
+
+&sde_dsi {
+	label = "secondary";
+
+	qcom,platform-te-gpio = <&tlmm 200 0>;
+
+	qcom,dsi-default-panel = <&dsi_ext_bridge_1080p>;
+
+	vddio-supply = <&vcc_hdmi_1v8>;
+	vdd-supply = <&vdd_hdmi_1v8>;
+
+	ports {
+		#address-cells = <1>;
+		#size-cells = <0>;
+
+		port@0 {
+			reg = <0>;
+			ext_dsi_0_out: endpoint {
+				remote-endpoint = <&lt8912b_in_0>;
+			};
+		};
+	};
+};
+
+&sde_dsi1 {
+	label = "primary";
+
+	qcom,platform-te-gpio = <&tlmm 86 0>;
+
+	qcom,dsi-default-panel = <&dsi_xm91080_1080p_video>;
+
+	vdd-supply = <&display_panel_avdd>;
+	vdisp-en-p-supply = <&display_panel_vdisp_en_p>;
+	vdisp-en-n-supply = <&display_panel_vdisp_en_n>;
+};
+
+&battery_charger {
+	qcom,display-panels = <&dsi_xm91080_1080p_video>;
+};

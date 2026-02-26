@@ -1,0 +1,6 @@
+dtbo-$(CONFIG_ARCH_KALAMA) += ../../qcom/bt/kalama-bt.dtbo \
+                 kalama-bt-ayn-odin2.dtbo
+
+always-y        := $(dtb-y) $(dtbo-y)
+subdir-y        := $(dts-dirs)
+clean-files     := *.dtb *.dtbo
