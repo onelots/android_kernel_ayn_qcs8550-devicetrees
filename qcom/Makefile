@@ -108,11 +108,11 @@ CROW_APQ_BOARDS += \
 		crowp-idp-rcm-overlay.dtbo \
 		crowp-qrd-overlay.dtbo
 
-kalama-dtb-$(CONFIG_ARCH_CROW) += \
+crow-dtb-$(CONFIG_ARCH_CROW) += \
 	$(call add-overlays, $(CROW_BOARDS) ,$(CROW_BASE_DTB))\
 	$(call add-overlays, $(CROW_APQ_BOARDS) ,$(CROW_APQ_BASE_DTB))
-kalama-overlays-dtb-$(CONFIG_ARCH_CROW) += $(CROW_BOARDS) $(CROW_APQ_BOARDS) $(CROW_BASE_DTB) $(CROW_APQ_BASE_DTB)
-dtb-y += $(kalama-dtb-y)
+crow-overlays-dtb-$(CONFIG_ARCH_CROW) += $(CROW_BOARDS) $(CROW_APQ_BOARDS) $(CROW_BASE_DTB) $(CROW_APQ_BASE_DTB)
+dtb-y += $(crow-dtb-y)
 
 KHAJE_BASE_DTB += khaje.dtb khajep.dtb khajeq.dtb khajeg.dtb khaje-3gb.dtb
 
@@ -158,13 +158,13 @@ KHAJE_BOARDS += \
 		 khajeg-idp-pm8010-overlay.dtbo \
 		 khajeg-idps-display-90hz-overlay.dtbo
 
-bengal-dtb-$(CONFIG_ARCH_KHAJE) += \
+khaje-dtb-$(CONFIG_ARCH_KHAJE) += \
         $(call add-overlays, $(KHAJE_BOARDS) ,$(KHAJE_BASE_DTB))
-bengal_le-dtb-$(CONFIG_ARCH_KHAJE) += \
+khaje_le-dtb-$(CONFIG_ARCH_KHAJE) += \
         $(call add-overlays, $(KHAJE_BOARDS) ,$(KHAJE_BASE_DTB))
-bengal-overlays-dtb-$(CONFIG_ARCH_KHAJE) += $(KHAJE_BOARDS) $(KHAJE_BASE_DTB)
-bengal_le-overlays-dtb-$(CONFIG_ARCH_KHAJE) += $(KHAJE_BOARDS) $(KHAJE_BASE_DTB)
-dtb-y += $(bengal-dtb-y)
+khaje-overlays-dtb-$(CONFIG_ARCH_KHAJE) += $(KHAJE_BOARDS) $(KHAJE_BASE_DTB)
+khaje_le-overlays-dtb-$(CONFIG_ARCH_KHAJE) += $(KHAJE_BOARDS) $(KHAJE_BASE_DTB)
+dtb-y += $(khaje-dtb-y)
 
 BENGAL_BASE_DTB += bengal.dtb bengalp.dtb bengal-1gb.dtb bengal-2gb.dtb
 BENGAL_IOT_BASE_DTB += bengal-iot.dtb bengalp-iot.dtb bengal-iot-2gb.dtb bengalp-iot-2gb.dtb
@@ -207,14 +207,14 @@ SCUBA_BOARDS += \
 		 scuba-iot-qrd-non-eldo-overlay.dtbo \
 		 scuba-iot-rb1-overlay.dtbo
 
-bengal-dtb-$(CONFIG_ARCH_SCUBA) += \
+scuba-dtb-$(CONFIG_ARCH_SCUBA) += \
 	$(call add-overlays, $(SCUBA_BOARDS), $(SCUBA_BASE_DTB))
-bengal_le-dtb-$(CONFIG_ARCH_SCUBA) += \
+scuba_le-dtb-$(CONFIG_ARCH_SCUBA) += \
 	$(call add-overlays, $(SCUBA_BOARDS), $(SCUBA_BASE_DTB))
 
-bengal-overlays-dtb-$(CONFIG_ARCH_SCUBA) += $(SCUBA_BOARDS) $(SCUBA_BASE_DTB)
-bengal_le-overlays-dtb-$(CONFIG_ARCH_SCUBA) += $(SCUBA_BOARDS) $(SCUBA_BASE_DTB)
-dtb-y += $(bengal-dtb-y)
+scuba-overlays-dtb-$(CONFIG_ARCH_SCUBA) += $(SCUBA_BOARDS) $(SCUBA_BASE_DTB)
+scuba_le-overlays-dtb-$(CONFIG_ARCH_SCUBA) += $(SCUBA_BOARDS) $(SCUBA_BASE_DTB)
+dtb-y += $(scuba-dtb-y)
 
 KONA_BASE_DTB += kona-iot.dtb kona-iot-v2.dtb kona-iot-v2.1.dtb kona-7230-iot-v2.1.dtb
 KONA_LE_BASE_DTB += kona-7230-iot-v2.1.dtb qrb5165-iot.dtb qrb5165n-iot.dtb qrb3165-iot.dtb qrb3165n-iot.dtb
@@ -588,7 +588,7 @@ endif
 
 ifeq ($(CONFIG_ARCH_CROW), y)
 ifeq ($(CONFIG_ARCH_QTI_VM), y)
-kalama_tuivm-dtb-$(CONFIG_ARCH_QTI_VM) += crow-vm-rumi.dtb \
+crow_tuivm-dtb-$(CONFIG_ARCH_QTI_VM) += crow-vm-rumi.dtb \
 	crow-vm-atp.dtb \
 	crow-vm-idp-wcd9395-aatc.dtb \
 	crow-vm-idp-wcd9395-dmic.dtb \
@@ -618,7 +618,7 @@ kalama_tuivm-dtb-$(CONFIG_ARCH_QTI_VM) += crow-vm-rumi.dtb \
 	crowp-oemvm-idp.dtb \
 	crowp-oemvm-idp-rcm.dtb \
 	crowp-oemvm-qrd.dtb
-dtb-y += $(kalama_tuivm-dtb-y)
+dtb-y += $(crow_tuivm-dtb-y)
 endif
 endif
 
