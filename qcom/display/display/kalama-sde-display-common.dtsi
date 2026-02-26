@@ -36,6 +36,11 @@
 #include "dsi-panel-vtdr6130-dsc-fhd-plus-video.dtsi"
 #include "dsi-panel-vtdr6130-qsync-dsc-fhd-plus-144hz-cmd.dtsi"
 #include "dsi-panel-vtdr6130-qsync-dsc-fhd-plus-144hz-video.dtsi"
+#include "dsi-panel-td4328-1080p-video.dtsi"
+#include "dsi-panel-xm91080-1080p-video.dtsi"
+#include "dsi-panel-icna3512-1080p-dsc-cmd.dtsi"
+#include "dsi-panel-icna3520-1080p-dsc-cmd.dtsi"
+#include "dsi-panel-ch13726a-amoled-video.dtsi"
 
 #include "kalama-sde-display-pinctrl.dtsi"
 
@@ -1180,6 +1185,103 @@
 				08 08 02 04 00 1b 18];
 			qcom,display-topology = <1 0 1>;
 			qcom,default-topology-index = <0>;
+		};
+	};
+};
+
+&dsi_td4328_1080p_video {
+	qcom,dsi-select-clocks = "pll_byte_clk1", "pll_dsi_clk1";
+
+	qcom,mdss-dsi-display-timings {
+		timing@0 {
+			/* DPHY regular margins */
+			qcom,mdss-dsi-panel-phy-timings = [00 1E 08 07 18 22 08
+				08 08 02 04 00 1A 0D];
+			qcom,display-topology = <1 0 1>,
+						<2 0 1>;
+			qcom,default-topology-index = <0>;
+			qcom,mdss-dsi-panel-clockrate = <891012300>;
+		};
+	};
+};
+
+&dsi_xm91080_1080p_video {
+	qcom,dsi-select-clocks = "pll_byte_clk1", "pll_dsi_clk1";
+
+	qcom,mdss-dsi-display-timings {
+		timing@0 {
+			/* DPHY regular margins */
+			qcom,mdss-dsi-panel-phy-timings = [00 1B 07 06 16 21 07
+				07 07 02 04 00 17 0C];
+			qcom,display-topology = <1 0 1>,
+						<2 0 1>;
+			qcom,default-topology-index = <0>;
+			qcom,mdss-dsi-panel-clockrate = <793400000>;
+		};
+	};
+};
+
+&dsi_icna3512_1080p_dsc_cmd {
+	qcom,dsi-select-clocks = "pll_byte_clk1", "pll_dsi_clk1";
+
+	qcom,mdss-dsi-display-timings {
+		timing@0 {
+			/* DPHY regular margins */
+			qcom,mdss-dsi-panel-phy-timings = [00 1F 08 07 18 22 08
+				08 08 02 04 00 1A 0C];
+			qcom,display-topology = <1 1 1>;
+			qcom,default-topology-index = <0>;
+		};
+
+		timing@1 {
+			/* DPHY regular margins */
+			qcom,mdss-dsi-panel-phy-timings = [00 1F 08 07 18 16 08
+				08 08 02 04 00 1A 0C];
+			qcom,display-topology = <1 1 1>;
+			qcom,default-topology-index = <0>;
+		};
+	};
+};
+
+&dsi_icna3520_1080p_dsc_cmd {
+	qcom,dsi-select-clocks = "pll_byte_clk1", "pll_dsi_clk1";
+
+	qcom,mdss-dsi-display-timings {
+		timing@0 { 
+			/* DPHY regular margins */
+			qcom,mdss-dsi-panel-phy-timings = [00 15 05 05 14 1F 05
+				05 06 02 04 00 13 0A];
+			qcom,display-topology = <1 1 1>;
+			qcom,default-topology-index = <0>;
+		};
+
+		timing@1 {
+			/* DPHY regular margins */
+			qcom,mdss-dsi-panel-phy-timings = [00 15 05 05 14 1F 05
+				05 06 02 04 00 13 0A];
+			qcom,display-topology = <1 1 1>;
+			qcom,default-topology-index = <0>;
+		};
+	};
+};
+
+&dsi_ch13726a_amoled_video {
+	qcom,dsi-select-sec-clocks = "pll_byte_clk0", "pll_dsi_clk0";
+	qcom,mdss-dsi-display-timings {
+		timing@0 {
+			qcom,mdss-dsi-panel-phy-timings = [00 21 09 09 19 23 09 
+				09 09 02 04 00 1C 0E];
+			qcom,display-topology = <1 0 1>;
+			qcom,default-topology-index = <0>;
+			qcom,mdss-dsi-panel-clockrate = <505000000>;
+		};
+
+		timing@1 {
+			qcom,mdss-dsi-panel-phy-timings = [00 21 09 09 19 23 09 
+				09 09 02 04 00 1C 0E];
+			qcom,display-topology = <1 0 1>;
+			qcom,default-topology-index = <0>;
+			qcom,mdss-dsi-panel-clockrate = <1011000000>;
 		};
 	};
 };

@@ -1,0 +1,257 @@
+/* Copyright (c) 2016-2018, The Linux Foundation. All rights reserved.
+ *
+ * This program is free software; you can redistribute it and/or modify
+ * it under the terms of the GNU General Public License version 2 and
+ * only version 2 as published by the Free Software Foundation.
+ *
+ * This program is distributed in the hope that it will be useful,
+ * but WITHOUT ANY WARRANTY; without even the implied warranty of
+ * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+ * GNU General Public License for more details.
+ */
+
+&mdss_mdp {
+	dsi_icna3512_1080p_dsc_cmd: qcom,mdss_dsi_icna3512_dsc_cmd {
+		qcom,mdss-dsi-panel-name = "icna3512 amoled panel with DSC";
+		qcom,mdss-dsi-panel-type = "dsi_cmd_mode";
+		qcom,mdss-dsi-panel-physical-type = "oled";
+		qcom,dsi-ctrl-num = <1>;
+		qcom,dsi-phy-num = <1>;
+
+		qcom,mdss-dsi-panel-mode-switch;
+
+		qcom,mdss-dsi-virtual-channel-id = <0>;
+		qcom,mdss-dsi-stream = <0>;
+		qcom,mdss-dsi-bpp = <24>;
+		qcom,mdss-dsi-color-order = "rgb_swap_rgb";
+		qcom,mdss-dsi-underflow-color = <0xff>;
+		qcom,mdss-dsi-border-color = <0>;
+
+		qcom,mdss-dsi-traffic-mode = "non_burst_sync_event";
+		qcom,mdss-dsi-lane-map = "lane_map_0123";
+		qcom,mdss-dsi-bllp-eof-power-mode;
+		qcom,mdss-dsi-bllp-power-mode;
+		qcom,mdss-dsi-lane-0-state;
+		qcom,mdss-dsi-lane-1-state;
+		qcom,mdss-dsi-lane-2-state;
+		qcom,mdss-dsi-lane-3-state;
+		qcom,mdss-dsi-pvgl-level-switch;
+		qcom,mdss-dsi-dma-trigger = "trigger_sw";
+		qcom,mdss-dsi-mdp-trigger = "none";
+		qcom,mdss-dsi-reset-sequence = <1 20>, <0 20>, <1 20>;
+		qcom,mdss-dsi-te-pin-select = <1>;
+		qcom,mdss-dsi-wr-mem-start = <0x2c>;
+		qcom,mdss-dsi-wr-mem-continue = <0x3c>;
+		qcom,mdss-dsi-te-dcs-command = <1>;
+		qcom,mdss-dsi-te-check-enable;
+		qcom,mdss-dsi-te-using-te-pin;
+		qcom,mdss-dsi-panel-hdr-enabled;
+		qcom,mdss-dsi-panel-orientation = "180";
+		qcom,mdss-dsi-panel-hdr-color-primaries = <14500 15500 32000
+			17000 15500 30000 8000 3000>;
+		qcom,mdss-dsi-panel-peak-brightness = <4200000>;
+		qcom,mdss-dsi-panel-blackness-level = <3230>;
+
+		qcom,mdss-dsi-display-timings {
+			timing@0 {
+				qcom,mdss-dsi-panel-framerate = <60>;
+				qcom,mdss-dsi-panel-width = <1080>;
+				qcom,mdss-dsi-panel-height = <1920>;
+				qcom,mdss-dsi-h-front-porch = <156>;
+				qcom,mdss-dsi-h-back-porch = <23>;
+				qcom,mdss-dsi-h-pulse-width = <1>;
+				qcom,mdss-dsi-h-sync-skew = <0>;
+				qcom,mdss-dsi-h-sync-pulse = <0>;
+				qcom,mdss-dsi-v-back-porch = <15>;
+				qcom,mdss-dsi-v-front-porch = <2760>;
+				qcom,mdss-dsi-v-pulse-width = <1>;
+				qcom,mdss-dsi-h-left-border = <0>;
+				qcom,mdss-dsi-h-right-border = <0>;
+				qcom,mdss-dsi-v-top-border = <0>;
+				qcom,mdss-dsi-v-bottom-border = <0>;
+				qcom,mdss-dsi-panel-jitter = <0x3 0x1>;
+
+				qcom,mdss-dsi-timing-switch-command = [
+					39 01 00 00 00 00 02 48 00 // Write DSI MODE - HFR_MODE = Normal Mode, DSI_MODE = Through GRAM
+				];
+				qcom,mdss-dsi-timing-switch-command-state = "dsi_lp_mode";
+
+				qcom,mdss-dsi-pvgl-7v9-commands = [
+					39 01 00 00 00 00 03 FD 5A 5A // Manufacture Command Access 
+
+					39 01 00 00 00 00 02 9F 02 // REG SEL - Group 2
+					39 01 00 00 00 00 11 B7 00 40 00 10 10 15 00 06 06 05 06 06 05 06 06 05 // Step-up Control 1
+					39 01 00 00 00 00 0E B8 00 00 00 92 33 92 33 92 33 92 33 92 33 // Step-up Control 2
+
+					39 01 00 00 00 00 03 FD A5 A5 // Manufacture Command Access Lock
+				];
+				qcom,mdss-dsi-pvgl-7v9-commands-state = "dsi_lp_mode";
+
+				qcom,mdss-dsi-pvgl-7v0-commands = [
+					39 01 00 00 00 00 03 FD 5A 5A // Manufacture Command Access Unlock
+
+					39 01 00 00 00 00 02 9F 02 // REG SEL - Group 2
+					39 01 00 00 00 00 11 B7 00 40 00 10 10 15 00 06 06 05 06 06 05 06 06 05 // Step-up Control 1
+					39 01 00 00 00 00 0E B8 00 00 00 72 29 72 29 72 29 72 29 72 29 // Step-up Control 2
+
+					39 01 00 00 00 00 03 FD A5 A5 // Manufacture Command Access Lock
+				];
+				qcom,mdss-dsi-pvgl-7v0-commands-state = "dsi_lp_mode";
+
+				qcom,mdss-dsi-lp1-command = [
+					05 01 00 00 00 00 02 39 00 // Idle Mode On
+				];
+				qcom,mdss-dsi-lp1-command-state = "dsi_lp_mode";
+
+				qcom,mdss-dsi-nolp-command = [
+					05 01 00 00 00 00 02 38 00 // Idle Mode Off
+				];
+				qcom,mdss-dsi-nolp-command-state ="dsi_lp_mode";
+
+				qcom,mdss-dsi-on-command = [
+					39 01 00 00 00 00 03 9C A5 A5 // User Command Access Unlock
+
+					39 01 00 00 00 00 02 53 E0 // Write Control Display
+					05 01 00 00 00 00 02 35 00 // Tearing Effect Line On
+					05 01 00 00 78 00 02 11 00 // Sleep Out
+
+					39 01 00 00 00 00 03 FD 5A 5A // Manufacture Command Access Unlock
+
+					39 01 00 00 00 00 02 9F 0F // REG SEL - Group 15
+					39 01 00 00 00 00 02 CE 22
+
+					39 01 00 00 00 00 02 9F 01 // REG SEL - Group 1
+					39 01 00 00 00 00 24 B3 00 E0 A0 10 FC 00 02 83 00 10 14 00 00 C3 00 10 14 00 00 E0 10 10 B8 00 00 E0 A0 10 C8 22 18 18 18 18 18 // Timing Control 1
+
+					39 01 00 00 00 00 02 9F 07 // REG SEL - Group 7
+					39 01 00 00 00 00 08 B2 04 18 08 0C 02 00 C4 // PWM Control 1
+					39 01 00 00 00 00 10 D3 88 4A 4A 88 4A 4A 00 EB 00 00 00 00 00 00 00 // PWM HMD WD1 MODE0 Control
+					39 01 00 00 00 00 08 CB 01 01 01 01 04 09 2C // PWM HMD Control 1
+					39 01 00 00 00 00 08 B5 04 0C 08 0C 04 00 C4 // PWM Control 4
+					39 01 00 00 00 00 10 D9 88 40 40 88 40 40 00 EB 00 00 00 00 00 00 00 // PWM HMD WD1 MODE3 Control
+					39 01 00 00 00 00 08 CE 01 01 01 01 04 09 2C // PWM HMD Control 4
+
+					39 01 00 00 00 00 03 FD A5 A5 // Manufacture Command Access Lock
+
+					39 01 00 00 00 00 02 48 00 // Write DSI MODE - HFR_MODE = Normal Mode, DSI_MODE = Through GRAM
+					05 01 00 00 78 00 02 29 00 // Display On
+				];
+				qcom,mdss-dsi-on-command-state = "dsi_lp_mode";
+
+				qcom,mdss-dsi-off-command = [
+					05 01 00 00 14 00 02 28 00 // Display Off
+					05 01 00 00 78 00 02 10 00 // Sleep In
+				];
+				qcom,mdss-dsi-off-command-state = "dsi_hs_mode";
+
+				qcom,compression-mode = "dsc";
+				qcom,mdss-dsc-slice-height = <20>;
+				qcom,mdss-dsc-slice-width = <540>;
+				qcom,mdss-dsc-slice-per-pkt = <1>;
+				qcom,mdss-dsc-bit-per-component = <8>;
+				qcom,mdss-dsc-bit-per-pixel = <8>;
+				qcom,mdss-dsc-block-prediction-enable;
+			};
+
+			timing@1 {
+				qcom,mdss-dsi-panel-framerate = <120>;
+				qcom,mdss-dsi-panel-width = <1080>;
+				qcom,mdss-dsi-panel-height = <1920>;
+				qcom,mdss-dsi-h-front-porch = <156>;
+				qcom,mdss-dsi-h-back-porch = <23>;
+				qcom,mdss-dsi-h-pulse-width = <1>;
+				qcom,mdss-dsi-h-sync-skew = <0>;
+				qcom,mdss-dsi-h-sync-pulse = <0>;
+				qcom,mdss-dsi-v-back-porch = <15>;
+				qcom,mdss-dsi-v-front-porch = <412>;
+				qcom,mdss-dsi-v-pulse-width = <1>;
+				qcom,mdss-dsi-h-left-border = <0>;
+				qcom,mdss-dsi-h-right-border = <0>;
+				qcom,mdss-dsi-v-top-border = <0>;
+				qcom,mdss-dsi-v-bottom-border = <0>;
+				qcom,mdss-dsi-panel-jitter = <0x3 0x1>;
+
+				qcom,mdss-dsi-timing-switch-command = [
+					39 01 00 00 00 00 02 48 30 // Write DSI MODE - HFR_MODE = HF3 Mode, DSI_MODE = Through GRAM
+				];
+				qcom,mdss-dsi-timing-switch-command-state = "dsi_lp_mode";
+
+				qcom,mdss-dsi-pvgl-7v9-commands = [
+					39 01 00 00 00 00 03 FD 5A 5A // Manufacture Command Access Unlock
+
+					39 01 00 00 00 00 02 9F 02 // REG SEL - Group 2
+					39 01 00 00 00 00 11 B7 00 40 00 10 10 15 00 06 06 05 06 06 05 06 06 05 // Step-up Control 1
+					39 01 00 00 00 00 0E B8 00 00 00 92 31 92 31 92 31 92 31 92 31 // Step-up Control 2
+
+					39 01 00 00 00 00 03 FD A5 A5 // Manufacture Command Access Lock
+				];
+				qcom,mdss-dsi-pvgl-7v9-commands-state = "dsi_lp_mode";
+
+				qcom,mdss-dsi-pvgl-7v0-commands = [
+					39 01 00 00 00 00 03 FD 5A 5A // Manufacture Command Access Unlock
+
+					39 01 00 00 00 00 02 9F 02// REG SEL - Group 2
+					39 01 00 00 00 00 11 B7 00 40 00 10 10 15 00 06 06 05 06 06 05 06 06 05 // Step-up Control 1
+					39 01 00 00 00 00 0E B8 00 00 00 72 29 72 29 72 29 72 29 72 29 // Step-up Control 2
+
+					39 01 00 00 00 00 03 FD A5 A5 // Manufacture Command Access Lock
+				];
+				qcom,mdss-dsi-pvgl-7v0-commands-state = "dsi_lp_mode";
+
+				qcom,mdss-dsi-lp1-command = [
+					05 01 00 00 00 00 02 39 00 // Idle Mode On
+				];
+				qcom,mdss-dsi-lp1-command-state = "dsi_lp_mode";
+
+				qcom,mdss-dsi-nolp-command = [
+					05 01 00 00 00 00 02 38 00 // Idle Mode Off
+				];
+				qcom,mdss-dsi-nolp-command-state ="dsi_lp_mode";
+
+				qcom,mdss-dsi-on-command = [
+					39 01 00 00 00 00 03 9C A5 A5 // User Command Access Unlock
+
+					39 01 00 00 00 00 02 53 E0 // Write Control Display - HBM_MODE = HBM1, BCTL = On, BC_DIM_EN = Off, BC_DC_EN = Off, HBM_EN = Off
+					05 01 00 00 00 00 02 35 00 // Tearing Effect Line On
+					05 01 00 00 78 00 02 11 00 // Sleep Out
+
+					39 01 00 00 00 00 03 FD 5A 5A // Manufacture Command Access Unlock
+
+					39 01 00 00 00 00 02 9F 0F // REG SEL - Group 15
+					39 01 00 00 00 00 02 CE 22
+
+					39 01 00 00 00 00 02 9F 01 // REG SEL - Group 1
+					39 01 00 00 00 00 24 B3 00 E0 A0 10 FC 00 02 83 00 10 14 00 00 C3 00 10 14 00 00 E0 10 10 B8 00 00 E0 A0 10 C8 22 18 18 18 18 18 // Timing Control 1
+
+					39 01 00 00 00 00 02 9F 07 // REG SEL - Group 7
+					39 01 00 00 00 00 08 B2 04 18 08 0C 02 00 C4 // PWM Control 1
+					39 01 00 00 00 00 10 D3 88 4A 4A 88 4A 4A 00 EB 00 00 00 00 00 00 00 // PWM HMD WD1 MODE0 Control
+					39 01 00 00 00 00 08 CB 01 01 01 01 04 09 2C // PWM HMD Control 1
+					39 01 00 00 00 00 08 B5 04 0C 08 0C 04 00 C4 // PWM Control 4
+					39 01 00 00 00 00 10 D9 88 40 40 88 40 40 00 EB 00 00 00 00 00 00 00 // PWM HMD WD1 MODE3 Control
+					39 01 00 00 00 00 08 CE 01 01 01 01 04 09 2C // PWM HMD Control 4
+
+					39 01 00 00 00 00 03 FD A5 A5 // Manufacture Command Access Lock
+
+					39 01 00 00 00 00 02 48 30 // Write DSI MODE - HFR_MODE = HF3 Mode, DSI_MODE = Through GRAM
+					05 01 00 00 78 00 02 29 00 // Display On
+				];
+				qcom,mdss-dsi-on-command-state = "dsi_lp_mode";
+
+				qcom,mdss-dsi-off-command = [
+					05 01 00 00 14 00 02 28 00 // Display Off
+					05 01 00 00 78 00 02 10 00 // Sleep In
+				];
+				qcom,mdss-dsi-off-command-state = "dsi_hs_mode";
+
+				qcom,compression-mode = "dsc";
+				qcom,mdss-dsc-slice-height = <20>;
+				qcom,mdss-dsc-slice-width = <540>;
+				qcom,mdss-dsc-slice-per-pkt = <1>;
+				qcom,mdss-dsc-bit-per-component = <8>;
+				qcom,mdss-dsc-bit-per-pixel = <8>;
+				qcom,mdss-dsc-block-prediction-enable;
+			};
+		};
+	};
+};
