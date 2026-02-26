@@ -1,0 +1,124 @@
+#include "kalama-sde-display-ayn-odin2-common.dtsi"
+
+&dsi_icna3512_1080p_dsc_cmd {
+	qcom,panel-supply-entries = <&dsi_panel_pwr_supply>;
+	qcom,mdss-dsi-bl-pmic-control-type = "bl_ctrl_dcs";
+	qcom,mdss-dsi-bl-min-level = <400>;
+	qcom,mdss-dsi-bl-max-level = <3413>;
+	qcom,mdss-brightness-max-level = <255>;
+	qcom,mdss-dsi-bl-inverted-dbv;
+	qcom,platform-reset-gpio = <&tlmm 133 0>;
+	qcom,platform-bklight-en-gpio = <&tlmm 52 0>;
+};
+
+&tlmm {
+
+	fp_pins_eint: fpeint {
+		mux {
+			pins = "gpio40";
+			function = "gpio";
+		};
+
+		config {
+			pins = "gpio40";
+			bias-disable;
+			input-enable;
+		};
+	};
+
+	fp_pins_rst_output0: fprstout0 {
+		mux {
+			pins = "gpio42";
+			function = "gpio";
+		};
+
+		config {
+			pins = "gpio42";
+			output-low;
+		};
+	};
+
+	fp_pins_rst_output1: fprstout1 {
+		mux {
+			pins = "gpio42";
+			function = "gpio";
+		};
+
+		config {
+			pins = "gpio42";
+			output-high;
+		};
+	};
+};
+
+&soc {
+	focaltech_fp: focaltech_fp {
+		compatible = "focaltech,fp";
+		interrupt-parent = <&pio>;
+		interrupts = <05 IRQ_TYPE_EDGE_RISING>;
+
+		focaltech_fp,reset-gpio = <&tlmm 42 0>;
+		focaltech_fp,irq-gpio = <&tlmm 40 0>;
+
+		focaltech_fp,use-regulator;
+		ff_vdd-supply = <&L14B>;
+
+		focaltech_fp,read-chip;
+
+		pinctrl-names = "ff_pins_reset_low","ff_pins_reset_high","ff_pins_irq_as_int";
+		pinctrl-0 = <&fp_pins_rst_output0>;
+		pinctrl-1 = <&fp_pins_rst_output1>;
+		pinctrl-2 = <&fp_pins_eint>;
+		panel = <&dsi_icna3512_1080p_dsc_cmd>;
+	};
+};
+
+&qupv3_se4_i2c {
+	#address-cells = <1>;
+	#size-cells = <0>;
+
+	status = "okay";
+
+	focaltech@38 {
+		compatible = "focaltech,fts";
+		reg = <0x38>;
+		interrupt-parent = <&tlmm>;
+		interrupts = <25 0x2008>;
+		focaltech,reset-gpio = <&tlmm 24 0x0>;
+		focaltech,irq-gpio = <&tlmm 25 0x02008>;
+		vdd-supply = <&L14B>;
+		vcc_i2c-supply  = <&L12B>;
+		focaltech,max-touch-number = <10>;
+		focaltech,display-coords =  <0 0 1080 1920>;
+		pinctrl-names = "pmx_ts_active","pmx_ts_suspend","pmx_ts_release";
+		pinctrl-0 = <&ts_int_active &ts_reset_active>;
+		pinctrl-1 = <&ts_int_suspend &ts_reset_suspend>;
+		pinctrl-2 = <&ts_release>;
+		panel = <&dsi_icna3512_1080p_dsc_cmd>;
+		qcom,i2c-touch-active = "focaltech,fts";
+		focaltech,ic-type = <0x35190489>;
+	};
+};
+
+&sde_dsi {
+	status = "disabled";
+};
+
+&sde_dsi1 {
+	label = "primary";
+
+	qcom,platform-te-gpio = <&tlmm 86 0>;
+	qcom,panel-te-source = <0>;
+
+	qcom,dsi-default-panel = <&dsi_icna3512_1080p_dsc_cmd>;
+
+	vdd-supply = <&display_panel_avdd>;
+};
+
+&mdss_mdp {
+	connectors = <&sde_dsi1 &smmu_sde_unsec &sde_wb1 &sde_wb2 &sde_rscc &sde_dp>;
+};
+
+&battery_charger {
+	qcom,display-panels = <&dsi_icna3512_1080p_dsc_cmd>;
+};

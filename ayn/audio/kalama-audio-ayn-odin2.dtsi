@@ -1,0 +1,194 @@
+#include "../../qcom/audio/kalama-audio-overlay.dtsi"
+
+&lpass_cdc {
+	qcom,num-macros = <3>;
+
+	lpass-cdc-clk-rsc-mngr {
+		/delete-property/ qcom,wsa_mclk_mode_muxsel;
+		clock-names = "tx_core_clk", "rx_core_clk",
+			"rx_tx_core_clk",
+			"va_core_clk";
+		clocks = <&clock_audio_tx_1 0>, <&clock_audio_rx_1 0>,
+			<&clock_audio_rx_tx 0>,
+			<&clock_audio_va_1 0>;
+	};
+};
+
+&tx_swr_clk_active {
+	config {
+		drive-strength = <2>;
+	};
+};
+
+&tx_swr_data0_active {
+	config {
+		drive-strength = <2>;
+	};
+};
+
+&tx_swr_data1_active {
+	config {
+		drive-strength = <2>;
+	};
+};
+
+&tx_swr_data2_active {
+	config {
+		drive-strength = <2>;
+	};
+};
+
+&wsa_macro {
+	status = "disabled";
+};
+
+// TODO: +++ NEED THESE?
+&wsa_swr_gpios {
+	status = "disabled";
+};
+
+&wsa_spkr_en02 {
+	status = "disabled";
+};
+
+&wsa_spkr_en13 {
+	status = "disabled";
+};
+
+&clock_audio_wsa_1 {
+	status = "disabled";
+};
+
+&clock_audio_wsa_tx {
+	status = "disabled";
+};
+// TODO: --- NEED THESE?
+
+&wsa2_macro {
+	status = "disabled";
+};
+
+// TODO: +++ NEED THESE?
+&wsa2_swr_gpios {
+	status = "disabled";
+};
+
+&clock_audio_wsa_2 {
+	status = "disabled";
+};
+
+&clock_audio_wsa2_tx {
+	status = "disabled";
+};
+
+&swr_haptics {
+	status = "disabled";
+};
+// TODO: --- NEED THESE?
+
+// TODO: +++ NEED THESE?
+&fm_i2s1_gpios {
+	status = "disabled";
+};
+// TODO: --- NEED THESE?
+
+&kalama_snd {
+	qcom,model = "kalama-qrd-snd-card";
+	qcom,ext-disp-audio-rx = <1>;
+	qcom,sep-mi2s-gpios = <&sep_lpi_i2s3_gpios>;
+	qcom,sec-mi2s-gpios = <&sec_i2s1_gpios>;
+
+	qcom,audio-routing =
+		"AMIC1", "Analog Mic1",
+		"AMIC1", "MIC BIAS1",
+		"AMIC2", "Analog Mic2",
+		"AMIC2", "MIC BIAS2",
+		"AMIC5", "Analog Mic5",
+		"AMIC5", "MIC BIAS4",
+		"DMIC2", "Digital Mic2",
+		"DMIC2", "MIC BIAS3",
+		"DMIC3", "Digital Mic3",
+		"DMIC3", "MIC BIAS3",
+		"VA AMIC1", "Analog Mic1",
+		"VA AMIC1", "VA MIC BIAS1",
+		"VA AMIC2", "Analog Mic2",
+		"VA AMIC2", "VA MIC BIAS2",
+		"VA AMIC5", "Analog Mic5",
+		"VA AMIC5", "VA MIC BIAS4",
+		"IN1_HPHL", "HPHL_OUT",
+		"IN2_HPHR", "HPHR_OUT",
+		"IN3_AUX", "AUX_OUT",
+		"RX_TX DEC0_INP", "TX DEC0 MUX",
+		"RX_TX DEC1_INP", "TX DEC1 MUX",
+		"RX_TX DEC2_INP", "TX DEC2 MUX",
+		"RX_TX DEC3_INP", "TX DEC3 MUX",
+		"TX SWR_INPUT", "WCD_TX_OUTPUT",
+		"VA SWR_INPUT", "VA_SWR_CLK",
+		"VA SWR_INPUT", "WCD_TX_OUTPUT",
+		"VA_AIF1 CAP", "VA_SWR_CLK",
+		"VA_AIF2 CAP", "VA_SWR_CLK",
+		"VA_AIF3 CAP", "VA_SWR_CLK";
+
+	// TODO: Check these!
+
+	asoc-codec  = <&stub_codec>, <&lpass_cdc>,
+				<&wcd938x_codec>, <&swr_haptics>;
+	asoc-codec-names = "msm-stub-codec.1", "lpass-cdc",
+				"wcd938x_codec", "swr-haptics";
+	qcom,wsa-max-devs = <0>;
+};
+
+&spf_core_platform {
+	sep_lpi_i2s3_gpios: sep_lpi_i2s3_pinctrl {
+		#gpio-cells = <0>;
+		compatible = "qcom,msm-cdc-pinctrl";
+		pinctrl-names = "aud_active", "aud_sleep";
+		pinctrl-0 = <&lpi_i2s3_sck_active &lpi_i2s3_ws_active &lpi_i2s3_sd0_active &lpi_i2s3_sd1_active>;
+		pinctrl-1 = <&lpi_i2s3_sck_sleep &lpi_i2s3_ws_sleep &lpi_i2s3_sd0_sleep &lpi_i2s3_sd1_sleep>;
+		qcom,lpi-gpios;
+	};
+
+	sec_i2s1_gpios: sec_i2s1_pinctrl {
+		#gpio-cells = <0>;
+		compatible = "qcom,msm-cdc-pinctrl";
+		pinctrl-names = "aud_active", "aud_sleep";
+		pinctrl-0 = <&i2s1_sck_active &i2s1_ws_active
+			&i2s1_sd0_active>;
+		pinctrl-1 = <&i2s1_sck_sleep &i2s1_ws_sleep
+			&i2s1_sd0_sleep>;
+	};
+};
+
+&qupv3_hub_i2c2 {
+	status = "ok";
+
+	aw883xx_smartpa@34 {
+		compatible = "awinic,aw883xx_smartpa";
+		reg = <0x34>;
+		reset-gpio = <&tlmm 103 0>;
+		irq-gpio = <&tlmm 97 0>;
+		sync-load = <1>;
+		sound-channel = <0>;
+		re-min = <1000>;
+		re-max= <40000>;
+		status = "okay";
+	};
+
+	aw883xx_smartpa@35 {
+		compatible = "awinic,aw883xx_smartpa";
+		reg = <0x35>;
+		reset-gpio = <&tlmm 100 0>;
+		irq-gpio = <&tlmm 98 0>;
+		sync-load = <1>;
+		sound-channel = <1>;
+		re-min = <1000>;
+		re-max= <40000>;
+		status = "okay";
+	};
+};
+
+&soc {
+	qcom,switch-gpio {
+		compatible = "qcom,switch-gpio";
+	};
+};

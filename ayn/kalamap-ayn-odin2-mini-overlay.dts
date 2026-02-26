@@ -1,0 +1,11 @@
+/dts-v1/;
+/plugin/;
+
+#include "kalamap-ayn-odin2-mini.dtsi"
+
+/ {
+	model = "Ayn Odin 2 Mini";
+	compatible = "qcom,kalamap-hdk", "qcom,kalamap", "qcom,hdk";
+	qcom,msm-id = <603 0x20000>;
+	qcom,board-id = <0x1001f 0>;
+};

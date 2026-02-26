@@ -1,0 +1,77 @@
+#include "kalamap-ayn-odin2-common.dtsi"
+
+&chosen {
+	bootargs = "console=ttyMSM0,115200n8 loglevel=6 kpti=0 log_buf_len=256K kernel.panic_on_rcu_stall=1 service_locator.enable=1 msm_rtb.filter=0x237 rcupdate.rcu_expedited=1 rcu_nocbs=0-7 ftrace_dump_on_oops swiotlb=noforce loop.max_part=7 fw_devlink.strict=1 allow_mismatched_32bit_el0 cpufreq.default_governor=performance printk.console_no_auto_verbose=1 kasan=off sysctl.kernel.sched_pelt_multiplier=4 can.stats_timer=0 pcie_ports=compat irqaffinity=0-2 disable_dma32=on no-steal-acc cgroup.memory=nokmem,nosocket slub_debug=- msm_drm.dsi_display0=qcom,dsi_td4328_1080p_video:  msm_drm.dsi_display1=qcom,mdss_dsi_ext_bridge_1080p:";
+	stdout-path = "/soc/qcom,qupv3_1_geni_se@ac0000/qcom,qup_uart@a9c000";
+};
+
+&sdhc_2 {
+	cd-debounce-delay-ms = <500>;
+};
+
+&qupv3_se0_i2c {
+	#address-cells = <1>;
+	#size-cells = <0>;
+	status = "ok";
+
+	sn3112l@54 {
+		compatible = "si-en,sn3112";
+		reg = <0x54>;
+		sn3112,label = "sn3112l";
+		sn3112,dv-en = <&tlmm 55 0x00>;
+	};
+};
+
+&qupv3_se12_i2c {
+	#address-cells = <1>;
+	#size-cells = <0>;
+	status = "ok";
+
+	sn3112r@54 {
+		compatible = "si-en,sn3112";
+		reg = <0x54>;
+		sn3112,label = "sn3112r";
+		sn3112,dv-en = <&tlmm 56 0x00>;
+	};
+};
+
+&pmk8550_gpios {
+	lcd_backlight_ctrl {
+		lcd_backlight_ctrl_default: lcd_backlight_ctrl_default {
+			pins = "gpio5";
+			function = "func3";
+			input-disable;
+			output-enable;
+			bias-disable;
+			power-source = <0>; /* 1.8V */
+			qcom,drive-strength = <2>;
+		};
+
+		lcd_backlight_ctrl_active: lcd_backlight_ctrl_active {
+			pins = "gpio5";
+			function = "func3";
+			input-disable;
+			output-high;
+			bias-disable;
+			power-source = <0>; /* 1.8V */
+			qcom,drive-strength = <2>;
+		};
+
+		lcd_backlight_ctrl_suspend: lcd_backlight_ctrl_suspend {
+			pins = "gpio5";
+			function = "func3";
+			input-disable;
+			output-low;
+			bias-disable;
+			power-source = <0>; /* 1.8V */
+			qcom,drive-strength = <2>;
+		};
+	};
+};
+
+&pmk8550_pwm_1 {
+	pinctrl-names = "default","active","suspend";
+	pinctrl-0 = <&lcd_backlight_ctrl_default>;
+	pinctrl-1 = <&lcd_backlight_ctrl_active>;
+	pinctrl-2 = <&lcd_backlight_ctrl_suspend>;
+};

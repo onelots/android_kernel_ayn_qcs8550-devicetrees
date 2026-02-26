@@ -1,0 +1,305 @@
+#include "../qcom/kalamap-hdk.dtsi"
+
+// TODO: Needed?
+/*
+&aliases {
+	hsuart1 = &qupv3_se15_2uart;
+	i2c0 = &qupv3_hub_i2c0;
+	i2c2 = &qupv3_hub_i2c2;
+	i2c3 = &qupv3_se0_i2c;
+};
+*/
+
+&video_mem {
+	reg = <0x0 0x9bb00000 0x0 0x700000>;
+};
+
+&cvp_mem {
+	reg = <0x0 0x9c200000 0x0 0x700000>;
+};
+
+&cdsp_mem {
+	reg = <0x0 0x9c900000 0x0 0x2000000>;
+};
+
+&q6_cdsp_dtb_mem {
+	reg = <0x0 0x9e900000 0x0 0x80000>;
+};
+
+&q6_adsp_dtb_mem {
+	reg = <0x0 0x9e980000 0x0 0x80000>;
+};
+
+&adspslpi_mem {
+	reg = <0x0 0x9ea00000 0x0 0x4080000>;
+};
+
+&sdhc_2 {
+	qcom,msm-bus,name = "sdhc2";
+	qcom,msm-bus,num-cases = <7>;
+	qcom,msm-bus,num-paths = <2>;
+	qcom,msm-bus,vectors-KBps =
+		/* No Vote */
+		<0 0>, <0 0>,
+		/* 400 KB/s*/
+		<1046 3200>, <1600 1600>,
+		/* 25 MB/s */
+		<65360 250000>, <100000 133320>,
+		/* 50 MB/s */
+		<130718 250000>, <133320 133320>,
+		/* 100 MB/s */
+		<261438 250000>, <150000 133320>,
+		/* 200 MB/s */
+		<261438 800000>, <300000 300000>,
+		/* Max. bandwidth */
+		<1338562 4096000>, <1338562 4096000>;
+	qcom,bus-bw-vectors-bps = <0 400000 25000000 50000000
+		100000000 200000000 4294967295>;
+};
+
+&qcom_qbt {
+	status = "disabled";
+};
+
+&pcie0 {
+	qcom,config-recovery;
+	qcom,drv-name = "lpass";
+	msi-map = <0x0 &gic_its 0x1400 0x1>,
+		  <0x100 &gic_its 0x1401 0x1>; /* 32 event IDs */
+};
+
+&pcie1 {
+	status = "disabled";
+};
+
+&pm8550b_haptics {
+	status = "okay";
+	qcom,use-erm = <1>;
+	qcom,vmax-mv = <3200>;
+
+	effect_0 {
+		/* CLICK */
+		qcom,wf-pattern-data =  <0x15f  S_PERIOD_T_LRA  0>,
+					<0x17f  S_PERIOD_T_LRA  0>,
+					<0x19f  S_PERIOD_T_LRA  0>,
+					<0x1df  S_PERIOD_T_LRA  0>,
+					<0x1df  S_PERIOD_T_LRA  0>,
+					<0x19f  S_PERIOD_T_LRA  0>,
+					<0x17f  S_PERIOD_T_LRA  0>,
+					<0x15f  S_PERIOD_T_LRA  0>;
+		/delete-property/ qcom,wf-pattern-preload;
+		qcom,wf-vmax-mv = <5000>;
+	};
+
+	effect_1 {
+		/* DOUBLE_CLICK */
+		qcom,wf-vmax-mv = <3200>;
+	};
+
+	effect_2 {
+		/* TICK */
+		qcom,wf-vmax-mv = <3200>;
+	};
+
+	effect_3 {
+		/* THUD */
+		qcom,wf-vmax-mv = <3200>;
+	};
+
+	effect_4 {
+		/* POP */
+		qcom,wf-vmax-mv = <3200>;
+	};
+
+	effect_5 {
+		/* HEAVY CLICK */
+		qcom,wf-pattern-data =  <0x11f  S_PERIOD_T_LRA  0>,
+					<0x13f  S_PERIOD_T_LRA  0>,
+					<0x15f  S_PERIOD_T_LRA  0>,
+					<0x17f  S_PERIOD_T_LRA  0>,
+					<0x17f  S_PERIOD_T_LRA  0>,
+					<0x15f  S_PERIOD_T_LRA  0>,
+					<0x13f  S_PERIOD_T_LRA  0>,
+					<0x11f  S_PERIOD_T_LRA  0>;
+		qcom,wf-vmax-mv = <5000>;
+	};
+};
+
+&socd_trip {
+	temperature = <99>;
+};
+
+// Fan
+&tlmm {
+	fg_int_default: fg_int_default {
+		mux {
+			pins = "gpio13";
+			function = "gpio";
+		};
+		config {
+			pins = "gpio13";
+			drive_strength = <2>;
+			bias-disable;
+		};
+	};
+};
+
+// kamala-pmic-overlay
+
+&pm8010_m {
+	status = "disabled";
+};
+
+&pm8010m_tz {
+	status = "disabled";
+};
+
+&pm8010_n {
+	status = "disabled";
+};
+
+&pm8010n_tz {
+	status = "disabled";
+};
+
+&pm8550_gpios {
+	pwm_out {
+		pwm_out_default: pwm_out_default {
+		pins = "gpio8";
+			function = "func1";
+			input-disable;
+			output-enable;
+			output-low;
+			bias-disable;
+			power-source = <1>;
+		};
+	};
+};
+
+&pmk8550_vadc {
+	/delete-node/ pm8550_msm_therm;
+	/delete-node/ pm8550_cam_flash_therm;
+	/delete-node/ pm8550_wlan_therm;
+	/delete-node/ pm8550_pa_therm_1;
+	/delete-node/ pm8550_rear_tof_therm;
+
+	pm8550_amux2_volt {
+		reg = <PM8550_ADC5_GEN3_AMUX_THM2>;
+		label = "pm8550_amux2_volt";
+		qcom,pre-scaling = <1 1>;
+	};
+
+	pm8550_amux4_volt {
+		reg = <PM8550_ADC5_GEN3_AMUX_THM4>;
+		label = "pm8550_amux4_volt";
+		qcom,pre-scaling = <1 1>;
+	};
+
+	pm8550_amux5_volt {
+		reg = <PM8550_ADC5_GEN3_AMUX_THM5>;
+		label = "pm8550_amux5_volt";
+		qcom,pre-scaling = <1 1>;
+	};
+};
+
+&thermal_zones {
+	pm8010m_tz {
+		status = "disabled";
+	};
+
+	pm8010n_tz {
+		status = "disabled";
+	};
+
+	/delete-node/ skin-msm-therm;
+	/delete-node/ cam-flash-therm;
+	/delete-node/ wlan-therm;
+	/delete-node/ pa-therm-1;
+	/delete-node/ rear-tof-therm;
+};
+
+// kalamap-qcs
+
+&ipa_hw {
+	status = "disabled";
+};
+
+// kalama-qrd.dtsi
+
+// Fan
+&soc {
+	fan_reg: fan_reg {
+		compatible = "regulator-fixed";
+		regulator-name = "fan_reg";
+		regulator-min-microvolt = <5000000>;
+		regulator-max-microvolt = <5000000>;
+		enable-active-high;
+		gpio = <&tlmm 109 GPIO_ACTIVE_HIGH>;
+	};
+};
+
+&spmi_bus {
+	qcom,pm8550@1 {
+		fan0: pwm-fan@0 {
+			compatible = "pwm-fan";
+			status = "ok";
+			pwms = <&pm8550_pwm_2 0 50000>;
+			cooling-levels = <0 32 64 128 170 230 255>;
+			pinctrl-names = "default","fg_int";
+			pinctrl-0 = <&pwm_out_default>;
+			pinctrl-1 = <&fg_int_default>;
+			fan-supply = <&fan_reg>;
+			interrupt-parent = <&tlmm>;
+			interrupts = <13 0x2004>;
+			interrupt-names = "fg_int";
+			pulses-per-revolution = <2>;
+		};
+	};
+};
+
+&qupv3_se4_spi {
+	status = "disabled";
+};
+
+&soc {
+	joystick_vdd_reg: joystick_vdd_reg {
+		compatible = "regulator-fixed";
+		regulator-name = "joystick_vdd_reg";
+		regulator-min-microvolt = <3300000>;
+		regulator-max-microvolt = <3300000>;
+		enable-active-high;
+		gpio = <&tlmm 99 GPIO_ACTIVE_HIGH>;
+	};
+
+	joystick_uart_reg: joystick_uart_reg {
+		compatible = "regulator-fixed";
+		regulator-name = "joystick_uart_reg";
+		regulator-min-microvolt = <1800000>;
+		regulator-max-microvolt = <1800000>;
+		enable-active-high;
+		gpio = <&tlmm 12 GPIO_ACTIVE_HIGH>;
+	};
+};
+
+&qupv3_se15_2uart {
+	status = "okay";
+
+	joystick {
+		status = "okay";
+		compatible = "ayn,joystick";
+		vdd-supply = <&joystick_vdd_reg>;
+		uart-supply = <&joystick_uart_reg>;
+
+		ayn,boot-gpio = <&tlmm 1 GPIO_ACTIVE_HIGH>;
+		ayn,reset-gpio = <&tlmm 0 GPIO_ACTIVE_HIGH>;
+	};
+};
+
+// kalama-regulators.dtsi
+
+// Focaltech VDD
+&L14B {
+	regulator-min-microvolt = <2800000>;
+	regulator-max-microvolt = <2800000>;
+	qcom,init-voltage = <2800000>;
+};

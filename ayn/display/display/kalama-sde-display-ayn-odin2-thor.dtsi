@@ -1,0 +1,350 @@
+#include "kalama-sde-display-ayn-odin2-common.dtsi"
+
+&dsi_ch13726a_amoled_video {
+	qcom,panel-sec-supply-entries = <&dsi_panel_pwr_supply>;
+	qcom,mdss-dsi-bl-pmic-control-type = "bl_ctrl_dcs";
+	qcom,mdss-dsi-sec-bl-pmic-control-type = "bl_ctrl_dcs";
+	qcom,mdss-dsi-bl-min-level = <10>;
+	qcom,mdss-dsi-bl-max-level = <65535>;
+	qcom,mdss-brightness-max-level = <4095>;
+	qcom,platform-sec-reset-gpio = <&tlmm 133 0>;
+	qcom,mdss-dsi-bl-inverted-dbv;
+};
+
+&dsi_icna3520_1080p_dsc_cmd {
+	qcom,panel-supply-entries = <&dsi_panel_pwr_supply>;
+	qcom,mdss-dsi-bl-pmic-control-type = "bl_ctrl_dcs";
+	qcom,mdss-dsi-bl-min-level = <10>;
+	qcom,mdss-dsi-bl-max-level = <3413>;
+	qcom,mdss-brightness-max-level = <4095>;
+	qcom,mdss-dsi-bl-inverted-dbv;
+	qcom,platform-reset-gpio = <&tlmm 137 0>;
+	qcom,platform-bklight-en-gpio = <&tlmm 52 0>;
+};
+
+&dsi_panel_pwr_supply {
+	qcom,panel-supply-entry@1 {
+		qcom,supply-min-voltage = <2800000>;
+		qcom,supply-max-voltage = <2800000>;
+	};
+};
+
+&dsi_panel_pwr_supply_avdd {
+	qcom,panel-supply-entry@1 {
+		qcom,supply-min-voltage = <2800000>;
+		qcom,supply-max-voltage = <2800000>;
+	};
+};
+
+&tlmm {
+	display_panel_avdd2_default: display_panel_avdd2_default {
+		mux {
+			pins = "gpio143";
+			function = "gpio";
+		};
+		config {
+			pins = "gpio143";
+			drive-strength = <8>;
+			bias-disable = <0>;
+			output-high;
+		};
+	};
+
+	display_panel_vddio_default: display_panel_vddio_default {
+		mux {
+			pins = "gpio70";
+			function = "gpio";
+		};
+		config {
+			pins = "gpio70";
+			drive-strength = <8>;
+			bias-disable = <0>;
+			output-high;
+		};
+	};
+
+	TS_AVDD_3V0_GPIO: TS_AVDD_3V0_GPIO {
+			mux {
+			pins = "gpio144";
+			function = "gpio";
+		};
+
+		config {
+				pins = "gpio144";
+				drive-strength = <8>;
+				bias-disable = <0>;
+				output-high;
+		};
+	};
+
+	TS_VDDIO_1V8_GPIO: TS_VDDIO_1V8_GPIO {
+			mux {
+			pins = "gpio102";
+			function = "gpio";
+		};
+
+		config {
+				pins = "gpio102";
+				drive-strength = <8>;
+				bias-disable = <0>;
+				output-high;
+		};
+	};
+
+	/* secondary touchscreen pins */
+	pmx_ts_int_active1  {
+		ts_int_active1: ts_int_active {
+			mux {
+				pins = "gpio15";
+				function = "gpio";
+			};
+
+			config {
+				pins = "gpio15";
+				drive-strength = <8>;
+				bias-pull-up;
+			};
+		};
+	};
+
+	pmx_ts_reset_active1 {
+			ts_reset_active1: ts_reset_active {
+				mux {
+					pins = "gpio14";
+					function = "gpio";
+				};
+
+				config {
+					pins = "gpio14";
+					drive-strength = <8>;
+					bias-pull-up;
+				};
+			};
+		};
+
+	pmx_ts_reset_suspend1 {
+		ts_reset_suspend1: ts_reset_suspend {
+			mux {
+				pins = "gpio14";
+				function = "gpio";
+			};
+
+			config {
+				pins = "gpio14";
+				drive-strength = <2>;
+				bias-pull-down;
+			};
+		};
+	};
+
+	pmx_ts_int_suspend1 {
+		ts_int_suspend1: ts_int_suspend {
+			mux {
+				pins = "gpio15";
+				function = "gpio";
+			};
+
+			config {
+				pins = "gpio15";
+				drive-strength = <2>;
+				bias-pull-down;
+			};
+		};
+	};
+
+	pmx_ts_active1 {
+		ts_active1: ts_active {
+			mux {
+				pins = "gpio14", "gpio15";
+				function = "gpio";
+			};
+			config {
+				pins = "gpio14", "gpio15";
+				drive-strength = <8>;
+				bias-pull-up;
+			};
+		};
+	};
+
+	pmx_ts_release1 {
+		ts_release1: ts_release {
+			mux {
+				pins = "gpio14", "gpio15";
+				function = "gpio";
+			};
+
+			config {
+				pins = "gpio14", "gpio15";
+				drive-strength = <2>;
+				bias-disable;
+			};
+		};
+	};
+};
+
+&sde_te_active {
+	mux {
+		function = "gpio";
+	};
+};
+
+&sde_te_suspend {
+	mux {
+		function = "gpio";
+	};
+};
+
+&soc {
+	display_panel_avdd2: display_gpio_regulator@2 {
+		compatible = "qti-regulator-fixed";
+		regulator-name = "display_panel_avdd2";
+		regulator-min-microvolt = <2800000>;
+		regulator-max-microvolt = <2800000>;
+		regulator-enable-ramp-delay = <233>;
+		gpio = <&tlmm 143 0>;
+		enable-active-high;
+		regulator-boot-on;
+		proxy-supply = <&display_panel_avdd2>;
+		qcom,proxy-consumer-enable;
+		pinctrl-names = "default";
+		pinctrl-0 = <&display_panel_avdd2_default>;
+	};
+
+	display_panel_vddio: display_gpio_regulator@3 {
+		compatible = "qti-regulator-fixed";
+		regulator-name = "display_panel_vddio";
+		regulator-min-microvolt = <1800000>;
+		regulator-max-microvolt = <1800000>;
+		regulator-enable-ramp-delay = <100>;
+		gpio = <&tlmm 70 0>;
+		enable-active-high;
+		regulator-boot-on;
+		proxy-supply = <&display_panel_vddio>;
+		qcom,proxy-consumer-enable;
+		pinctrl-names = "default";
+		pinctrl-0 = <&display_panel_vddio_default>;
+	};
+
+	TS_AVDD_3V0: display_gpio_regulator@4 {
+		compatible = "qti-regulator-fixed";
+		regulator-name = "TS_AVDD_3V0";
+		regulator-min-microvolt = <3000000>;
+		regulator-max-microvolt = <3000000>;
+		regulator-enable-ramp-delay = <233>;
+		gpio = <&tlmm 144 0>;
+		enable-active-high;
+		regulator-boot-on;
+		proxy-supply = <&TS_AVDD_3V0>;
+		qcom,proxy-consumer-enable;
+		pinctrl-names = "default";
+		pinctrl-0 = <&TS_AVDD_3V0_GPIO>;
+	};
+
+	TS_VDDIO_1V8: display_gpio_regulator@5 {
+		compatible = "qti-regulator-fixed";
+		regulator-name = "TS_VDDIO_1V8";
+		regulator-min-microvolt = <1800000>;
+		regulator-max-microvolt = <1800000>;
+		regulator-enable-ramp-delay = <233>;
+		gpio = <&tlmm 102 0>;
+		enable-active-high;
+		regulator-boot-on;
+		proxy-supply = <&TS_VDDIO_1V8>;
+		qcom,proxy-consumer-enable;
+		pinctrl-names = "default";
+		pinctrl-0 = <&TS_VDDIO_1V8_GPIO>;
+	};
+};
+
+&qupv3_se4_i2c {
+	#address-cells = <1>;
+	#size-cells = <0>;
+
+	status = "okay";
+
+	focaltech@38 {
+		compatible = "focaltech,fts";
+		reg = <0x38>;
+		interrupt-parent = <&tlmm>;
+		interrupts = <25 0x2008>;
+		focaltech,reset-gpio = <&tlmm 24 0x0>;
+		focaltech,irq-gpio = <&tlmm 25 0x02008>;
+		vdd-supply = <&L14B>;
+		vcc_i2c-supply  = <&L12B>;
+		focaltech,max-touch-number = <10>;
+		focaltech,display-coords =  <0 0 1080 1920>;
+		pinctrl-names = "pmx_ts_active","pmx_ts_suspend","pmx_ts_release";
+		pinctrl-0 = <&ts_int_active &ts_reset_active>;
+		pinctrl-1 = <&ts_int_suspend &ts_reset_suspend>;
+		pinctrl-2 = <&ts_release>;
+		panel = <&dsi_icna3520_1080p_dsc_cmd>;
+		qcom,i2c-touch-active = "focaltech,fts";
+		focaltech,ic-type = <0x35190489>;
+	};
+};
+
+&qupv3_hub_i2c3 {
+	#address-cells = <1>;
+	#size-cells = <0>;
+
+	status = "okay";
+
+	focaltech@38 {
+		compatible = "focaltech,fts_3";
+		status = "ok";
+		reg = <0x38>;
+
+		interrupt-parent = <&tlmm>;
+		interrupts = <15 0x2008>;
+		focaltech,reset-gpio = <&tlmm 14 0x00>;
+		focaltech,irq-gpio = <&tlmm 15 0x2008>;
+		focaltech,display-coords = <0 0 1080 1240>;
+		focaltech,max-touch-number = <5>;
+		focaltech,ic-type = <0x35190489>;
+		focaltech,touch-environment = "pvm";
+
+		pinctrl-names = "pmx_ts_active1","pmx_ts_suspend1","pmx_ts_release1";
+		pinctrl-0 = <&ts_active1>;
+		pinctrl-1 = <&ts_int_suspend1 &ts_reset_suspend1>;
+		pinctrl-2 = <&ts_release1>;
+		panel = <&dsi_ch13726a_amoled_video>;
+		vdd-supply = <&TS_AVDD_3V0>;
+		vcc_i2c-supply  = <&TS_VDDIO_1V8>;
+		qcom,i2c-touch-active = "focaltech,fts_3";
+	};
+};
+
+&sde_dsi {
+	label = "secondary";
+
+	qcom,dsi-default-panel = <&dsi_ch13726a_amoled_video>;
+
+	/delete-property/ vci-supply;
+	vdd-supply = <&display_panel_avdd2>;
+	vddio-supply = <&display_panel_vddio>;
+	vcc1v2-supply = <&L11B>;
+};
+
+&sde_dsi1 {
+	label = "primary";
+
+	qcom,dsi-default-panel = <&dsi_icna3520_1080p_dsc_cmd>;
+
+	vci-supply = <&L14B>;
+	vdd-supply = <&display_panel_avdd>;
+};
+
+&mdss_dsi_phy0 {
+	/delete-property/ qcom,dsi-pll-ssc-en;
+	/delete-property/ qcom,dsi-pll-ssc-mode;
+};
+
+&mdss_dsi_phy1 {
+	/delete-property/ qcom,dsi-pll-ssc-en;
+	/delete-property/ qcom,dsi-pll-ssc-mode;
+};
+
+&battery_charger {
+	qcom,display-panels = <&dsi_icna3520_1080p_dsc_cmd
+			      &dsi_ch13726a_amoled_video>;
+};

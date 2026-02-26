@@ -1,0 +1,180 @@
+#include "kalamap-ayn-odin2-common.dtsi"
+
+&chosen {
+	bootargs = "console=ttyMSM0,115200n8 loglevel=6 kpti=0 log_buf_len=256K kernel.panic_on_rcu_stall=1 service_locator.enable=1 msm_rtb.filter=0x237 rcupdate.rcu_expedited=1 rcu_nocbs=0-7 ftrace_dump_on_oops swiotlb=noforce loop.max_part=7 fw_devlink.strict=1 allow_mismatched_32bit_el0 cpufreq.default_governor=performance printk.console_no_auto_verbose=1 kasan=off sysctl.kernel.sched_pelt_multiplier=4 can.stats_timer=0 pcie_ports=compat irqaffinity=0-2 disable_dma32=on no-steal-acc cgroup.memory=nokmem,nosocket slub_debug=- msm_drm.dsi_display1=qcom,mdss_dsi_ch13726a_amoled_video:";
+	stdout-path = "/soc/qcom,qupv3_1_geni_se@ac0000/qcom,qup_uart@a9c000";
+};
+
+&sdhc_2 {
+	qcom,vdd-io-current-level = <0 10000>;
+	cd-debounce-delay-ms = <2000>;
+	post-power-on-delay-ms = <200>;
+};
+
+&pm8550b_haptics {
+	effect_0 {
+		/* CLICK */
+		qcom,wf-pattern-data =  <0x11f  S_PERIOD_T_LRA  0>,
+					<0x13f  S_PERIOD_T_LRA  0>,
+					<0x15f  S_PERIOD_T_LRA  0>,
+					<0x17f  S_PERIOD_T_LRA  0>,
+					<0x17f  S_PERIOD_T_LRA  0>,
+					<0x15f  S_PERIOD_T_LRA  0>,
+					<0x13f  S_PERIOD_T_LRA  0>,
+					<0x11f  S_PERIOD_T_LRA  0>;
+		/delete-property/ qcom,wf-pattern-preload;
+	};
+};
+
+&pm8550b_eusb2_repeater {
+	qcom,param-override-seq =
+		/* <value reg_offset> */
+		/* Adjust HS trasmit amplitude */
+		<0x7 0x51
+		/* Squelch detection threshold */
+		 0x3 0x54
+		/* Tx pre-emphasis tuning */
+		 0x3 0x57
+		/* HS disconnect threshold */
+		 0x6 0x53>;
+};
+
+&tlmm {
+	custom_key: custom_key {
+		custom_key_default: custom_key_default {
+			mux {
+				pins = "gpio41";
+				function = "gpio";
+			};
+			config {
+				pins = "gpio41";
+				drive_strength = <2>;
+				bias-disable;
+			};
+		};
+	};
+
+	hall_switch: hall_switch {
+		hall_switch_default: hall_switch_default {
+			mux {
+				pins = "gpio17";
+				function = "gpio";
+			};
+			config {
+				pins = "gpio17";
+				drive_strength = <2>;
+				bias-disable;
+			};
+		};
+	};
+};
+
+&qupv3_se15_2uart_tx_active {
+	config {
+		bias-disable;
+	};
+};
+
+&qupv3_se15_2uart_rx_active {
+	config {
+		bias-disable;
+	};
+};
+
+&soc {
+	gpio_key {
+		pinctrl-0 = <&key_vol_up_default>, <&custom_key_default>, <&hall_switch_default>;
+
+		custom_key {
+			label = "custom_key";
+			gpios = <&tlmm 41 GPIO_ACTIVE_LOW>;
+			linux,input-type = <1>;
+			linux,code = <KEY_F24>;
+			gpio-key,wakeup;
+			debounce-interval = <15>;
+			linux,can-disable;
+		};
+
+		hall_switch {
+			label = "hall_switch";
+			gpios = <&tlmm 17 GPIO_ACTIVE_HIGH>;
+			linux,input-type = <1>;
+			linux,code = <SW_LID>;
+			gpio-key,wakeup;
+			debounce-interval = <15>;
+			linux,can-disable;
+		};
+	};
+};
+
+&pm8550b_haptics {
+	/delete-property/ qcom,use-erm;
+	qcom,vmax-mv = <1300>;
+
+	effect_0 {
+		/* CLICK */
+		qcom,wf-vmax-mv = <1300>;
+	};
+
+	effect_1 {
+		/* DOUBLE_CLICK */
+		qcom,wf-vmax-mv = <1300>;
+	};
+
+	effect_2 {
+		/* TICK */
+		qcom,wf-vmax-mv = <1300>;
+	};
+
+	effect_3 {
+		/* THUD */
+		qcom,wf-vmax-mv = <1300>;
+	};
+
+	effect_4 {
+		/* POP */
+		qcom,wf-vmax-mv = <1300>;
+	};
+
+	effect_5 {
+		/* HEAVY CLICK */
+		qcom,wf-vmax-mv = <1300>;
+	};
+};
+
+&qupv3_se0_i2c {
+	#address-cells = <1>;
+	#size-cells = <0>;
+	status = "ok";
+
+	htr3212l@3c {
+		compatible = "yongfukang,htr3212";
+		reg = <0x3c>;
+		htr3212,label = "sn3112l";
+		htr3212,dv-en = <&tlmm 55 0x00>;
+	};
+};
+
+&qupv3_se12_i2c {
+	#address-cells = <1>;
+	#size-cells = <0>;
+	status = "ok";
+
+	htr3212r@3c {
+		compatible = "yongfukang,htr3212";
+		reg = <0x3c>;
+		htr3212,label = "sn3112r";
+		htr3212,dv-en = <&tlmm 56 0x00>;
+	};
+};
+
+// TODO: ???
+&L1B {
+	regulator-always-on;
+};
+
+&L14B {
+	regulator-min-microvolt = <3000000>;
+	regulator-max-microvolt = <3000000>;
+	qcom,init-voltage = <3000000>;
+};
