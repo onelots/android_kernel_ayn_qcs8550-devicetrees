@@ -1,0 +1,12 @@
+/dts-v1/;
+/plugin/;
+
+#include "kona-sde.dtsi"
+#include "qrb5165-sde-display-rb5.dtsi"
+
+/ {
+	model = "Qualcomm Technologies, Inc. RB5 Platform";
+	compatible = "qcom,kona-mtp", "qcom,kona", "qcom,mtp";
+	qcom,msm-id = <455 0x0>, <496 0x0>, <598 0x0>, <599 0x0>;
+	qcom,board-id = <0x301000b 0x0>, <0x305000b 0x0>;
+};

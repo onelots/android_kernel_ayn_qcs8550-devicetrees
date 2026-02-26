@@ -34,6 +34,46 @@
 	/* 36 - 39 qupv3_se2_spi for tdk temp sensor */
 	qcom,gpios-reserved = <34 35>;
 
+	i2chub0_se4_pins: i2chub0_se4_pins {
+		i2chub0_se4_sda_active: i2chub0_se4_sda_active {
+			mux {
+				pins = "gpio4";
+				function = "i2chub0_se4_l0";
+			};
+
+			config {
+				pins = "gpio4";
+				drive-strength = <8>;
+				bias-disable;
+			};
+		};
+
+		i2chub0_se4_scl_active: i2chub0_se4_scl_active {
+			mux {
+				pins = "gpio5";
+				function = "i2chub0_se4_l1";
+			};
+
+			config {
+				pins = "gpio5";
+				drive-strength = <8>;
+				bias-disable;
+			};
+		};
+
+		i2chub0_se4_sleep: i2chub0_se4_sleep {
+			mux {
+				pins = "gpio4", "gpio5";
+				function = "gpio";
+			};
+
+			config {
+				pins = "gpio4", "gpio5";
+				drive-strength = <2>;
+			};
+		};
+	};
+
 	pice0_usb_power_1p05_default: pice0_usb_power_1p05_default {
 		mux {
 			pins = "gpio179";
@@ -75,9 +115,68 @@
 			bias-pull-up;
 		};
 	};
+
+	pcie0_usbhub_reset_default: pcie0_usbhub_reset_default {
+		mux {
+			pins = "gpio41";
+			function = "gpio";
+		};
+
+		config {
+			pins = "gpio41";
+			drive-strength = <2>;
+			output-high;
+			bias-pull-down;
+		};
+	};
+
+	qps615_intn_wol {
+		aqr_intn_wol_sig: aqr_intn_wol_sig {
+			mux {
+				pins = "gpio197";
+				function = "gpio";
+			};
+
+			config {
+				pins = "gpio197";
+				input-enable;
+				bias-disable;
+			};
+		};
+
+		napa_intn_wol_sig: napa_intn_wol_sig {
+			mux {
+				pins = "gpio60";
+				function = "gpio";
+			};
+
+			config {
+				pins = "gpio60";
+				input-enable;
+				bias-disable;
+			};
+		};
+	};
 };
 
 &soc {
+	aqr_vreg: aqr_vreg {
+		compatible = "regulator-fixed";
+		regulator-name = "aqr_vreg";
+		gpio = <&tlmm 160 GPIO_ACTIVE_HIGH>;
+		regulator-min-microvolt = <1800000>;
+		regulator-max-microvolt = <1800000>;
+		enable-active-high;
+	};
+
+	qep_vreg: qep_vreg {
+		compatible = "regulator-fixed";
+		regulator-name = "qep_vreg";
+		gpio = <&tlmm 163 GPIO_ACTIVE_HIGH>;
+		regulator-min-microvolt = <1800000>;
+		regulator-max-microvolt = <1800000>;
+		enable-active-high;
+	};
 
 	qps615_bridge0_0p9_vreg: qps615_bridge0_0p9_vreg {
 		compatible = "regulator-fixed";
@@ -121,43 +220,52 @@
 		regulator-enable-ramp-delay = <2000>;
 	};
 
-	pcie_usb_hub_1p05_vreg: pcie_usb_hub_1p05_vreg {
+	pcie_upd_1p05_vreg: pcie_upd_1p05_vreg {
 		compatible = "regulator-fixed";
-		regulator-name = "pcie_usb_hub_1p05_vreg";
-		pinctrl-names = "default";
-		pinctrl-0 = <&pice0_usb_power_1p05_default>;
+		regulator-name = "pcie_upd_1p05_vreg";
 		gpio = <&tlmm 179 GPIO_ACTIVE_HIGH>;
 		vin-supply = <&qps615_resx0_0p9_vreg>;
 		regulator-min-microvolt = <1000000>;
 		regulator-max-microvolt = <1000000>;
 		enable-active-high;
+		regulator-always-on;
 		regulator-enable-ramp-delay = <5000>;
 	};
 
-	pcie_usb_hub_3p3_vreg: pcie_usb_hub_3p3_vreg {
+	pcie_upd_3p3_vreg: pcie_upd_3p3_vreg {
 		compatible = "regulator-fixed";
-		regulator-name = "pcie_usb_hub_3p3_vreg";
-		pinctrl-names = "default";
-		pinctrl-0 = <&pice0_usb_power_3p3_default>;
+		regulator-name = "pcie_upd_3p3_vreg";
 		gpio = <&tlmm 13 GPIO_ACTIVE_HIGH>;
-		vin-supply = <&pcie_usb_hub_1p05_vreg>;
+		vin-supply = <&pcie_upd_1p05_vreg>;
 		regulator-min-microvolt = <3300000>;
 		regulator-max-microvolt = <3300000>;
 		enable-active-high;
+		regulator-always-on;
 		regulator-enable-ramp-delay = <10000>;
 	};
 
-	usb_hub_rest_vreg: usb_hub_rest_vreg {
+	upd_rest_vreg: upd_rest_vreg {
 		compatible = "regulator-fixed";
-		regulator-name = "usb_hub_rest_vreg";
-		pinctrl-names = "default";
-		pinctrl-0 = <&pice0_usb_ponrst_default>;
+		regulator-name = "upd_rest_vreg";
 		gpio = <&tlmm 182 GPIO_ACTIVE_HIGH>;
-		vin-supply = <&pcie_usb_hub_3p3_vreg>;
+		vin-supply = <&pcie_upd_3p3_vreg>;
 		regulator-min-microvolt = <3300000>;
 		regulator-max-microvolt = <3300000>;
 		enable-active-high;
+		regulator-always-on;
 		regulator-enable-ramp-delay = <10000>;
+	};
+
+	usbhub_rest_vreg: usbhub_rest_vreg {
+		compatible = "regulator-fixed";
+		regulator-name = "usbhub_rest_vreg";
+		regulator-min-microvolt = <3300000>;
+		regulator-max-microvolt = <3300000>;
+		gpio = <&tlmm 41 GPIO_ACTIVE_LOW>;
+		regulator-boot-on;
+		regulator-always-on;
+		startup-delay-us = <1500>;
+		off-on-delay-us = <1500>;
 	};
 
 	gpio_key {
@@ -370,6 +478,9 @@
 	qcom,vccq-parent-supply = <&pm_v6g_s4>;
 	qcom,vccq-parent-max-microamp = <210000>;
 
+	qcom,vccq-shutdown-supply = <&pm_v6g_l1>;
+	qcom,vccq-shutdown-max-microamp = <1200000>;
+
 	reset-gpios = <&tlmm 210 GPIO_ACTIVE_LOW>;
 	resets = <&gcc GCC_UFS_PHY_BCR>;
 	reset-names = "rst";
@@ -509,9 +620,10 @@
 
 &qupv3_se4_4uart {
 	status = "ok";
+	qcom,auto-suspend-disable;
 	qrc:qrc@100 {
 		compatible = "qcom,qrc-uart";
-		status = "ok";
+		status = "disabled";
 		qcom,qrc-reset-gpio = <&tlmm 168 0>;
 	};
 };
@@ -540,7 +652,6 @@
 		pinctrl-0 = <&usb3phy_portselect_gpio>;
 		gpios = <&tlmm 11 0>;
 		set-aux;
-		aux-orientation-violate-usb;
 
 		eq = /bits/ 8 <
 				/* Parameters for USB */
@@ -589,6 +700,7 @@
 
 &usb0 {
 	usb-role-switch;
+	snps,dwc3_guctl_resbwhseps_quirk;
 	port {
 		usb_port0: endpoint {
 			remote-endpoint = <&usb_port0_connector>;
@@ -686,6 +798,8 @@
 };
 
 &qupv3_hub_i2c4 {
+	pinctrl-0 = <&i2chub0_se4_sda_active>, <&i2chub0_se4_scl_active>;
+	pinctrl-1 = <&i2chub0_se4_sleep>;
 	status = "ok";
 
 	pcie0_i2c_ctrl: pcie0_i2c_ctrl {
@@ -736,9 +850,8 @@
 
 &pcie0 {
 	qcom,boot-option = <0x2>;
-
 	pcie-i2c-phandle = <&qupv3_hub_i2c4>;
-	vreg-3p3-supply = <&usb_hub_rest_vreg>;
+	vreg-3p3-supply = <&qps615_resx0_0p9_vreg>;
 	msi-parent = <&pcie0_msi>;
 
 	 qcom,pcie-phy-ver = <102>;
@@ -907,6 +1020,57 @@
 		/* BDF 2.3.0 */
 		pcie0_bus2_dev3_fn0: pcie0_bus2_dev3_fn0 {
 			reg = <0x1800 0x0 0x0 0x0 0x0>;
+			qps615_eth0,qps615_eth0@pcie0_rp {
+				reg = <0x0 0x0 0x0 0x0 0x0>;
+
+				pinctrl-names = "default";
+				pinctrl-0 = <&aqr_intn_wol_sig>;
+
+				qcom,phy-rst-gpio = <0>;
+
+				interrupts-extended = <&tlmm 197 IRQ_TYPE_EDGE_FALLING>;
+				interrupt-names = "wol_irq";
+
+				phy-supply = <&aqr_vreg>;
+				qcom,phy-rst-delay-us = <221000>;
+				#address-cells = <1>;
+				#size-cells = <1>;
+			};
+
+			/* BDF 5.0.0 */
+			pcie0_bus5_dev0_fn0: pcie0_ntn3_eth0 {
+				reg = <0x0 0x0 0x0 0x0 0x0>;
+				qcom,iommu-group = <&eth0_pci0_iommu_group>;
+				eth0_pci0_iommu_group: eth0_pci0_iommu_group {
+					qcom,iommu-dma = "atomic";
+				};
+			};
+
+			qps615_eth1,qps615_eth1@pcie0_rp {
+				reg = <0x100 0x0 0x0 0x0 0x0>;
+
+				pinctrl-names = "default";
+				pinctrl-0 = <&napa_intn_wol_sig>;
+
+				qcom,phy-rst-gpio = <1>;
+
+				interrupts-extended = <&tlmm 60 IRQ_TYPE_EDGE_FALLING>;
+				interrupt-names = "wol_irq";
+
+				phy-supply = <&qep_vreg>;
+				qcom,phy-rst-delay-us = <20000>;
+				#address-cells = <1>;
+				#size-cells = <1>;
+			};
+
+			/* BDF 5.0.1 */
+			pcie0_bus5_dev0_fn1: pcie0_ntn3_eth1 {
+				reg = <0x100 0x0 0x0 0x0 0x0>;
+				qcom,iommu-group = <&eth1_pci0_iommu_group>;
+				eth1_pci0_iommu_group: eth1_pci0_iommu_group {
+					qcom,iommu-dma = "atomic";
+				};
+			};
 		};
 	};
 };
@@ -952,9 +1116,9 @@
 
 &pcie1 {
 	pcie-i2c-phandle = <&qupv3_hub_i2c3>;
+	qcom,filtered-bdfs = <0x05010000>;
 	qcom,boot-option = <0x1>;
 	vreg-3p3-supply = <&qps615_resx1_0p9_vreg>;
-	qcom,apss-based-l1ss-sleep;
 	msi-parent = <&pcie1_msi>;
 	qcom,phy-sequence = <0x1240 0x03 0x0
 			0x0030 0x1d 0x0
@@ -1164,6 +1328,13 @@
 	rear-tof-therm {
 		status = "disabled";
 	};
+};
+
+&pmk8550_vadc {
+	/delete-node/ pm8550_msm_therm;
+	/delete-node/ pm8550_cam_flash_therm;
+	/delete-node/ pm8550_wlan_therm;
+	/delete-node/ pm8550_rear_tof_therm;
 };
 
 &qcom_qbt {

@@ -4,7 +4,6 @@
 #include "kalama-hw-fence.dtsi"
 
 / {
-	qcom,msm-id = <519 0x10000>;
+	qcom,msm-id = <519 0x10000>, <603 0x20000>, <604 0x20000>;
 	qcom,board-id = <0 0>;
 };
-

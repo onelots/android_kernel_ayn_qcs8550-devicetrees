@@ -1,0 +1,43 @@
+#include "kona-sde-display.dtsi"
+
+&sde_dp {
+	qcom,display-type = "primary";
+	qcom,dp-aux-switch = <&redriver>;
+	extcon = <&pm8150b_pdphy>;
+	qcom,aux-en-gpio = <&tlmm 69 0>;
+	qcom,aux-sel-gpio = <&tlmm 71 0>;
+	/delete-property/ qcom,dsc-feature-enable;
+	qcom,yuv422-supported;
+};
+
+&mdss_mdp {
+	connectors = <&smmu_sde_unsec &smmu_sde_sec &sde_dp &sde_rscc>;
+};
+
+&sde_wb {
+	status = "disabled";
+};
+
+&sde_dsi {
+	status = "disabled";
+};
+
+&sde_dsi1 {
+	status = "disabled";
+};
+
+&mdss_dsi0 {
+	status = "disabled";
+};
+
+&mdss_dsi1 {
+	status = "disabled";
+};
+
+&mdss_dsi_phy0 {
+	status = "disabled";
+};
+
+&mdss_dsi_phy1 {
+	status = "disabled";
+};

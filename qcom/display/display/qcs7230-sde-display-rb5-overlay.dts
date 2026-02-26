@@ -1,0 +1,12 @@
+/dts-v1/;
+/plugin/;
+
+#include "kona-sde.dtsi"
+#include "qcs7230-sde-display-rb5.dtsi"
+
+/ {
+	model = "Qualcomm Technologies, Inc. Kona-7230-iot v2.1 RB5 Platform";
+	compatible = "qcom,kona-mtp", "qcom,kona", "qcom,mtp";
+	qcom,msm-id = <548 0x20001>;
+	qcom,board-id = <0x301000b 0x0>;
+};

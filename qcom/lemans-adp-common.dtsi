@@ -13,7 +13,7 @@
 		key_sleep {
 			label = "sleep";
 			linux,code = <KEY_SLEEP>;
-			gpios = <&tlmm 6 GPIO_ACTIVE_LOW>;
+			gpios = <&tlmm 6 GPIO_ACTIVE_HIGH>;
 			linux,input-type = <1>;
 			debounce-interval = <0>;
 			wakeup-source;
@@ -22,7 +22,7 @@
 		key_power {
 			label = "power";
 			linux,code = <KEY_POWER>;
-			gpios = <&tlmm 59 GPIO_ACTIVE_LOW>;
+			gpios = <&tlmm 59 GPIO_ACTIVE_HIGH>;
 			linux,input-type = <1>;
 			debounce-interval = <0>;
 			wakeup-source;
@@ -215,6 +215,26 @@
 			power-source = <0>;
 		};
 	};
+
+	usb0_oc {
+		usb0_oc_default: usb0_oc_default {
+			pins = "gpio4";
+			function = "normal";
+			input-enable;
+			bias-pull-up;
+			power-source = <0>;
+		};
+	};
+
+	usb1_oc {
+		usb1_oc_default: usb1_oc_default {
+			pins = "gpio11";
+			function = "normal";
+			input-enable;
+			bias-pull-up;
+			power-source = <0>;
+		};
+	};
 };
 
 &pm8775_2_gpios {
@@ -229,13 +249,15 @@
 };
 
 &usb0 {
+	oc-gpio = <&pm8775_3_gpios 4 1>;
 	pinctrl-names = "default";
-	pinctrl-0 = <&usb20_vbus_boost_default>;
+	pinctrl-0 = <&usb20_vbus_boost_default &usb0_oc_default>;
 };
 
 &usb1 {
+	oc-gpio = <&pm8775_3_gpios 11 1>;
 	pinctrl-names = "default";
-	pinctrl-0 = <&usb21_vbus_boost_default>;
+	pinctrl-0 = <&usb21_vbus_boost_default &usb1_oc_default>;
 };
 
 &usb2 {

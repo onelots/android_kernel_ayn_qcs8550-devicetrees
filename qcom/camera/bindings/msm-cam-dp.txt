@@ -1,0 +1,29 @@
+* Qualcomm Technologies, Inc. MSM Camera DP
+
+The MSM camera DP driver provides the definitions for enabling
+the Camera DP hadware. It provides the functions for the Client to
+control the DP hardware.
+
+=======================
+Required Node Structure
+=======================
+The camera DP device is described in one level of device node.
+
+==================================
+First Level Node - CAM DP Device
+==================================
+- compatible
+  Usage: required
+  Value type: <string>
+  Definition: Should be "dp_bdg_irq_handler".
+
+- dp_bdg_irq_pin
+    Usage: optional
+    Value type: <u32>
+    Definition: should specify the gpio labels.
+
+Example:
+    dp_bdg_irq_handler: dp_bdg_irq_handler {
+        compatible = "dp_bdg_irq_handler";
+        dp_bdg_irq_pin = <&tlmm 32 0>;
+    };

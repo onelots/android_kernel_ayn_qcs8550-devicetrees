@@ -303,6 +303,8 @@ patternProperties:
     description: Digi International Inc.
   "^digilent,.*":
     description: Diglent, Inc.
+  "^diodes,.*":
+    description: Diodes Incorporated
   "^dioo,.*":
     description: Dioo Microcircuit Co., Ltd
   "^dlc,.*":
@@ -377,6 +379,8 @@ patternProperties:
     description: Ecole Polytechnique Fédérale de Lausanne
   "^epson,.*":
     description: Seiko Epson Corp.
+  "^esmt,.*":
+    description: Elite Semiconductor Microelectronics Technology Inc.
   "^esp,.*":
     description: Espressif Systems Co. Ltd.
   "^est,.*":
@@ -808,6 +812,10 @@ patternProperties:
     description: NLT Technologies, Ltd.
   "^nokia,.*":
     description: Nokia
+  "^novatek,.*":
+    description: Novatek Microelectronics Corporation
+  "^kinet,.*":
+    description: Kinet
   "^nordic,.*":
     description: Nordic Semiconductor
   "^novtech,.*":

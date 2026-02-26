@@ -34,7 +34,6 @@
 
 		qcom,core-clk-rate = <200000000>;
 		qcom,core-clk-rate-hs = <66666667>;
-		qcom,host-poweroff-in-pm-suspend;
 
 		interconnect-names = "usb-ddr", "ddr-usb";
 		interconnects = <&aggre1_noc MASTER_USB3_0 &mc_virt SLAVE_EBI1>,
@@ -133,9 +132,6 @@
 		interrupt-names = "pwr_event_irq","dp_hs_phy_irq",
 				"ss_phy_irq","dm_hs_phy_irq";
 		qcom,use-pdc-interrupts;
-		qcom,default-mode-host;
-		qcom,force-gen1;
-		qcom,host-poweroff-in-pm-suspend;
 
 		USB3_GDSC-supply = <&usb30_sec_gdsc>;
 		clocks = <&gcc GCC_USB30_SEC_MASTER_CLK>,
@@ -156,7 +152,6 @@
 		interconnect-names = "usb-ddr", "ddr-usb";
 		interconnects = <&aggre1_noc MASTER_USB3_1 &mc_virt SLAVE_EBI1>,
 				<&gem_noc MASTER_APPSS_PROC &config_noc SLAVE_USB3_1>;
-		qcom,disable-host-ssphy-powerdown;
 
 		dwc3@a800000 {
 			compatible = "snps,dwc3";
