@@ -33,7 +33,8 @@
 
 		qcom,core-clk-rate = <200000000>;
 		qcom,core-clk-rate-hs = <66666667>;
-		qcom,ignore-wakeup-src-in-hostmode;
+		qcom,host-poweroff-in-pm-suspend;
+		qcom,disable-wakeup;
 
 		status = "disabled";
 		dwc3@a600000 {
@@ -49,6 +50,7 @@
 			snps,hird-threshold = /bits/ 8 <0x0>;
 			snps,is-utmi-l1-suspend;
 			snps,usb2-gadget-lpm-disable;
+			snps,dis_u2_susphy_quirk;
 			tx-fifo-resize;
 			maximum-speed = "high-speed";
 			dr_mode = "otg";
@@ -102,7 +104,9 @@
 				"ss_phy_irq","dm_hs_phy_irq";
 		qcom,use-pdc-interrupts;
 		qcom,default-mode-host;
-		qcom,ignore-wakeup-src-in-hostmode;
+		qcom,disable-wakeup;
+		qcom,host-poweroff-in-pm-suspend;
+		qcom,disable-host-ssphy-powerdown;
 
 		USB3_GDSC-supply = <&usb30_sec_gdsc>;
 		clocks = <&gcc GCC_USB30_SEC_MASTER_CLK>,
@@ -119,7 +123,6 @@
 
 		qcom,core-clk-rate = <200000000>;
 		qcom,core-clk-rate-hs = <66666667>;
-
 		status = "disabled";
 
 		dwc3@a800000 {

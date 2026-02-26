@@ -327,7 +327,7 @@
 			regulator-max-microvolt = <1050000>;
 			qcom,init-voltage = <880000>;
 			qcom,init-mode =
-				<RPMH_REGULATOR_MODE_LPM>;
+				<RPMH_REGULATOR_MODE_HPM>;
 		};
 	};
 
@@ -348,7 +348,7 @@
 			regulator-max-microvolt = <950000>;
 			qcom,init-voltage = <870000>;
 			qcom,init-mode =
-				<RPMH_REGULATOR_MODE_LPM>;
+				<RPMH_REGULATOR_MODE_HPM>;
 		};
 	};
 
@@ -369,7 +369,7 @@
 			regulator-max-microvolt = <970000>;
 			qcom,init-voltage = <900000>;
 			qcom,init-mode =
-				<RPMH_REGULATOR_MODE_LPM>;
+				<RPMH_REGULATOR_MODE_HPM>;
 		};
 	};
 
@@ -388,10 +388,9 @@
 			qcom,set = <RPMH_REGULATOR_SET_ALL>;
 			regulator-min-microvolt = <830000>;
 			regulator-max-microvolt = <920000>;
-			regulator-always-on;
 			qcom,init-voltage = <880000>;
 			qcom,init-mode =
-				<RPMH_REGULATOR_MODE_LPM>;
+				<RPMH_REGULATOR_MODE_HPM>;
 		};
 	};
 
@@ -420,7 +419,7 @@
 		qcom,supported-modes =
 			<RPMH_REGULATOR_MODE_LPM
 			RPMH_REGULATOR_MODE_HPM>;
-		qcom,mode-threshold-currents = <0 30000>;
+		qcom,mode-threshold-currents = <0 10000>;
 
 		L9A:
 		pm8775_a_l9: regulator-pm8775_a-l9 {
@@ -430,7 +429,7 @@
 			regulator-max-microvolt = <3544000>;
 			qcom,init-voltage = <3072000>;
 			qcom,init-mode =
-				<RPMH_REGULATOR_MODE_LPM>;
+				<RPMH_REGULATOR_MODE_HPM>;
 		};
 	};
 
@@ -451,7 +450,7 @@
 			regulator-max-microvolt = <1260000>;
 			qcom,init-voltage = <1200000>;
 			qcom,init-mode =
-				<RPMH_REGULATOR_MODE_LPM>;
+				<RPMH_REGULATOR_MODE_HPM>;
 		};
 	};
 
@@ -472,7 +471,7 @@
 			regulator-max-microvolt = <1100000>;
 			qcom,init-voltage = <900000>;
 			qcom,init-mode =
-				<RPMH_REGULATOR_MODE_LPM>;
+				<RPMH_REGULATOR_MODE_HPM>;
 		};
 	};
 
@@ -493,7 +492,7 @@
 			regulator-max-microvolt = <1300000>;
 			qcom,init-voltage = <1200000>;
 			qcom,init-mode =
-				<RPMH_REGULATOR_MODE_LPM>;
+				<RPMH_REGULATOR_MODE_HPM>;
 		};
 	};
 
@@ -514,7 +513,7 @@
 			regulator-max-microvolt = <1200000>;
 			qcom,init-voltage = <1200000>;
 			qcom,init-mode =
-				<RPMH_REGULATOR_MODE_LPM>;
+				<RPMH_REGULATOR_MODE_HPM>;
 		};
 	};
 
@@ -535,7 +534,7 @@
 			regulator-max-microvolt = <1200000>;
 			qcom,init-voltage = <1200000>;
 			qcom,init-mode =
-				<RPMH_REGULATOR_MODE_LPM>;
+				<RPMH_REGULATOR_MODE_HPM>;
 		};
 	};
 
@@ -556,7 +555,7 @@
 			regulator-max-microvolt = <1980000>;
 			qcom,init-voltage = <1800000>;
 			qcom,init-mode =
-				<RPMH_REGULATOR_MODE_LPM>;
+				<RPMH_REGULATOR_MODE_HPM>;
 		};
 	};
 
@@ -577,7 +576,7 @@
 			regulator-max-microvolt = <2000000>;
 			qcom,init-voltage = <1620000>;
 			qcom,init-mode =
-				<RPMH_REGULATOR_MODE_LPM>;
+				<RPMH_REGULATOR_MODE_HPM>;
 		};
 	};
 
@@ -594,6 +593,9 @@
 		pm8775_c_l8: regulator-pm8775_c-l8 {
 			regulator-name = "pm8775_c_l8";
 			qcom,set = <RPMH_REGULATOR_SET_ALL>;
+			regulator-min-microvolt = <2504000>;
+			regulator-max-microvolt = <3300000>;
+			qcom,init-voltage = <2504000>;
 			qcom,init-mode =
 				<RPMH_REGULATOR_MODE_HPM>;
 		};
@@ -616,7 +618,7 @@
 			regulator-max-microvolt = <2700000>;
 			qcom,init-voltage = <1650000>;
 			qcom,init-mode =
-				<RPMH_REGULATOR_MODE_LPM>;
+				<RPMH_REGULATOR_MODE_HPM>;
 		};
 	};
 
@@ -679,7 +681,7 @@
 			regulator-max-microvolt = <1450000>;
 			qcom,init-voltage = <1280000>;
 			qcom,init-mode =
-				<RPMH_REGULATOR_MODE_LPM>;
+				<RPMH_REGULATOR_MODE_HPM>;
 		};
 	};
 
@@ -700,7 +702,7 @@
 			regulator-max-microvolt = <1950000>;
 			qcom,init-voltage = <1800000>;
 			qcom,init-mode =
-				<RPMH_REGULATOR_MODE_LPM>;
+				<RPMH_REGULATOR_MODE_HPM>;
 		};
 	};
 };

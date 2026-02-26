@@ -71,7 +71,11 @@ DP Controller: Required properties:
 - qcom,max-pclk-frequency-khz:	An integer specifying the max. pixel clock in KHz supported by Display Port.
 - qcom,mst-enable:		MST feature enable control node.
 - qcom,dsc-feature-enable:	DSC feature enable control node.
+- qcom,dsc-version		Maximum DSC version supported by the device.
 - qcom,fec-feature-enable:	FEC feature enable control node.
+- qcom,pll-clk-factor: 		A u32 value indicating the factor to be multipled to rate.
+				Default 1000, if not speecified.
+- qcom,no-audio-support:	Audio feature disable control node.
 - qcom,qos-cpu-mask:		A u32 value indicating desired PM QoS CPU affine mask
 - qcom,qos-cpu-latency-us:		A u32 value indicating desired PM QoS CPU latency in usec
 - qcom,altmode-dev:         Phandle for the AltMode GLink driver.

@@ -1527,7 +1527,8 @@
 
 	mhi_net_device: qcom,mhi_net_dev {
 		compatible = "qcom,msm-mhi-dev-net";
-		qcom,mhi-ethernet-interface-channel = <50>;
+		qcom,mhi-num-nw-client-limit = <5>;
+		qcom,mhi-ethernet-interface-ch-list = <50 52 54>;
 		status = "ok";
 	};
 
@@ -1562,6 +1563,27 @@
 		qcom,ee = <0>;
 		qcom,bus-id = <0>;
 	};
+
+	spmi1_bus: qcom,spmi@c432000 {
+		compatible = "qcom,spmi-pmic-arb";
+		reg = <0xc432000 0x4000>,
+		      <0xc400000 0x3000>,
+		      <0xc500000 0x400000>,
+		      <0xc440000 0x80000>,
+		      <0xc4d0000 0x10000>;
+		reg-names = "cnfg", "core", "chnls", "obsrvr", "intr";
+		interrupts-extended = <&pdc 3 IRQ_TYPE_LEVEL_HIGH>;
+		interrupt-names = "periph_irq";
+		interrupt-controller;
+		#interrupt-cells = <4>;
+		#address-cells = <2>;
+		#size-cells = <0>;
+		cell-index = <0>;
+		qcom,channel = <0>;
+		qcom,ee = <0>;
+		qcom,bus-id = <1>;
+		depends-on-supply = <&spmi_bus>;
+};
 
 	clk_virt: interconnect@0 {
 		compatible = "qcom,cinder-clk_virt";

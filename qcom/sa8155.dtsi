@@ -355,6 +355,18 @@ hsi2s: qcom,hsi2s {
 	parent-supply = <&VDD_GFX_LEVEL>;
 };
 
+&usb0 {
+	qcom,disable-wakeup;
+	qcom,host-poweroff-in-pm-suspend;
+};
+
+&usb1 {
+	qcom,default-mode-host;
+	qcom,disable-wakeup;
+	qcom,host-poweroff-in-pm-suspend;
+	qcom,disable-host-ssphy-powerdown;
+};
+
 &pcie0 {
 	vreg-1p2-supply = <&pm8150_2_l8>;
 	vreg-0p9-supply = <&pm8150_2_l18>;
@@ -610,5 +622,4 @@ hsi2s: qcom,hsi2s {
 
 &msm_fastrpc {
 	qcom,adsp-remoteheap-vmid = <3 5 6>;
-	qcom,mdsp-remoteheap-vmid = <3 0xf>;
 };

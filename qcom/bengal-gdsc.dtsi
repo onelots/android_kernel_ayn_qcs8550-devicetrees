@@ -74,7 +74,7 @@
 		regulator-name = "mdss_core_gdsc";
 		proxy-supply = <&mdss_core_gdsc>;
 		qcom,proxy-consumer-enable;
-		status = "disabled";
+		status = "ok";
 	};
 
 	/* GDSCs in GPUCC */
@@ -110,6 +110,22 @@
 		regulator-name = "gpu_gx_gdsc";
 		sw-reset = <&gpu_gx_sw_reset>;
 		domain-addr = <&gpu_gx_domain_addr>;
+		status = "disabled";
+	};
+
+	/* LPASS_AON_CC GDSCs */
+	lpass_audio_hm_gdsc_hw_ctrl: syscon@a7890ac {
+		compatible = "syscon";
+		reg = <0xa7890ac 0x4>;
+	};
+
+	lpass_audio_hm_gdsc: qcom,gdsc@a789090 {
+		compatible = "qcom,gdsc";
+		reg = <0xa789090 0x4>;
+		regulator-name = "lpass_audio_hm_gdsc";
+		hw-ctrl-addr = <&lpass_audio_hm_gdsc_hw_ctrl>;
+		qcom,retain-regs;
+		qcom,support-cfg-gdscr;
 		status = "disabled";
 	};
 };

@@ -125,6 +125,14 @@
 
 };
 
+&mdss_dsi_phy0 {
+	qcom,dsi-pll-ssc-en;
+};
+
+&mdss_dsi_phy1 {
+	qcom,dsi-pll-ssc-en;
+};
+
 &mdss_mdp {
 	connectors = <&sde_dsi &sde_dsi1 &smmu_sde_unsec &sde_wb1 &sde_wb2 &sde_rscc &sde_dp>;
 };

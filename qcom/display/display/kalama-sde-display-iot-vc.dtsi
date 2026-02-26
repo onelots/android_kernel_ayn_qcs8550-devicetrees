@@ -1,0 +1,145 @@
+#include "kalama-sde-display-rb5-gen2.dtsi"
+
+&lt9611_pins {
+	mux {
+		pins = "gpio15", "gpio88", "gpio14", "gpio49";
+		function = "gpio";
+	};
+
+	config {
+		pins = "gpio15", "gpio88", "gpio14", "gpio49";
+		drive-strength = <8>;
+		bias-disable = <0>;
+	};
+};
+
+&tlmm {
+	lt9611_1_pins: lt9611_1_pins {
+		mux {
+			pins = "gpio65", "gpio64", "gpio66";
+			function = "gpio";
+		};
+
+		config {
+			pins = "gpio65", "gpio64", "gpio66";
+			drive-strength = <8>;
+			bias-disable = <0>;
+		};
+	};
+};
+
+&lt9611 {
+	lt,irq-gpio = <&tlmm 15 0x0>;
+	lt,writable-gpio = <&tlmm 88 0x0>;
+	lt,reset-gpio = <&tlmm 14 0x0>;
+	lt,dsi-sel-gpio = <&tlmm 49 0x0>;
+
+	pinctrl-names = "default";
+	pinctrl-0 = <&lt9611_pins>;
+};
+
+&sde_dp {
+	qcom,dp_cec_feature;
+	qcom,dp-aux-switch = <>;
+};
+
+
+&qupv3_hub_i2c3 {
+	status = "ok";
+
+	lt9611_1: lt,lt9611@2f {
+		compatible = "lt,lt9611uxc";
+		reg = <0x2f>;
+		interrupt-parent = <&tlmm>;
+		interrupts = <65 0>;
+		interrupt-names = "lt_irq";
+		lt,irq-gpio = <&tlmm 65 0x0>;
+		lt,writable-gpio = <&tlmm 64 0x0>;
+		lt,reset-gpio = <&tlmm 66 0x0>;
+
+		pinctrl-names = "default";
+		pinctrl-0 = <&lt9611_1_pins>;
+
+		lt,ext-disp = <&ext_disp>;
+		lt,cec-support;
+
+		lt,preferred-mode = "3840x2160";
+
+		lt,customize-modes {
+			lt,customize-mode-id@0 {
+				lt,mode-h-active = <1920>;
+				lt,mode-h-front-porch = <88>;
+				lt,mode-h-pulse-width = <44>;
+				lt,mode-h-back-porch = <148>;
+				lt,mode-h-active-high;
+				lt,mode-v-active = <1080>;
+				lt,mode-v-front-porch = <4>;
+				lt,mode-v-pulse-width = <5>;
+				lt,mode-v-back-porch = <36>;
+				lt,mode-v-active-high;
+				lt,mode-clock-in-khz = <148500>;
+			};
+
+			lt,customize-mode-id@1 {
+				lt,mode-h-active = <3840>;
+				lt,mode-h-front-porch = <176>;
+				lt,mode-h-pulse-width = <88>;
+				lt,mode-h-back-porch = <296>;
+				lt,mode-h-active-high;
+				lt,mode-v-active = <2160>;
+				lt,mode-v-front-porch = <8>;
+				lt,mode-v-pulse-width = <10>;
+				lt,mode-v-back-porch = <72>;
+				lt,mode-v-active-high;
+				lt,mode-refresh-rate = <30>;
+				lt,mode-clock-in-khz = <297000>;
+			};
+
+
+			lt,customize-mode-id@2 {
+				lt,mode-h-active = <1280>;
+				lt,mode-h-front-porch = <110>;
+				lt,mode-h-pulse-width = <40>;
+				lt,mode-h-back-porch = <220>;
+				lt,mode-h-active-high;
+				lt,mode-v-active = <720>;
+				lt,mode-v-front-porch = <5>;
+				lt,mode-v-pulse-width = <5>;
+				lt,mode-v-back-porch = <20>;
+				lt,mode-v-active-high;
+				lt,mode-clock-in-khz = <74250>;
+			};
+		};
+
+		ports {
+			#address-cells = <1>;
+			#size-cells = <0>;
+
+			port@0 {
+				reg = <0>;
+				lt9611_in_1: endpoint {
+					remote-endpoint = <&ext_dsi_1_out>;
+				};
+			};
+		};
+	};
+};
+
+&sde_dsi1 {
+	status = "ok";
+	ports {
+		#address-cells = <1>;
+		#size-cells = <0>;
+
+		port@0 {
+			reg = <0>;
+			ext_dsi_1_out: endpoint {
+				remote-endpoint = <&lt9611_in_1>;
+			};
+		};
+	};
+};
+
+&mdss_mdp {
+	connectors = <&sde_dsi &sde_dsi1 &smmu_sde_unsec &sde_rscc &sde_dp &sde_wb1>;
+};

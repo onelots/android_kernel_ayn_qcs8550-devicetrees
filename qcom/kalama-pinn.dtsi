@@ -14,7 +14,7 @@
 	qcom,target-link-width = <1>; /* force X1 lane width */
 	qcom,panic-genspeed-mismatch;
 	qcom,no-l0s-supported;
-	qcom,target-link-speed = <4>; /* Set max link speed to Gen4 */
+	qcom,target-link-speed = <2>; /* Set max link speed to Gen2 */
 	qcom,vreg-0p9-voltage-level = <912000 880000 193000>;
 	qcom,vreg-cx-voltage-level = <RPMH_REGULATOR_LEVEL_MAX
 					RPMH_REGULATOR_LEVEL_NOM 0>;
@@ -237,4 +237,88 @@
 			qcom,iommu-pagetable = "coherent";
 		};
 	};
+};
+
+&L1K {
+	status = "disabled";
+};
+
+&L2K {
+	status = "disabled";
+};
+
+&L3K {
+	status = "disabled";
+};
+
+&L4K {
+	status = "disabled";
+};
+
+&L5K {
+	status = "disabled";
+};
+
+&L6K {
+	status = "disabled";
+};
+
+&L7K {
+	status = "disabled";
+};
+
+&L1M {
+	status = "disabled";
+};
+
+&L2M {
+	status = "disabled";
+};
+
+&L3M {
+	status = "disabled";
+};
+
+&L4M {
+	status = "disabled";
+};
+
+&L5M {
+	status = "disabled";
+};
+
+&L6M {
+	status = "disabled";
+};
+
+&L7M {
+	status = "disabled";
+};
+
+&L1N {
+	status = "disabled";
+};
+
+&L2N {
+	status = "disabled";
+};
+
+&L3N {
+	status = "disabled";
+};
+
+&L4N {
+	status = "disabled";
+};
+
+&L5N {
+	status = "disabled";
+};
+
+&L6N {
+	status = "disabled";
+};
+
+&L7N {
+	status = "disabled";
 };
