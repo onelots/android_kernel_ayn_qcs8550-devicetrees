@@ -1,0 +1,11 @@
+/dts-v1/;
+/plugin/;
+
+#include "kalamap-retroid-pocket-6.dtsi"
+
+/ {
+	model = "Retroid Pocket 6";
+	compatible = "qcom,kalamap-hdk", "qcom,kalamap", "qcom,hdk";
+	qcom,msm-id = <603 0x20000>;
+	qcom,board-id = <0x1001f 0>;
+};
