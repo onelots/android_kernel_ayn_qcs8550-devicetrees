@@ -1,4 +1,4 @@
-#include "kalama-sde-display-ayn-odin2-common.dtsi"
+#include "kalama-sde-display-moorechip-common.dtsi"
 
 &dsi_icna3512_1080p_dsc_cmd {
 	qcom,panel-supply-entries = <&dsi_panel_pwr_supply>;

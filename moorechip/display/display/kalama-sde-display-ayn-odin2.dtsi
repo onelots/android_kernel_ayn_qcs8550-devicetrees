@@ -1,6 +1,6 @@
 #include <dt-bindings/gpio/gpio.h>
 
-#include "kalama-sde-display-ayn-odin2-common.dtsi"
+#include "kalama-sde-display-moorechip-common.dtsi"
 
 &dsi_ext_bridge_1080p {
 	qcom,panel-supply-entries = <&dsi_bridge_pwr_supply>;

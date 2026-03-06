@@ -1,4 +1,4 @@
-#include "kalamap-ayn-odin2-common.dtsi"
+#include "kalamap-moorechip-common.dtsi"
 
 &sdhc_2 {
 	cd-debounce-delay-ms = <2000>;

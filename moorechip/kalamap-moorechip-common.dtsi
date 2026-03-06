@@ -286,12 +286,12 @@
 
 	joystick {
 		status = "okay";
-		compatible = "ayn,joystick";
+		compatible = "moorechip,joystick";
 		vdd-supply = <&joystick_vdd_reg>;
 		uart-supply = <&joystick_uart_reg>;
 
-		ayn,boot-gpio = <&tlmm 1 GPIO_ACTIVE_HIGH>;
-		ayn,reset-gpio = <&tlmm 0 GPIO_ACTIVE_HIGH>;
+		moorechip,boot-gpio = <&tlmm 1 GPIO_ACTIVE_HIGH>;
+		moorechip,reset-gpio = <&tlmm 0 GPIO_ACTIVE_HIGH>;
 	};
 };
 

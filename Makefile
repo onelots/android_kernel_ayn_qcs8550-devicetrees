@@ -1,5 +1,5 @@
 vendor := $(srctree)/$(src)
 
 ifneq "$(wildcard $(vendor)/qcom)" ""
-	subdir-y += ayn
+	subdir-y += moorechip
 endif

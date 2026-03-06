@@ -1,10 +1,10 @@
 /dts-v1/;
 /plugin/;
 
-#include "kalama-bt-ayn-odin2.dtsi"
+#include "kalama-audio-moorechip.dtsi"
 
 / {
-	model = "Ayn Odin 2";
+	model = "Moorechip Audio";
 	compatible = "qcom,kalamap-hdk", "qcom,kalamap", "qcom,hdk";
 	qcom,msm-id = <603 0x20000>;
 	qcom,board-id = <0x1001f 0>;
