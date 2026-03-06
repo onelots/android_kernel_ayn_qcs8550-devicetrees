@@ -9,6 +9,7 @@
 	qcom,mdss-dsi-bl-inverted-dbv;
 	qcom,platform-reset-gpio = <&tlmm 133 0>;
 	qcom,platform-bklight-en-gpio = <&tlmm 52 0>;
+	qcom,mdss-dsi-panel-orientation = "180";
 };
 
 &tlmm {
