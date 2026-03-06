@@ -19,6 +19,7 @@
 		qcom,dsi-phy-num = <1>;
 
 		qcom,mdss-dsi-panel-mode-switch;
+		qcom,mdss-dsi-pvgl-level-switch;
 
 		qcom,mdss-dsi-virtual-channel-id = <0>;
 		qcom,mdss-dsi-stream = <0>;
@@ -26,7 +27,6 @@
 		qcom,mdss-dsi-color-order = "rgb_swap_rgb";
 		qcom,mdss-dsi-underflow-color = <0xff>;
 		qcom,mdss-dsi-border-color = <0>;
-
 		qcom,mdss-dsi-traffic-mode = "non_burst_sync_event";
 		qcom,mdss-dsi-lane-map = "lane_map_0123";
 		qcom,mdss-dsi-bllp-eof-power-mode;
@@ -35,7 +35,6 @@
 		qcom,mdss-dsi-lane-1-state;
 		qcom,mdss-dsi-lane-2-state;
 		qcom,mdss-dsi-lane-3-state;
-		qcom,mdss-dsi-pvgl-level-switch;
 		qcom,mdss-dsi-dma-trigger = "trigger_sw";
 		qcom,mdss-dsi-mdp-trigger = "none";
 		qcom,mdss-dsi-reset-sequence = <1 20>, <0 20>, <1 20>;
@@ -72,7 +71,7 @@
 				qcom,mdss-dsi-panel-jitter = <0x3 0x1>;
 
 				qcom,mdss-dsi-timing-switch-command = [
-					39 01 00 00 00 00 02 48 00 // Write DSI MODE - HFR_MODE = Normal Mode, DSI_MODE = Through GRAM
+					39 01 00 00 00 00 02 48 00 // Write DSI MODE - HFR_MODE = Normal Mode, DSI_MODE = Command Mode - Through GRAM
 				];
 				qcom,mdss-dsi-timing-switch-command-state = "dsi_lp_mode";
 
@@ -172,7 +171,7 @@
 				qcom,mdss-dsi-panel-jitter = <0x3 0x1>;
 
 				qcom,mdss-dsi-timing-switch-command = [
-					39 01 00 00 00 00 02 48 30 // Write DSI MODE - HFR_MODE = HF3 Mode, DSI_MODE = Through GRAM
+					39 01 00 00 00 00 02 48 30 // Write DSI MODE - HFR_MODE = HF3 Mode, DSI_MODE = Command Mode - Through GRAM
 				];
 				qcom,mdss-dsi-timing-switch-command-state = "dsi_lp_mode";
 
@@ -233,7 +232,7 @@
 
 					39 01 00 00 00 00 03 FD A5 A5 // Manufacture Command Access Lock
 
-					39 01 00 00 00 00 02 48 30 // Write DSI MODE - HFR_MODE = HF3 Mode, DSI_MODE = Through GRAM
+					39 01 00 00 00 00 02 48 30 // Write DSI MODE - HFR_MODE = HF3 Mode, DSI_MODE = Command Mode - Through GRAM
 					05 01 00 00 78 00 02 29 00 // Display On
 				];
 				qcom,mdss-dsi-on-command-state = "dsi_lp_mode";
