@@ -5,10 +5,6 @@
 	stdout-path = "/soc/qcom,qupv3_1_geni_se@ac0000/qcom,qup_uart@a9c000";
 };
 
-&sdhc_2 {
-	cd-debounce-delay-ms = <1000>;
-};
-
 &qupv3_se0_i2c {
 	#address-cells = <1>;
 	#size-cells = <0>;

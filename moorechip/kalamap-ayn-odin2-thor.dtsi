@@ -7,7 +7,6 @@
 
 &sdhc_2 {
 	qcom,vdd-io-current-level = <0 10000>;
-	cd-debounce-delay-ms = <2000>;
 	post-power-on-delay-ms = <200>;
 };
 
@@ -66,18 +65,6 @@
 				bias-disable;
 			};
 		};
-	};
-};
-
-&qupv3_se15_2uart_tx_active {
-	config {
-		bias-disable;
-	};
-};
-
-&qupv3_se15_2uart_rx_active {
-	config {
-		bias-disable;
 	};
 };
 

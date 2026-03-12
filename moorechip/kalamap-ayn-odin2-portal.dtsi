@@ -1,9 +1,5 @@
 #include "kalamap-moorechip-common.dtsi"
 
-&sdhc_2 {
-	cd-debounce-delay-ms = <2000>;
-};
-
 &qupv3_se0_i2c {
 	#address-cells = <1>;
 	#size-cells = <0>;
@@ -28,4 +24,10 @@
 		htr3212,label = "sn3112r";
 		htr3212,dv-en = <&tlmm 56 0x00>;
 	};
+};
+
+&L14B {
+	regulator-min-microvolt = <2800000>;
+	regulator-max-microvolt = <2800000>;
+	qcom,init-voltage = <2800000>;
 };

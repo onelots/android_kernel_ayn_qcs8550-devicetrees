@@ -1,14 +1,5 @@
 #include "kalamap-moorechip-common.dtsi"
 
-&chosen {
-	bootargs = "console=ttyMSM0,115200n8 loglevel=6 kpti=0 log_buf_len=256K kernel.panic_on_rcu_stall=1 service_locator.enable=1 msm_rtb.filter=0x237 rcupdate.rcu_expedited=1 rcu_nocbs=0-7 ftrace_dump_on_oops swiotlb=noforce loop.max_part=7 fw_devlink.strict=1 allow_mismatched_32bit_el0 cpufreq.default_governor=performance printk.console_no_auto_verbose=1 kasan=off sysctl.kernel.sched_pelt_multiplier=4 can.stats_timer=0 pcie_ports=compat irqaffinity=0-2 disable_dma32=on no-steal-acc cgroup.memory=nokmem,nosocket slub_debug=- msm_drm.dsi_display1=qcom,mdss_dsi_ch13726a_amoled_video:";
-	stdout-path = "/soc/qcom,qupv3_1_geni_se@ac0000/qcom,qup_uart@a9c000";
-};
-
-&sdhc_2 {
-	cd-debounce-delay-ms = <2000>;
-};
-
 &pm8550b_haptics {
 	effect_0 {
 		/* CLICK */
@@ -35,18 +26,6 @@
 		 0x3 0x57
 		/* HS disconnect threshold */
 		 0x6 0x53>;
-};
-
-&qupv3_se15_2uart_tx_active {
-	config {
-		bias-disable;
-	};
-};
-
-&qupv3_se15_2uart_rx_active {
-	config {
-		bias-disable;
-	};
 };
 
 &pm8550b_haptics {
@@ -113,10 +92,4 @@
 // TODO: ???
 &L1B {
 	regulator-always-on;
-};
-
-&L14B {
-	regulator-min-microvolt = <3000000>;
-	regulator-max-microvolt = <3000000>;
-	qcom,init-voltage = <3000000>;
 };
