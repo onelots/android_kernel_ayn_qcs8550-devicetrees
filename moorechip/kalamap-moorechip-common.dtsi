@@ -68,9 +68,9 @@
 		gpio = <&tlmm 99 GPIO_ACTIVE_HIGH>;
 	};
 
-	joystick_uart_reg: joystick_uart_reg {
+	joystick_levelshifter_reg: joystick_levelshifter_reg {
 		compatible = "regulator-fixed";
-		regulator-name = "joystick_uart_reg";
+		regulator-name = "joystick_levelshifter_reg";
 		regulator-min-microvolt = <1800000>;
 		regulator-max-microvolt = <1800000>;
 		enable-active-high;
@@ -85,7 +85,7 @@
 		status = "okay";
 		compatible = "moorechip,joystick";
 		vdd-supply = <&joystick_vdd_reg>;
-		uart-supply = <&joystick_uart_reg>;
+		levelshifter-supply = <&joystick_levelshifter_reg>;
 
 		moorechip,boot-gpio = <&tlmm 1 GPIO_ACTIVE_HIGH>;
 		moorechip,reset-gpio = <&tlmm 0 GPIO_ACTIVE_HIGH>;
