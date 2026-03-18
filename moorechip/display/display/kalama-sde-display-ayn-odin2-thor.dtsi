@@ -184,13 +184,21 @@
 
 &sde_te_active {
 	mux {
-		function = "gpio";
+		pins = "gpio200";
+	};
+
+	config {
+		pins = "gpio200";
 	};
 };
 
 &sde_te_suspend {
 	mux {
-		function = "gpio";
+		pins = "gpio200";
+	};
+
+	config {
+		pins = "gpio200";
 	};
 };
 
