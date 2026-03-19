@@ -16,3 +16,7 @@
 		vcc_3v3-supply = <&BOB2>; 
 	};
 };
+
+&joystick {
+	moorechip,layout-xbox;
+};

@@ -68,6 +68,7 @@
 		gpio = <&tlmm 99 GPIO_ACTIVE_HIGH>;
 	};
 
+	// AW3911
 	joystick_levelshifter_reg: joystick_levelshifter_reg {
 		compatible = "regulator-fixed";
 		regulator-name = "joystick_levelshifter_reg";
@@ -81,14 +82,14 @@
 &qupv3_se15_2uart {
 	status = "okay";
 
-	joystick {
+	joystick: joystick {
 		status = "okay";
 		compatible = "moorechip,joystick";
 		vdd-supply = <&joystick_vdd_reg>;
 		levelshifter-supply = <&joystick_levelshifter_reg>;
 
-		moorechip,boot-gpio = <&tlmm 1 GPIO_ACTIVE_HIGH>;
-		moorechip,reset-gpio = <&tlmm 0 GPIO_ACTIVE_HIGH>;
+		moorechip,boot-gpio = <&tlmm 1 GPIO_ACTIVE_LOW>;
+		moorechip,reset-gpio = <&tlmm 0 GPIO_ACTIVE_LOW>;
 	};
 };
 

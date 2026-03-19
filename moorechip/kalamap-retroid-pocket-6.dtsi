@@ -93,3 +93,7 @@
 &L1B {
 	regulator-always-on;
 };
+
+&joystick {
+	moorechip,layout-nintendo;
+};

@@ -164,3 +164,7 @@
 	regulator-max-microvolt = <3000000>;
 	qcom,init-voltage = <3000000>;
 };
+
+&joystick {
+	moorechip,layout-nintendo;
+};
