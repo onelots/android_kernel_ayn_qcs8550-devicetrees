@@ -6,9 +6,8 @@
 	qcom,mdss-dsi-bl-min-level = <10>;
 	qcom,mdss-dsi-bl-max-level = <4095>;
 	qcom,mdss-brightness-max-level = <4095>;
-	qcom,platform-reset-gpio = <&tlmm 133 0>;
 	qcom,mdss-dsi-bl-inverted-dbv;
-	qcom,mdss-dsi-panel-orientation = "180";
+	qcom,platform-reset-gpio = <&tlmm 133 0>;
 };
 
 &dsi_panel_pwr_supply {
@@ -52,7 +51,7 @@
 		};
 	};
 
-	TS_AVDD_3V0_GPIO: TS_AVDD_3V0_GPIO {
+	pmx_ts_avdd_3v0: pmx_ts_avdd_3v0 {
 			mux {
 			pins = "gpio144";
 			function = "gpio";
@@ -66,7 +65,7 @@
 		};
 	};
 
-	TS_VDDIO_1V8_GPIO: TS_VDDIO_1V8_GPIO {
+	pmx_ts_vddio_1v8: pmx_ts_vddio_1v8 {
 			mux {
 			pins = "gpio102";
 			function = "gpio";
@@ -171,6 +170,26 @@
 	};
 };
 
+&sde_te_active {
+	mux {
+		pins = "gpio200";
+	};
+
+	config {
+		pins = "gpio200";
+	};
+};
+
+&sde_te_suspend {
+	mux {
+		pins = "gpio200";
+	};
+
+	config {
+		pins = "gpio200";
+	};
+};
+
 &soc {
 	display_panel_avdd2: display_gpio_regulator@2 {
 		compatible = "qti-regulator-fixed";
@@ -187,34 +206,34 @@
 		pinctrl-0 = <&display_panel_avdd2_default>;
 	};
 
-	TS_AVDD_3V0: display_gpio_regulator@4 {
+	ts_avdd_3v0: display_gpio_regulator@4 {
 		compatible = "qti-regulator-fixed";
-		regulator-name = "TS_AVDD_3V0";
+		regulator-name = "ts_avdd_3v0";
 		regulator-min-microvolt = <3000000>;
 		regulator-max-microvolt = <3000000>;
 		regulator-enable-ramp-delay = <233>;
 		gpio = <&tlmm 144 0>;
 		enable-active-high;
 		regulator-boot-on;
-		proxy-supply = <&TS_AVDD_3V0>;
+		proxy-supply = <&ts_avdd_3v0>;
 		qcom,proxy-consumer-enable;
 		pinctrl-names = "default";
-		pinctrl-0 = <&TS_AVDD_3V0_GPIO>;
+		pinctrl-0 = <&pmx_ts_avdd_3v0>;
 	};
 
-	TS_VDDIO_1V8: display_gpio_regulator@5 {
+	ts_vddio_1v8: display_gpio_regulator@5 {
 		compatible = "qti-regulator-fixed";
-		regulator-name = "TS_VDDIO_1V8";
+		regulator-name = "ts_vddio_1v8";
 		regulator-min-microvolt = <1800000>;
 		regulator-max-microvolt = <1800000>;
 		regulator-enable-ramp-delay = <233>;
 		gpio = <&tlmm 102 0>;
 		enable-active-high;
 		regulator-boot-on;
-		proxy-supply = <&TS_VDDIO_1V8>;
+		proxy-supply = <&ts_vddio_1v8>;
 		qcom,proxy-consumer-enable;
 		pinctrl-names = "default";
-		pinctrl-0 = <&TS_VDDIO_1V8_GPIO>;
+		pinctrl-0 = <&pmx_ts_vddio_1v8>;
 	};
 };
 
@@ -223,29 +242,29 @@
 	#size-cells = <0>;
 
 	status = "okay";
+	qcom,i2c-touch-active = "focaltech,fts_ts";
 
 	focaltech@38 {
-		compatible = "focaltech,fts";
-		status = "ok";
+		compatible = "focaltech,fts_ts";
 		reg = <0x38>;
 
 		interrupt-parent = <&tlmm>;
 		interrupts = <15 0x2008>;
-		focaltech,reset-gpio = <&tlmm 14 0x00>;
+		focaltech,reset-gpio = <&tlmm 14 0>;
 		focaltech,irq-gpio = <&tlmm 15 0x2008>;
 		focaltech,display-coords = <0 0 1080 1920>;
 		focaltech,max-touch-number = <10>;
 		focaltech,ic-type = <0x35190489>;
-		focaltech,touch-environment = "pvm";
+		focaltech,touch-type = "primary";
 
-		pinctrl-names = "pmx_ts_active1","pmx_ts_suspend1","pmx_ts_release1";
+		vdd-supply = <&ts_avdd_3v0>;
+		vcc_i2c-supply  = <&ts_vddio_1v8>;
+
+		pinctrl-names = "pmx_ts_active", "pmx_ts_suspend", "pmx_ts_release";
 		pinctrl-0 = <&ts_active1>;
 		pinctrl-1 = <&ts_int_suspend1 &ts_reset_suspend1>;
 		pinctrl-2 = <&ts_release1>;
 		panel = <&dsi_vtdr6130_visionox_cog_cmd>;
-		vdd-supply = <&TS_AVDD_3V0>;
-		vcc_i2c-supply  = <&TS_VDDIO_1V8>;
-		qcom,i2c-touch-active = "focaltech,fts";
 	};
 };
 
@@ -255,6 +274,10 @@
 	/delete-property/ vci-supply;
 	vdd-supply = <&display_panel_avdd2>;
 	vddio-supply = <&L11B>;
+};
+
+&sde_dsi1 {
+	status = "disabled";
 };
 
 &mdss_dsi_phy0 {

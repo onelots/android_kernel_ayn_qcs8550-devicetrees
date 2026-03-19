@@ -63,7 +63,7 @@
 		};
 	};
 
-	TS_AVDD_3V0_GPIO: TS_AVDD_3V0_GPIO {
+	pmx_ts_avdd_3v0: pmx_ts_avdd_3v0 {
 			mux {
 			pins = "gpio144";
 			function = "gpio";
@@ -77,7 +77,7 @@
 		};
 	};
 
-	TS_VDDIO_1V8_GPIO: TS_VDDIO_1V8_GPIO {
+	pmx_ts_vddio_1v8: pmx_ts_vddio_1v8 {
 			mux {
 			pins = "gpio102";
 			function = "gpio";
@@ -233,34 +233,34 @@
 		pinctrl-0 = <&display_panel_vddio_default>;
 	};
 
-	TS_AVDD_3V0: display_gpio_regulator@4 {
+	ts_avdd_3v0: display_gpio_regulator@4 {
 		compatible = "qti-regulator-fixed";
-		regulator-name = "TS_AVDD_3V0";
+		regulator-name = "ts_avdd_3v0";
 		regulator-min-microvolt = <3000000>;
 		regulator-max-microvolt = <3000000>;
 		regulator-enable-ramp-delay = <233>;
 		gpio = <&tlmm 144 0>;
 		enable-active-high;
 		regulator-boot-on;
-		proxy-supply = <&TS_AVDD_3V0>;
+		proxy-supply = <&ts_avdd_3v0>;
 		qcom,proxy-consumer-enable;
 		pinctrl-names = "default";
-		pinctrl-0 = <&TS_AVDD_3V0_GPIO>;
+		pinctrl-0 = <&pmx_ts_avdd_3v0>;
 	};
 
-	TS_VDDIO_1V8: display_gpio_regulator@5 {
+	ts_vddio_1v8: display_gpio_regulator@5 {
 		compatible = "qti-regulator-fixed";
-		regulator-name = "TS_VDDIO_1V8";
+		regulator-name = "ts_vddio_1v8";
 		regulator-min-microvolt = <1800000>;
 		regulator-max-microvolt = <1800000>;
 		regulator-enable-ramp-delay = <233>;
 		gpio = <&tlmm 102 0>;
 		enable-active-high;
 		regulator-boot-on;
-		proxy-supply = <&TS_VDDIO_1V8>;
+		proxy-supply = <&ts_vddio_1v8>;
 		qcom,proxy-consumer-enable;
 		pinctrl-names = "default";
-		pinctrl-0 = <&TS_VDDIO_1V8_GPIO>;
+		pinctrl-0 = <&pmx_ts_vddio_1v8>;
 	};
 };
 
@@ -269,25 +269,29 @@
 	#size-cells = <0>;
 
 	status = "okay";
+	qcom,i2c-touch-active = "focaltech,fts_ts";
 
 	focaltech@38 {
-		compatible = "focaltech,fts";
+		compatible = "focaltech,fts_ts";
 		reg = <0x38>;
+
 		interrupt-parent = <&tlmm>;
 		interrupts = <25 0x2008>;
-		focaltech,reset-gpio = <&tlmm 24 0x0>;
-		focaltech,irq-gpio = <&tlmm 25 0x02008>;
+		focaltech,reset-gpio = <&tlmm 24 0>;
+		focaltech,irq-gpio = <&tlmm 25 0x2008>;
+		focaltech,display-coords =  <0 0 1080 1920>;
+		focaltech,max-touch-number = <10>;
+		focaltech,ic-type = <0x35190489>;
+		focaltech,touch-type = "primary";
+
 		vdd-supply = <&L14B>;
 		vcc_i2c-supply  = <&L12B>;
-		focaltech,max-touch-number = <10>;
-		focaltech,display-coords =  <0 0 1080 1920>;
-		pinctrl-names = "pmx_ts_active","pmx_ts_suspend","pmx_ts_release";
-		pinctrl-0 = <&ts_int_active &ts_reset_active>;
+
+		pinctrl-names = "pmx_ts_active", "pmx_ts_suspend", "pmx_ts_release";
+		pinctrl-0 = <&ts_active>;
 		pinctrl-1 = <&ts_int_suspend &ts_reset_suspend>;
 		pinctrl-2 = <&ts_release>;
 		panel = <&dsi_icna3520_1080p_dsc_cmd>;
-		qcom,i2c-touch-active = "focaltech,fts";
-		focaltech,ic-type = <0x35190489>;
 	};
 };
 
@@ -296,29 +300,29 @@
 	#size-cells = <0>;
 
 	status = "okay";
+	qcom,i2c-touch-active = "focaltech,fts_ts";
 
 	focaltech@38 {
-		compatible = "focaltech,fts";
-		status = "ok";
+		compatible = "focaltech,fts_ts";
 		reg = <0x38>;
 
 		interrupt-parent = <&tlmm>;
 		interrupts = <15 0x2008>;
-		focaltech,reset-gpio = <&tlmm 14 0x00>;
+		focaltech,reset-gpio = <&tlmm 14 0>;
 		focaltech,irq-gpio = <&tlmm 15 0x2008>;
 		focaltech,display-coords = <0 0 1080 1240>;
 		focaltech,max-touch-number = <10>;
 		focaltech,ic-type = <0x35190489>;
-		focaltech,touch-environment = "pvm";
+		focaltech,touch-type = "secondary";
 
-		pinctrl-names = "pmx_ts_active1","pmx_ts_suspend1","pmx_ts_release1";
+		vdd-supply = <&ts_avdd_3v0>;
+		vcc_i2c-supply  = <&ts_vddio_1v8>;
+
+		pinctrl-names = "pmx_ts_active", "pmx_ts_suspend", "pmx_ts_release";
 		pinctrl-0 = <&ts_active1>;
 		pinctrl-1 = <&ts_int_suspend1 &ts_reset_suspend1>;
 		pinctrl-2 = <&ts_release1>;
 		panel = <&dsi_ch13726a_amoled_video>;
-		vdd-supply = <&TS_AVDD_3V0>;
-		vcc_i2c-supply  = <&TS_VDDIO_1V8>;
-		qcom,i2c-touch-active = "focaltech,fts";
 	};
 };
 

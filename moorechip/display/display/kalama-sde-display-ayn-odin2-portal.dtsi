@@ -79,25 +79,29 @@
 	#size-cells = <0>;
 
 	status = "okay";
+	qcom,i2c-touch-active = "focaltech,fts_ts";
 
 	focaltech@38 {
-		compatible = "focaltech,fts";
+		compatible = "focaltech,fts_ts";
 		reg = <0x38>;
+
 		interrupt-parent = <&tlmm>;
 		interrupts = <25 0x2008>;
 		focaltech,reset-gpio = <&tlmm 24 0x0>;
 		focaltech,irq-gpio = <&tlmm 25 0x02008>;
+		focaltech,display-coords =  <0 0 1080 1920>;
+		focaltech,max-touch-number = <10>;
+		focaltech,ic-type = <0x35190489>;
+		focaltech,touch-type = "primary";
+
 		vdd-supply = <&L14B>;
 		vcc_i2c-supply  = <&L12B>;
-		focaltech,max-touch-number = <10>;
-		focaltech,display-coords =  <0 0 1080 1920>;
-		pinctrl-names = "pmx_ts_active","pmx_ts_suspend","pmx_ts_release";
-		pinctrl-0 = <&ts_int_active &ts_reset_active>;
+
+		pinctrl-names = "pmx_ts_active", "pmx_ts_suspend", "pmx_ts_release";
+		pinctrl-0 = <&ts_active>;
 		pinctrl-1 = <&ts_int_suspend &ts_reset_suspend>;
 		pinctrl-2 = <&ts_release>;
 		panel = <&dsi_icna3512_1080p_dsc_cmd>;
-		qcom,i2c-touch-active = "focaltech,fts";
-		focaltech,ic-type = <0x35190489>;
 	};
 };
 
