@@ -215,7 +215,6 @@
 
 &pm8550b_haptics {
 	status = "okay";
-	qcom,use-erm = <1>;
 	qcom,vmax-mv = <3200>;
 
 	effect_0 {

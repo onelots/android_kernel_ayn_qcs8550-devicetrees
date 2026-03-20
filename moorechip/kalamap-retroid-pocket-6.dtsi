@@ -1,6 +1,8 @@
 #include "kalamap-moorechip-common.dtsi"
 
 &pm8550b_haptics {
+	qcom,vmax-mv = <1300>;
+
 	effect_0 {
 		/* CLICK */
 		qcom,wf-pattern-data =  <0x11f  S_PERIOD_T_LRA  0>,
@@ -12,28 +14,6 @@
 					<0x13f  S_PERIOD_T_LRA  0>,
 					<0x11f  S_PERIOD_T_LRA  0>;
 		/delete-property/ qcom,wf-pattern-preload;
-	};
-};
-
-&pm8550b_eusb2_repeater {
-	qcom,param-override-seq =
-		/* <value reg_offset> */
-		/* Adjust HS trasmit amplitude */
-		<0x7 0x51
-		/* Squelch detection threshold */
-		 0x3 0x54
-		/* Tx pre-emphasis tuning */
-		 0x3 0x57
-		/* HS disconnect threshold */
-		 0x6 0x53>;
-};
-
-&pm8550b_haptics {
-	/delete-property/ qcom,use-erm;
-	qcom,vmax-mv = <1300>;
-
-	effect_0 {
-		/* CLICK */
 		qcom,wf-vmax-mv = <1300>;
 	};
 
@@ -61,6 +41,19 @@
 		/* HEAVY CLICK */
 		qcom,wf-vmax-mv = <1300>;
 	};
+};
+
+&pm8550b_eusb2_repeater {
+	qcom,param-override-seq =
+		/* <value reg_offset> */
+		/* Adjust HS trasmit amplitude */
+		<0x7 0x51
+		/* Squelch detection threshold */
+		 0x3 0x54
+		/* Tx pre-emphasis tuning */
+		 0x3 0x57
+		/* HS disconnect threshold */
+		 0x6 0x53>;
 };
 
 &qupv3_se0_i2c {
