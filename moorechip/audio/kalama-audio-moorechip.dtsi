@@ -14,89 +14,12 @@
 	};
 };
 
-&tx_swr_clk_active {
-	config {
-		drive-strength = <2>;
-	};
-};
-
-&tx_swr_data0_active {
-	config {
-		drive-strength = <2>;
-	};
-};
-
-&tx_swr_data1_active {
-	config {
-		drive-strength = <2>;
-	};
-};
-
-&tx_swr_data2_active {
-	config {
-		drive-strength = <2>;
-	};
-};
-
 &wsa_macro {
 	status = "disabled";
 };
 
-// TODO: +++ NEED THESE?
-&wsa_swr_gpios {
-	status = "disabled";
-};
-
-&wsa_spkr_en02 {
-	status = "disabled";
-};
-
-&wsa_spkr_en13 {
-	status = "disabled";
-};
-
-&clock_audio_wsa_1 {
-	status = "disabled";
-};
-
-&clock_audio_wsa_tx {
-	status = "disabled";
-};
-// TODO: --- NEED THESE?
-
-&wsa2_macro {
-	status = "disabled";
-};
-
-// TODO: +++ NEED THESE?
-&wsa2_swr_gpios {
-	status = "disabled";
-};
-
-&clock_audio_wsa_2 {
-	status = "disabled";
-};
-
-&clock_audio_wsa2_tx {
-	status = "disabled";
-};
-
-&swr_haptics {
-	status = "disabled";
-};
-// TODO: --- NEED THESE?
-
-// TODO: +++ NEED THESE?
-&fm_i2s1_gpios {
-	status = "disabled";
-};
-// TODO: --- NEED THESE?
-
 &kalama_snd {
 	qcom,model = "kalama-qrd-snd-card";
-	qcom,ext-disp-audio-rx = <1>;
-	qcom,sep-mi2s-gpios = <&sep_lpi_i2s3_gpios>;
-	qcom,sec-mi2s-gpios = <&sec_i2s1_gpios>;
 
 	qcom,audio-routing =
 		"AMIC1", "Analog Mic1",
@@ -128,34 +51,93 @@
 		"VA_AIF1 CAP", "VA_SWR_CLK",
 		"VA_AIF2 CAP", "VA_SWR_CLK",
 		"VA_AIF3 CAP", "VA_SWR_CLK";
-
-	// TODO: Check these!
-
 	asoc-codec  = <&stub_codec>, <&lpass_cdc>,
 				<&wcd938x_codec>, <&swr_haptics>;
 	asoc-codec-names = "msm-stub-codec.1", "lpass-cdc",
 				"wcd938x_codec", "swr-haptics";
 	qcom,wsa-max-devs = <0>;
+	qcom,sep-mi2s-gpios = <&sep_lpi_i2s3_gpios>;
+	qcom,sec-mi2s-gpios = <&fm_i2s1_gpios>;
+	qcom,ext-disp-audio-rx = <1>;
 };
+
+// TODO: +++ NEED THESE?
+
+&wsa_swr_gpios {
+	status = "disabled";
+};
+
+&wsa2_swr_gpios {
+	status = "disabled";
+};
+
+&wsa_spkr_en02 {
+	status = "disabled";
+};
+
+&wsa_spkr_en13 {
+	status = "disabled";
+};
+
+&clock_audio_wsa_1 {
+	status = "disabled";
+};
+
+&clock_audio_wsa_2 {
+	status = "disabled";
+};
+
+&clock_audio_wsa_tx {
+	status = "disabled";
+};
+
+&clock_audio_wsa2_tx {
+	status = "disabled";
+};
+
+// TODO: --- NEED THESE?
+
+&tx_swr_clk_active {
+	config {
+		drive-strength = <2>;
+	};
+};
+
+&tx_swr_data0_active {
+	config {
+		drive-strength = <2>;
+	};
+};
+
+&tx_swr_data1_active {
+	config {
+		drive-strength = <2>;
+	};
+};
+
+&tx_swr_data2_active {
+	config {
+		drive-strength = <2>;
+	};
+};
+
+// TODO: +++ NEED THESE?
+
+&swr_haptics {
+	status = "disabled";
+};
+
+// TODO: --- NEED THESE?
 
 &spf_core_platform {
 	sep_lpi_i2s3_gpios: sep_lpi_i2s3_pinctrl {
-		#gpio-cells = <0>;
 		compatible = "qcom,msm-cdc-pinctrl";
 		pinctrl-names = "aud_active", "aud_sleep";
-		pinctrl-0 = <&lpi_i2s3_sck_active &lpi_i2s3_ws_active &lpi_i2s3_sd0_active &lpi_i2s3_sd1_active>;
-		pinctrl-1 = <&lpi_i2s3_sck_sleep &lpi_i2s3_ws_sleep &lpi_i2s3_sd0_sleep &lpi_i2s3_sd1_sleep>;
+		pinctrl-0 = <&lpi_i2s3_sck_active &lpi_i2s3_ws_active &lpi_i2s3_sd1_active>;
+		pinctrl-1 = <&lpi_i2s3_sck_sleep &lpi_i2s3_ws_sleep &lpi_i2s3_sd1_sleep>;
 		qcom,lpi-gpios;
-	};
-
-	sec_i2s1_gpios: sec_i2s1_pinctrl {
 		#gpio-cells = <0>;
-		compatible = "qcom,msm-cdc-pinctrl";
-		pinctrl-names = "aud_active", "aud_sleep";
-		pinctrl-0 = <&i2s1_sck_active &i2s1_ws_active
-			&i2s1_sd0_active>;
-		pinctrl-1 = <&i2s1_sck_sleep &i2s1_ws_sleep
-			&i2s1_sd0_sleep>;
+		status = "ok";
 	};
 };
 
