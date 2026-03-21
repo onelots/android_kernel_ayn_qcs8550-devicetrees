@@ -95,30 +95,31 @@
 	};
 };
 
-&soc {
-	gpio_key {
-		pinctrl-0 = <&key_vol_up_default>, <&custom_key_default>, <&hall_switch_default>;
+&gpio_keys {
+	pinctrl-0 = <&key_vol_up_default>, <&custom_key_default>, <&hall_switch_default>;
 
-		custom_key {
-			label = "custom_key";
-			gpios = <&tlmm 41 GPIO_ACTIVE_LOW>;
-			linux,input-type = <1>;
-			linux,code = <KEY_F24>;
-			gpio-key,wakeup;
-			debounce-interval = <15>;
-			linux,can-disable;
-		};
-
-		hall_switch {
-			label = "hall_switch";
-			gpios = <&tlmm 17 GPIO_ACTIVE_HIGH>;
-			linux,input-type = <1>;
-			linux,code = <SW_LID>;
-			gpio-key,wakeup;
-			debounce-interval = <15>;
-			linux,can-disable;
-		};
+	custom_key {
+		label = "custom_key";
+		gpios = <&tlmm 41 GPIO_ACTIVE_LOW>;
+		linux,input-type = <1>;
+		linux,code = <KEY_F24>;
+		gpio-key,wakeup;
+		debounce-interval = <15>;
+		linux,can-disable;
 	};
+
+	hall_switch {
+		label = "hall_switch";
+		gpios = <&tlmm 17 GPIO_ACTIVE_LOW>;
+		linux,input-type = <5>;
+		linux,code = <SW_LID>;
+		gpio-key,wakeup;
+		linux,can-disable;
+	};
+};
+
+&qupv3_hub_i2c0 {
+	status = "disabled";
 };
 
 &qupv3_se0_i2c {
