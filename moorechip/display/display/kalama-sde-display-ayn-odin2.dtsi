@@ -162,7 +162,7 @@
 
 	focaltech_fp: focaltech_fp {
 		compatible = "focaltech,fp";
-		interrupt-parent = <&pio>;
+		interrupt-parent = <&tlmm>;
 		interrupts = <05 IRQ_TYPE_EDGE_RISING>;
 
 		focaltech_fp,reset-gpio = <&tlmm 42 0>;
