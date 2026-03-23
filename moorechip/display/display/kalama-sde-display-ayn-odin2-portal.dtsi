@@ -12,68 +12,6 @@
 	qcom,mdss-dsi-panel-orientation = "180";
 };
 
-&tlmm {
-
-	fp_pins_eint: fpeint {
-		mux {
-			pins = "gpio40";
-			function = "gpio";
-		};
-
-		config {
-			pins = "gpio40";
-			bias-disable;
-			input-enable;
-		};
-	};
-
-	fp_pins_rst_output0: fprstout0 {
-		mux {
-			pins = "gpio42";
-			function = "gpio";
-		};
-
-		config {
-			pins = "gpio42";
-			output-low;
-		};
-	};
-
-	fp_pins_rst_output1: fprstout1 {
-		mux {
-			pins = "gpio42";
-			function = "gpio";
-		};
-
-		config {
-			pins = "gpio42";
-			output-high;
-		};
-	};
-};
-
-&soc {
-	focaltech_fp: focaltech_fp {
-		compatible = "focaltech,fp";
-		interrupt-parent = <&pio>;
-		interrupts = <05 IRQ_TYPE_EDGE_RISING>;
-
-		focaltech_fp,reset-gpio = <&tlmm 42 0>;
-		focaltech_fp,irq-gpio = <&tlmm 40 0>;
-
-		focaltech_fp,use-regulator;
-		ff_vdd-supply = <&L14B>;
-
-		focaltech_fp,read-chip;
-
-		pinctrl-names = "ff_pins_reset_low","ff_pins_reset_high","ff_pins_irq_as_int";
-		pinctrl-0 = <&fp_pins_rst_output0>;
-		pinctrl-1 = <&fp_pins_rst_output1>;
-		pinctrl-2 = <&fp_pins_eint>;
-		panel = <&dsi_icna3512_1080p_dsc_cmd>;
-	};
-};
-
 &qupv3_se4_i2c {
 	#address-cells = <1>;
 	#size-cells = <0>;
