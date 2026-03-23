@@ -27,5 +27,5 @@ dtb-y += $(kalama-dtb-y)
 
 always-y        := $(dtb-y)
 subdir-y        := $(dts-dirs)
-subdir-y        += audio bt ../qcom/data display ../qcom/eSE ../qcom/eva ../qcom/graphics ../qcom/mm ../qcom/mmrm ../qcom/nfc ../qcom/video ../qcom/wlan
+subdir-y        += audio bt display ../qcom/eSE ../qcom/eva ../qcom/graphics ../qcom/mm ../qcom/mmrm ../qcom/nfc ../qcom/video ../qcom/wlan
 clean-files     := *.dtb *.dtbo
