@@ -12,8 +12,53 @@
 	sn3112l@54 {
 		compatible = "si-en,sn3112";
 		reg = <0x54>;
-		sn3112,label = "sn3112l";
 		sn3112,dv-en = <&tlmm 55 0x00>;
+
+		multi-led@0 {
+			#address-cells = <1>;
+			#size-cells = <0>;
+			reg = <0>;
+			color = <LED_COLOR_ID_MULTI>;
+			label = "left:strip";
+
+			led@0 {
+				reg = <0>;
+				color = <LED_COLOR_ID_RED>;
+			};
+
+			led@1 {
+				reg = <1>;
+				color = <LED_COLOR_ID_BLUE>;
+			};
+
+			led@2 {
+				reg = <2>;
+				color = <LED_COLOR_ID_GREEN>;
+			};
+		};
+
+		multi-led@1 {
+			#address-cells = <1>;
+			#size-cells = <0>;
+			reg = <1>;
+			color = <LED_COLOR_ID_MULTI>;
+			label = "left:stick";
+
+			led@6 {
+				reg = <6>;
+				color = <LED_COLOR_ID_RED>;
+			};
+
+			led@7 {
+				reg = <7>;
+				color = <LED_COLOR_ID_BLUE>;
+			};
+
+			led@8 {
+				reg = <8>;
+				color = <LED_COLOR_ID_GREEN>;
+			};
+		};
 	};
 };
 
@@ -25,8 +70,53 @@
 	sn3112r@54 {
 		compatible = "si-en,sn3112";
 		reg = <0x54>;
-		sn3112,label = "sn3112r";
 		sn3112,dv-en = <&tlmm 56 0x00>;
+
+		multi-led@0 {
+			#address-cells = <1>;
+			#size-cells = <0>;
+			reg = <0>;
+			color = <LED_COLOR_ID_MULTI>;
+			label = "right:strip";
+
+			led@0 {
+				reg = <0>;
+				color = <LED_COLOR_ID_RED>;
+			};
+
+			led@1 {
+				reg = <1>;
+				color = <LED_COLOR_ID_BLUE>;
+			};
+
+			led@2 {
+				reg = <2>;
+				color = <LED_COLOR_ID_GREEN>;
+			};
+		};
+
+		multi-led@1 {
+			#address-cells = <1>;
+			#size-cells = <0>;
+			reg = <1>;
+			color = <LED_COLOR_ID_MULTI>;
+			label = "right:stick";
+
+			led@6 {
+				reg = <6>;
+				color = <LED_COLOR_ID_RED>;
+			};
+
+			led@7 {
+				reg = <7>;
+				color = <LED_COLOR_ID_BLUE>;
+			};
+
+			led@8 {
+				reg = <8>;
+				color = <LED_COLOR_ID_GREEN>;
+			};
+		};
 	};
 };
 
