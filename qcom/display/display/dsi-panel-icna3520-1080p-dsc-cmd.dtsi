@@ -80,8 +80,8 @@
 					39 01 00 00 00 00 03 FD 5A 5A // Manufacture Command Access Unlock
 
 					39 01 00 00 00 00 02 53 E0 // Write Control Display - HBM_MODE = HBM1, BCTL = On, BC_DIM_EN = Off, BC_DC_EN = Off, HBM_EN = Off
-					05 01 00 00 00 00 02 35 00 // Tearing Effect Line On
-					05 01 00 00 78 00 02 11 00 // Sleep Out
+					05 01 00 00 00 00 01 35 // Tearing Effect Line On
+					05 01 00 00 78 00 01 11 // Sleep Out
 
 					39 01 00 00 00 00 02 9F 00 // REG SEL - Group 0
 					39 01 00 00 00 00 0F B3 00 D8 00 1C 00 4C 00 00 DB 00 1C 07 D6 00 // Timing Control
@@ -94,7 +94,6 @@
 					39 01 00 00 00 00 02 B2 00
 
 					39 01 00 00 00 00 02 9F 0D // REG SEL - Group 13
-					39 01 00 00 00 00 02 B2 27
 					39 01 00 00 00 00 02 B6 03
 					39 01 00 00 00 00 02 BB 01
 					39 01 00 00 00 00 02 B2 24
@@ -102,7 +101,7 @@
 					39 01 00 00 00 00 03 FD A5 A5 // Manufacture Command Access Lock
 
 					39 01 00 00 00 00 02 48 10 // Write DSI MODE - HFR_MODE = HF1 Mode, DSI_MODE = Through GRAM
-					05 01 00 00 14 00 02 29 00 // Display On
+					05 01 00 00 14 00 01 29 // Display On
 				];
 				qcom,mdss-dsi-on-command-state = "dsi_lp_mode";
 
@@ -149,8 +148,8 @@
 					39 01 00 00 00 00 03 FD 5A 5A // Manufacture Command Access Unlock
 
 					39 01 00 00 00 00 02 53 E0 // Write Control Display - HBM_MODE = HBM1, BCTL = On, BC_DIM_EN = Off, BC_DC_EN = Off, HBM_EN = Off
-					05 01 00 00 00 00 02 35 00 // Tearing Effect Line On
-					05 01 00 00 78 00 02 11 00 // Sleep Out
+					05 01 00 00 00 00 01 35 // Tearing Effect Line On
+					05 01 00 00 78 00 01 11 // Sleep Out
 
 					39 01 00 00 00 00 02 9F 00 // REG SEL - Group 0
 					39 01 00 00 00 00 0F B3 00 D8 00 1C 00 4C 00 00 DB 00 1C 07 D6 00 // Timing Control
@@ -163,7 +162,6 @@
 					39 01 00 00 00 00 02 B2 00
 
 					39 01 00 00 00 00 02 9F 0D // REG SEL - Group 13
-					39 01 00 00 00 00 02 B2 27
 					39 01 00 00 00 00 02 B6 03
 					39 01 00 00 00 00 02 BB 01
 					39 01 00 00 00 00 02 B2 24
@@ -171,7 +169,7 @@
 					39 01 00 00 00 00 03 FD A5 A5 // Manufacture Command Access Lock
 
 					39 01 00 00 00 00 02 48 00 // Write DSI MODE - HFR_MODE = Normal Mode, DSI_MODE = Through GRAM
-					05 01 00 00 14 00 02 29 00 // Display On
+					05 01 00 00 14 00 01 29 // Display On
 				];
 				qcom,mdss-dsi-on-command-state = "dsi_lp_mode";
 
