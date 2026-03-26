@@ -15,7 +15,7 @@
 			#size-cells = <0>;
 			reg = <0>;
 			color = <LED_COLOR_ID_MULTI>;
-			label = "left:top-left";
+			label = "left:left";
 
 			led@0 {
 				reg = <0>;
@@ -38,7 +38,7 @@
 			#size-cells = <0>;
 			reg = <1>;
 			color = <LED_COLOR_ID_MULTI>;
-			label = "left:bottom-left";
+			label = "left:top";
 
 			led@3 {
 				reg = <3>;
@@ -61,7 +61,7 @@
 			#size-cells = <0>;
 			reg = <2>;
 			color = <LED_COLOR_ID_MULTI>;
-			label = "left:bottom-right";
+			label = "left:right";
 
 			led@6 {
 				reg = <6>;
@@ -84,7 +84,7 @@
 			#size-cells = <0>;
 			reg = <3>;
 			color = <LED_COLOR_ID_MULTI>;
-			label = "left:top-right";
+			label = "left:bottom";
 
 			led@9 {
 				reg = <9>;
@@ -119,7 +119,7 @@
 			#size-cells = <0>;
 			reg = <0>;
 			color = <LED_COLOR_ID_MULTI>;
-			label = "right:bottom-left";
+			label = "right:right";
 
 			led@0 {
 				reg = <0>;
@@ -142,7 +142,7 @@
 			#size-cells = <0>;
 			reg = <1>;
 			color = <LED_COLOR_ID_MULTI>;
-			label = "right:top-left";
+			label = "right:top";
 
 			led@3 {
 				reg = <3>;
@@ -165,7 +165,7 @@
 			#size-cells = <0>;
 			reg = <2>;
 			color = <LED_COLOR_ID_MULTI>;
-			label = "right:top-right";
+			label = "right:left";
 
 			led@6 {
 				reg = <6>;
@@ -188,7 +188,7 @@
 			#size-cells = <0>;
 			reg = <3>;
 			color = <LED_COLOR_ID_MULTI>;
-			label = "right:bottom-right";
+			label = "right:bottom";
 
 			led@9 {
 				reg = <9>;
