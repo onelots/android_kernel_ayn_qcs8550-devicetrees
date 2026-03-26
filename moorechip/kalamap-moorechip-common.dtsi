@@ -292,3 +292,13 @@
 &pm8550_flash {
 	status = "disabled";
 };
+
+&cdsp_pas {
+	status = "disabled";
+};
+
+&soc {
+	qcom,msm-cdsp-loader {
+		status = "disabled";
+	};
+};
