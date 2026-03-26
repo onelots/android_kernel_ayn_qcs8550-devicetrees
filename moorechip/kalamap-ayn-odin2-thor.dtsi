@@ -1,4 +1,5 @@
 #include "kalamap-moorechip-common.dtsi"
+#include <dt-bindings/leds/common.h>
 
 &sdhc_2 {
 	qcom,vdd-io-current-level = <0 10000>;
@@ -126,8 +127,99 @@
 	htr3212l@3c {
 		compatible = "yongfukang,htr3212";
 		reg = <0x3c>;
-		htr3212,label = "sn3112l";
 		htr3212,dv-en = <&tlmm 55 0x00>;
+
+		multi-led@0 {
+			#address-cells = <1>;
+			#size-cells = <0>;
+			reg = <0>;
+			color = <LED_COLOR_ID_MULTI>;
+			label = "left:top-left";
+
+			led@0 {
+				reg = <0>;
+				color = <LED_COLOR_ID_RED>;
+			};
+
+			led@1 {
+				reg = <1>;
+				color = <LED_COLOR_ID_BLUE>;
+			};
+
+			led@2 {
+				reg = <2>;
+				color = <LED_COLOR_ID_GREEN>;
+			};
+		};
+
+		multi-led@1 {
+			#address-cells = <1>;
+			#size-cells = <0>;
+			reg = <1>;
+			color = <LED_COLOR_ID_MULTI>;
+			label = "left:bottom-left";
+
+			led@3 {
+				reg = <3>;
+				color = <LED_COLOR_ID_RED>;
+			};
+
+			led@4 {
+				reg = <4>;
+				color = <LED_COLOR_ID_BLUE>;
+			};
+
+			led@5 {
+				reg = <5>;
+				color = <LED_COLOR_ID_GREEN>;
+			};
+		};
+
+		multi-led@2 {
+			#address-cells = <1>;
+			#size-cells = <0>;
+			reg = <2>;
+			color = <LED_COLOR_ID_MULTI>;
+			label = "left:bottom-right";
+
+			led@6 {
+				reg = <6>;
+				color = <LED_COLOR_ID_RED>;
+			};
+
+			led@7 {
+				reg = <7>;
+				color = <LED_COLOR_ID_BLUE>;
+			};
+
+			led@8 {
+				reg = <8>;
+				color = <LED_COLOR_ID_GREEN>;
+			};
+		};
+
+		multi-led@3 {
+			#address-cells = <1>;
+			#size-cells = <0>;
+			reg = <3>;
+			color = <LED_COLOR_ID_MULTI>;
+			label = "left:top-right";
+
+			led@9 {
+				reg = <9>;
+				color = <LED_COLOR_ID_RED>;
+			};
+
+			led@10 {
+				reg = <10>;
+				color = <LED_COLOR_ID_BLUE>;
+			};
+
+			led@11 {
+				reg = <11>;
+				color = <LED_COLOR_ID_GREEN>;
+			};
+		};
 	};
 };
 
@@ -139,8 +231,99 @@
 	htr3212r@3c {
 		compatible = "yongfukang,htr3212";
 		reg = <0x3c>;
-		htr3212,label = "sn3112r";
 		htr3212,dv-en = <&tlmm 56 0x00>;
+
+		multi-led@0 {
+			#address-cells = <1>;
+			#size-cells = <0>;
+			reg = <0>;
+			color = <LED_COLOR_ID_MULTI>;
+			label = "right:bottom-left";
+
+			led@0 {
+				reg = <0>;
+				color = <LED_COLOR_ID_RED>;
+			};
+
+			led@1 {
+				reg = <1>;
+				color = <LED_COLOR_ID_BLUE>;
+			};
+
+			led@2 {
+				reg = <2>;
+				color = <LED_COLOR_ID_GREEN>;
+			};
+		};
+
+		multi-led@1 {
+			#address-cells = <1>;
+			#size-cells = <0>;
+			reg = <1>;
+			color = <LED_COLOR_ID_MULTI>;
+			label = "right:top-left";
+
+			led@3 {
+				reg = <3>;
+				color = <LED_COLOR_ID_RED>;
+			};
+
+			led@4 {
+				reg = <4>;
+				color = <LED_COLOR_ID_BLUE>;
+			};
+
+			led@5 {
+				reg = <5>;
+				color = <LED_COLOR_ID_GREEN>;
+			};
+		};
+
+		multi-led@2 {
+			#address-cells = <1>;
+			#size-cells = <0>;
+			reg = <2>;
+			color = <LED_COLOR_ID_MULTI>;
+			label = "right:top-right";
+
+			led@6 {
+				reg = <6>;
+				color = <LED_COLOR_ID_RED>;
+			};
+
+			led@7 {
+				reg = <7>;
+				color = <LED_COLOR_ID_BLUE>;
+			};
+
+			led@8 {
+				reg = <8>;
+				color = <LED_COLOR_ID_GREEN>;
+			};
+		};
+
+		multi-led@3 {
+			#address-cells = <1>;
+			#size-cells = <0>;
+			reg = <3>;
+			color = <LED_COLOR_ID_MULTI>;
+			label = "right:bottom-right";
+
+			led@9 {
+				reg = <9>;
+				color = <LED_COLOR_ID_RED>;
+			};
+
+			led@10 {
+				reg = <10>;
+				color = <LED_COLOR_ID_BLUE>;
+			};
+
+			led@11 {
+				reg = <11>;
+				color = <LED_COLOR_ID_GREEN>;
+			};
+		};
 	};
 };
 
