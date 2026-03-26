@@ -7,13 +7,6 @@
 	};
 };
 
-&dsi_panel_pwr_supply_avdd {
-	qcom,panel-supply-entry@1 {
-		qcom,supply-min-voltage = <2800000>;
-		qcom,supply-max-voltage = <2800000>;
-	};
-};
-
 &pm8550_gpios {
 	/delete-node/ display_panel_avdd_default;
 };

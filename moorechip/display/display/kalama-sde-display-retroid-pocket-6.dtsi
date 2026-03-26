@@ -17,13 +17,6 @@
 	};
 };
 
-&dsi_panel_pwr_supply_avdd {
-	qcom,panel-supply-entry@1 {
-		qcom,supply-min-voltage = <2800000>;
-		qcom,supply-max-voltage = <2800000>;
-	};
-};
-
 &tlmm {
 	display_panel_avdd2_default: display_panel_avdd2_default {
 		mux {
