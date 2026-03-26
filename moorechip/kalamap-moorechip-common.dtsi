@@ -284,3 +284,11 @@
 	/delete-property/ periph-bc6-supply;
 	/delete-property/ periph-bc7-supply;
 };
+
+&pm8550_rgb {
+	status = "disabled";
+};
+
+&pm8550_flash {
+	status = "disabled";
+};
