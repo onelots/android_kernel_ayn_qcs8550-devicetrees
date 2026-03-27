@@ -305,53 +305,51 @@
 		};
 	};
 
-
-
 	cpu-1-10 {
 		trips {
-			fan_cpu1a_config0: fan-cpu19-config0 {
+			fan_cpu1a_config0: fan-cpu1a-config0 {
 				temperature = <50000>;
 				hysteresis = <0>;
 				type = "passive";
 			};
 
-			fan_cpu1a_config1: fan-cpu19-config1 {
+			fan_cpu1a_config1: fan-cpu1a-config1 {
 				temperature = <55000>;
 				hysteresis = <0>;
 				type = "passive";
 			};
 
-			fan_cpu1a_config2: fan-cpu19-config2 {
+			fan_cpu1a_config2: fan-cpu1a-config2 {
 				temperature = <60000>;
 				hysteresis = <0>;
 				type = "passive";
 			};
 
-			fan_cpu1a_config3: fan-cpu19-config3 {
+			fan_cpu1a_config3: fan-cpu1a-config3 {
 				temperature = <65000>;
 				hysteresis = <0>;
 				type = "passive";
 			};
 
-			fan_cpu1a_config4: fan-cpu19-config4 {
+			fan_cpu1a_config4: fan-cpu1a-config4 {
 				temperature = <70000>;
 				hysteresis = <0>;
 				type = "passive";
 			};
 
-			fan_cpu1a_config5: fan-cpu19-config5 {
+			fan_cpu1a_config5: fan-cpu1a-config5 {
 				temperature = <75000>;
 				hysteresis = <0>;
 				type = "passive";
 			};
 
-			fan_cpu1a_config6: fan-cpu19-config6 {
+			fan_cpu1a_config6: fan-cpu1a-config6 {
 				temperature = <80000>;
 				hysteresis = <0>;
 				type = "passive";
 			};
 
-			fan_cpu1a_config7: fan-cpu19-config7 {
+			fan_cpu1a_config7: fan-cpu1a-config7 {
 				temperature = <85000>;
 				hysteresis = <0>;
 				type = "passive";
@@ -401,53 +399,52 @@
 		};
 	};
 
-
-
+/*
 	gpuss-0 {
 		trips {
-			fan_gpuss0_config0: fan-cpu19-config0 {
+			fan_gpuss0_config0: fan-gpuss0-config0 {
 				temperature = <50000>;
 				hysteresis = <0>;
 				type = "passive";
 			};
 
-			fan_gpuss0_config1: fan-cpu19-config1 {
+			fan_gpuss0_config1: fan-gpuss0-config1 {
 				temperature = <55000>;
 				hysteresis = <0>;
 				type = "passive";
 			};
 
-			fan_gpuss0_config2: fan-cpu19-config2 {
+			fan_gpuss0_config2: fan-gpuss0-config2 {
 				temperature = <60000>;
 				hysteresis = <0>;
 				type = "passive";
 			};
 
-			fan_gpuss0_config3: fan-cpu19-config3 {
+			fan_gpuss0_config3: fan-gpuss0-config3 {
 				temperature = <65000>;
 				hysteresis = <0>;
 				type = "passive";
 			};
 
-			fan_gpuss0_config4: fan-cpu19-config4 {
+			fan_gpuss0_config4: fan-gpuss0-config4 {
 				temperature = <70000>;
 				hysteresis = <0>;
 				type = "passive";
 			};
 
-			fan_gpuss0_config5: fan-cpu19-config5 {
+			fan_gpuss0_config5: fan-gpuss0-config5 {
 				temperature = <75000>;
 				hysteresis = <0>;
 				type = "passive";
 			};
 
-			fan_gpuss0_config6: fan-cpu19-config6 {
+			fan_gpuss0_config6: fan-gpuss0-config6 {
 				temperature = <80000>;
 				hysteresis = <0>;
 				type = "passive";
 			};
 
-			fan_gpuss0_config7: fan-cpu19-config7 {
+			fan_gpuss0_config7: fan-gpuss0-config7 {
 				temperature = <85000>;
 				hysteresis = <0>;
 				type = "passive";
@@ -499,49 +496,49 @@
 
 	gpuss-1 {
 		trips {
-			fan_gpuss1_config0: fan-cpu19-config0 {
+			fan_gpuss1_config0: fan-gpuss1-config0 {
 				temperature = <50000>;
 				hysteresis = <0>;
 				type = "passive";
 			};
 
-			fan_gpuss1_config1: fan-cpu19-config1 {
+			fan_gpuss1_config1: fan-gpuss1-config1 {
 				temperature = <55000>;
 				hysteresis = <0>;
 				type = "passive";
 			};
 
-			fan_gpuss1_config2: fan-cpu19-config2 {
+			fan_gpuss1_config2: fan-gpuss1-config2 {
 				temperature = <60000>;
 				hysteresis = <0>;
 				type = "passive";
 			};
 
-			fan_gpuss1_config3: fan-cpu19-config3 {
+			fan_gpuss1_config3: fan-gpuss1-config3 {
 				temperature = <65000>;
 				hysteresis = <0>;
 				type = "passive";
 			};
 
-			fan_gpuss1_config4: fan-cpu19-config4 {
+			fan_gpuss1_config4: fan-gpuss1-config4 {
 				temperature = <70000>;
 				hysteresis = <0>;
 				type = "passive";
 			};
 
-			fan_gpuss1_config5: fan-cpu19-config5 {
+			fan_gpuss1_config5: fan-gpuss1-config5 {
 				temperature = <75000>;
 				hysteresis = <0>;
 				type = "passive";
 			};
 
-			fan_gpuss1_config6: fan-cpu19-config6 {
+			fan_gpuss1_config6: fan-gpuss1-config6 {
 				temperature = <80000>;
 				hysteresis = <0>;
 				type = "passive";
 			};
 
-			fan_gpuss1_config7: fan-cpu19-config7 {
+			fan_gpuss1_config7: fan-gpuss1-config7 {
 				temperature = <85000>;
 				hysteresis = <0>;
 				type = "passive";
@@ -590,6 +587,7 @@
 			};
 		};
 	};
+*/
 
 	usb-therm {
 		trips {
