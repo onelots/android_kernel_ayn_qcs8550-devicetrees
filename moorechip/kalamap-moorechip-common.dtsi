@@ -146,6 +146,7 @@
 		interrupts = <13 0x2004>;
 		interrupt-names = "fg_int";
 		pulses-per-revolution = <4>;
+		#cooling-cells = <2>;
 	};
 };
 
