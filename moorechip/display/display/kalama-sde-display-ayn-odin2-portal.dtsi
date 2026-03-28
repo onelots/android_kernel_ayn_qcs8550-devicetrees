@@ -42,7 +42,7 @@
 		panel = <&dsi_icna3512_1080p_dsc_cmd>;
 
 		focaltech,misconfigured-x-line-order;
-		focaltech,misconfigured-y-line-order
+		focaltech,misconfigured-y-line-order;
 	};
 };
 
