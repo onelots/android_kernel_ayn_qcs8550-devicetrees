@@ -341,3 +341,7 @@
 &joystick {
 	moorechip,layout-nintendo;
 };
+
+&pm8550_rgb {
+	status = "disabled";
+};
