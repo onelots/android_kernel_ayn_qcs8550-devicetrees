@@ -132,6 +132,7 @@
 	};
 };
 
+/*
 &soc {
 	fan0: pwm-fan@0 {
 		compatible = "pwm-fan";
@@ -149,6 +150,7 @@
 		#cooling-cells = <2>;
 	};
 };
+*/
 
 &socd_trip {
 	temperature = <99>;
@@ -211,6 +213,7 @@
 	/delete-node/ pa-therm-1;
 	/delete-node/ rear-tof-therm;
 
+/*
 	cpu-1-9 {
 		trips {
 			fan_cpu19_config0: fan-cpu19-config0 {
@@ -399,7 +402,6 @@
 		};
 	};
 
-/*
 	gpuss-0 {
 		trips {
 			fan_gpuss0_config0: fan-gpuss0-config0 {
@@ -587,7 +589,6 @@
 			};
 		};
 	};
-*/
 
 	usb-therm {
 		trips {
@@ -616,6 +617,7 @@
 			};
 		};
 	};
+*/
 };
 
 &pm8550b_haptics {
