@@ -17,7 +17,7 @@ KALAMA_APQ_BASE_DTB += ../qcom/kalamap.dtb ../qcom/kalamap-v2.dtb ../qcom/kalama
 #	kalamap-ayn-odin2-thor-overlay.dtbo \
 #	kalamap-retroid-pocket-6-overlay.dtbo
 
-KALAMA_BOARDS += kalamap-ayn-odin2-thor-overlay.dtbo
+KALAMA_BOARDS += kalamap-ayn-odin2-overlay.dtbo
 
 kalama-dtb-$(CONFIG_ARCH_KALAMA) += $(KALAMA_BOARDS) $(KALAMA_BASE_DTB) $(KALAMA_APQ_BASE_DTB)
 kalama-overlays-dtb-$(CONFIG_ARCH_KALAMA) += $(KALAMA_BOARDS) $(KALAMA_BASE_DTB) $(KALAMA_APQ_BASE_DTB)
