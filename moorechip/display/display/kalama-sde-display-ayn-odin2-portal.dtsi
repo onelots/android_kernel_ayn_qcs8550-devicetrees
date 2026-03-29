@@ -68,3 +68,11 @@
 &battery_charger {
 	qcom,display-panels = <&dsi_icna3512_1080p_dsc_cmd>;
 };
+
+&htr3212l {
+	panel = <&dsi_icna3512_1080p_dsc_cmd>;
+};
+
+&htr3212r {
+	panel = <&dsi_icna3512_1080p_dsc_cmd>;
+};

@@ -354,3 +354,11 @@
 	qcom,display-panels = <&dsi_icna3520_1080p_dsc_cmd
 			      &dsi_ch13726a_amoled_video>;
 };
+
+&htr3212l {
+	panel = <&dsi_icna3520_1080p_dsc_cmd>;
+};
+
+&htr3212r {
+	panel = <&dsi_icna3520_1080p_dsc_cmd>;
+};

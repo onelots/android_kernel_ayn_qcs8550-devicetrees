@@ -119,15 +119,26 @@
 	status = "disabled";
 };
 
+&soc {
+	htr3212l_reg: htr3212l_reg {
+		compatible = "regulator-fixed";
+		regulator-name = "htr3212l_reg";
+		regulator-min-microvolt = <3300000>;
+		regulator-max-microvolt = <3300000>;
+		enable-active-high;
+		gpio = <&tlmm 55 GPIO_ACTIVE_HIGH>;
+	};
+};
+
 &qupv3_se0_i2c {
 	#address-cells = <1>;
 	#size-cells = <0>;
 	status = "ok";
 
-	htr3212l@3c {
+	htr3212l: htr3212l@3c {
 		compatible = "yongfukang,htr3212";
 		reg = <0x3c>;
-		htr3212,dv-en = <&tlmm 55 0x00>;
+		vdd-supply = <&htr3212l_reg>;
 
 		multi-led@0 {
 			#address-cells = <1>;
@@ -223,15 +234,26 @@
 	};
 };
 
+&soc {
+	htr3212r_reg: htr3212r_reg {
+		compatible = "regulator-fixed";
+		regulator-name = "htr3212r_reg";
+		regulator-min-microvolt = <3300000>;
+		regulator-max-microvolt = <3300000>;
+		enable-active-high;
+		gpio = <&tlmm 56 GPIO_ACTIVE_HIGH>;
+	};
+};
+
 &qupv3_se12_i2c {
 	#address-cells = <1>;
 	#size-cells = <0>;
 	status = "ok";
 
-	htr3212r@3c {
+	htr3212r: htr3212r@3c {
 		compatible = "yongfukang,htr3212";
 		reg = <0x3c>;
-		htr3212,dv-en = <&tlmm 56 0x00>;
+		vdd-supply = <&htr3212r_reg>;
 
 		multi-led@0 {
 			#address-cells = <1>;
